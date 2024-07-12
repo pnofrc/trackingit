@@ -14,7 +14,7 @@ class ContentsController extends Controller
 
         $latests =  Latests::get();
 
-		return view('home', ['latests' => $latests]);
+		return view('home', ['lat' => $latests]);
     }
 
     public function getBlog(){

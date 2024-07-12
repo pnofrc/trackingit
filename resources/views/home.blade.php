@@ -20,7 +20,7 @@
 
         <div id="slide-update">
             <marquee behavior="smooth" direction="left" id="latests">
-                @foreach ($latests as $latest) <span>{{$latest['latests']}}</span> @endforeach
+                @foreach ($lat as $latest) <span>{{$latest['latests']}}</span> @endforeach
             </marquee>
         </div>
 
