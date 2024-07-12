@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\News;
-use App\Models\latests;
+use App\Models\Latests;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +14,7 @@ class ContentsController extends Controller
 
         $latests =  Latests::get();
 
-		return view('home', ['lat' => $latests]);
+		return view('home', ['latests' => $latests]);
     }
 
     public function getBlog(){
