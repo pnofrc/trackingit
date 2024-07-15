@@ -72,7 +72,7 @@
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
                 <b><a href="/visualization">INDICATORI</a></b>
-                <b class="selected"><a href="/blog">MATERIALI</a></b>
+                <b><a class="selected" href="/blog">MATERIALI</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>

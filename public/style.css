@@ -156,7 +156,7 @@ text-decoration: none;
 color: unset;
 }
 
-.selected, #menu b a:hover{
+s.selected, #menu b a:hover{
 background-color: var(--dark) !important;
 color: var(--lighter) !important;
 }

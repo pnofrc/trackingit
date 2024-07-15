@@ -71,7 +71,7 @@
 
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
-                <b class="selected"><a href="/dashboard">DASHBOARD</a></b>
+                <b><a class="selected" href="/dashboard">DASHBOARD</a></b>
                 <b><a href="/visualization">INDICATORI</a></b>
                 <b><a href="/blog">MATERIALI</a></b>
                 <b><a href="/news">NEWS</a></b>

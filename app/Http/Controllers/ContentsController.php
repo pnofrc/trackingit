@@ -12,7 +12,7 @@ class ContentsController extends Controller
 
     public function getLatests(){
 
-        $latests =  Latests::get();
+        $latests =  Latests::get()->toArray();
 
 		return view('home', ['latests' => $latests]);
     }

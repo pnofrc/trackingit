@@ -145,7 +145,7 @@
                 <b><a href="/visualization">INDICATORI</a></b>
                 <b><a href="/blog">MATERIALI</a></b>
                 <b><a href="/news">NEWS</a></b>
-                <b class="selected"><a href="/about">ABOUT</a></b>
+                <b><a class="selected" href="/about">ABOUT</a></b>
             </div>
         </div>
 

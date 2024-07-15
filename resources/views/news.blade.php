@@ -53,7 +53,7 @@
             <div class="row news-ext">
                 <div class="column info-news">
                     <span>{{ $new['news_type'] }}</span>
-                    <span>{{ $new['date'] }}</span>
+                    <span>{{ $new->date->format('d-m-Y') }}</span>
                     <span>{{ $new['city'] }}</span>
                 </div>
 
@@ -81,7 +81,7 @@
                 <b><a href="/dashboard">DASHBOARD</a></b>
                 <b><a href="/visualization">INDICATORI</a></b>
                 <b><a href="/blog">MATERIALI</a></b>
-                <b class="selected"><a href="/news">NEWS</a></b>
+                <b><a class="selected" href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>
         </div>

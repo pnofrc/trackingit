@@ -30,7 +30,7 @@
         </div>
 
         <div id="menu">
-            <b><a  class="selected"href="/">HOME</a></b>
+            <b><a class="selected"href="/">HOME</a></b>
             <b><a href="/dashboard">DASHBOARD</a></b>
             <b><a href="/visualization">INDICATORI</a></b>
             <b><a href="/blog">MATERIALI</a></b>
