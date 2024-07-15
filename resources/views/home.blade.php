@@ -30,7 +30,7 @@
         </div>
 
         <div id="menu">
-            <b class="selected"><a href="/">HOME</a></b>
+            <b><a  class="selected"href="/">HOME</a></b>
             <b><a href="/dashboard">DASHBOARD</a></b>
             <b><a href="/visualization">INDICATORI</a></b>
             <b><a href="/blog">MATERIALI</a></b>
@@ -41,6 +41,7 @@
         <div class="void"></div>
 
         <img class="footer" src="assets/down.png" alt="">
+        <img src="assets/up-mobile.png" class="header-mobile" alt="">
 
     </div>
 
