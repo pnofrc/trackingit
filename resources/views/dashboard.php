@@ -100,105 +100,58 @@
     });
     tiles.addTo(map);
 
+    var geojsonLayers = []; // Array to store GeoJSON layers
 
-
- function addGeoJSON(url) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Network response was not ok: ${response.statusText}`);
+    // Fetch data from Laravel controller
+    fetch('/geojson') // Adjust the URL endpoint to match your Laravel route
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(place => {
+                var geojson = JSON.parse(place.geom);
+                
+                // Create a Leaflet GeoJSON layer
+                var geojsonLayer = L.geoJSON(geojson, {
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup(place.name); // Bind popup with place name
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    // Define a style function to customize polygon styles
-                    function style(feature) {
-                        return {
-                            fillColor: 'green',  // Fill color of polygons
-                            weight: 2,  // Border thickness in pixels
-                            opacity: 1,  // Border opacity (0 = transparent, 1 = fully opaque)
-                            color: 'white',  // Border color
-                            fillOpacity: 0.7  // Fill opacity (0 = transparent, 1 = fully opaque)
-                        };
-                    }
+                });
 
-                    // Function to handle click events on polygons
-                    function onEachFeature(feature, layer) {
-                        if (feature.properties && feature.properties.DEN_SL2011) {
-                            layer.bindPopup('<b>' + feature.properties.DEN_SL2011 + '</b><br>SLL 2011: ' + feature.properties.SLL_2011);
+                // Store GeoJSON layer in array
+                geojsonLayers.push({
+                    layer: geojsonLayer,
+                    bounds: geojsonLayer.getBounds() // Store the bounds of the GeoJSON layer
+                });
+            });
+
+            // Function to update visible layers based on map bounds and zoom
+            function updateVisibleLayers() {
+                var currentZoom = map.getZoom();
+                var visibleBounds = map.getBounds();
+
+                geojsonLayers.forEach(obj => {
+                    var layer = obj.layer;
+                    var bounds = obj.bounds;
+
+                    if (currentZoom >= 9 && visibleBounds.intersects(bounds)) {
+                        // Add layer to map if zoom level is >= 8 and bounds intersect with visible bounds
+                        if (!map.hasLayer(layer)) {
+                            map.addLayer(layer);
+                        }
+                    } else {
+                        // Remove layer from map if not within zoom level or bounds
+                        if (map.hasLayer(layer)) {
+                            map.removeLayer(layer);
                         }
                     }
-
-                    // Add GeoJSON layer with custom style and event handlers
-                    L.geoJSON(data, {
-                        style: style,
-                        onEachFeature: onEachFeature
-                    }).addTo(map);
-
-                    // Fit the map to the bounds of the GeoJSON layer
-                    map.fitBounds(L.geoJSON(data).getBounds());
-                })
-                .catch(error => {
-                    console.error('Error loading GeoJSON data:', error);
                 });
-        }
+            }
 
-        // Call the function with the URL to your GeoJSON file
-        addGeoJSON('/datasets/comuni.geojson');
+            // Event listener for map zoom and moveend events to update visible layers
+            map.on('zoomend moveend', updateVisibleLayers);
 
-
-    // var geojsonLayers = []; // Array to store GeoJSON layers
-
-    // // Fetch data from Laravel controller
-    // fetch('/geojson') // Adjust the URL endpoint to match your Laravel route
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         data.forEach(place => {
-    //             var geojson = JSON.parse(place.geom);
-                
-    //             // Create a Leaflet GeoJSON layer
-    //             var geojsonLayer = L.geoJSON(geojson, {
-    //                 onEachFeature: function (feature, layer) {
-    //                     layer.bindPopup(place.name); // Bind popup with place name
-    //                 }
-    //             });
-
-    //             // Store GeoJSON layer in array
-    //             geojsonLayers.push({
-    //                 layer: geojsonLayer,
-    //                 bounds: geojsonLayer.getBounds() // Store the bounds of the GeoJSON layer
-    //             });
-    //         });
-
-    //         // Function to update visible layers based on map bounds and zoom
-    //         function updateVisibleLayers() {
-    //             var currentZoom = map.getZoom();
-    //             var visibleBounds = map.getBounds();
-
-    //             geojsonLayers.forEach(obj => {
-    //                 var layer = obj.layer;
-    //                 var bounds = obj.bounds;
-
-    //                 if (currentZoom >= 9 && visibleBounds.intersects(bounds)) {
-    //                     // Add layer to map if zoom level is >= 8 and bounds intersect with visible bounds
-    //                     if (!map.hasLayer(layer)) {
-    //                         map.addLayer(layer);
-    //                     }
-    //                 } else {
-    //                     // Remove layer from map if not within zoom level or bounds
-    //                     if (map.hasLayer(layer)) {
-    //                         map.removeLayer(layer);
-    //                     }
-    //                 }
-    //             });
-    //         }
-
-    //         // Event listener for map zoom and moveend events to update visible layers
-    //         map.on('zoomend moveend', updateVisibleLayers);
-
-    //         // Initial call to update visible layers
-    //         updateVisibleLayers();
-    //     });
+            // Initial call to update visible layers
+            updateVisibleLayers();
+        });
 </script>
 
 </body>
