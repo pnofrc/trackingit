@@ -8,14 +8,16 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
-        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-        /> -->
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<!-- Leaflet.markercluster CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster/dist/MarkerCluster.Default.css" />
+
+<!-- Leaflet and Leaflet.markercluster JS -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
 
     <style>
         .corpus {
@@ -63,7 +65,7 @@
 
     <div id="corpus" class="corpus animate__animated">
 
-            <div id="fakeMenuBackground"></div>
+        <div id="fakeMenuBackground"></div>
 
         <!-- <div class="blackDot start clickMenu -->
         <div id="menu">
@@ -89,16 +91,69 @@
     <script src="app.js"></script>
 
     <script>
-        // map
-        var map = L.map('map').setView([42.682492765949576, 12.552070799113139], 7);
-        var tiles = L.tileLayer(
-            'https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
-                attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
-                maxZoom: 9,
-                minZoom: 6
+    var map = L.map('map').setView([42.682492765949576, 12.552070799113139], 7);
+    var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        subdomains: 'abcd',
+        maxZoom: 9,
+        minZoom: 6
+    });
+    tiles.addTo(map);
+
+    var geojsonLayers = []; // Array to store GeoJSON layers
+
+    // Fetch data from Laravel controller
+    fetch('/geojson') // Adjust the URL endpoint to match your Laravel route
+        .then(response => response.json())
+        .then(data => {
+            data.forEach(place => {
+                var geojson = JSON.parse(place.geom);
+                
+                // Create a Leaflet GeoJSON layer
+                var geojsonLayer = L.geoJSON(geojson, {
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup(place.name); // Bind popup with place name
+                    }
+                });
+
+                // Store GeoJSON layer in array
+                geojsonLayers.push({
+                    layer: geojsonLayer,
+                    bounds: geojsonLayer.getBounds() // Store the bounds of the GeoJSON layer
+                });
             });
-        tiles.addTo(map);
-    </script>
+
+            // Function to update visible layers based on map bounds and zoom
+            function updateVisibleLayers() {
+                var currentZoom = map.getZoom();
+                var visibleBounds = map.getBounds();
+
+                geojsonLayers.forEach(obj => {
+                    var layer = obj.layer;
+                    var bounds = obj.bounds;
+
+                    if (currentZoom >= 9 && visibleBounds.intersects(bounds)) {
+                        // Add layer to map if zoom level is >= 8 and bounds intersect with visible bounds
+                        if (!map.hasLayer(layer)) {
+                            map.addLayer(layer);
+                        }
+                    } else {
+                        // Remove layer from map if not within zoom level or bounds
+                        if (map.hasLayer(layer)) {
+                            map.removeLayer(layer);
+                        }
+                    }
+                });
+            }
+
+            // Event listener for map zoom and moveend events to update visible layers
+            map.on('zoomend moveend', updateVisibleLayers);
+
+            // Initial call to update visible layers
+            updateVisibleLayers();
+        });
+</script>
+
 </body>
 
 </html>

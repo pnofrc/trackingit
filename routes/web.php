@@ -20,3 +20,7 @@ Route::get('/news', 'App\Http\Controllers\ContentsController@getNews');
 Route::get('/about', function () {
     return view('about');
 });
+
+use App\Http\Controllers\GeoJsonController;
+
+Route::get('/geojson', [GeoJsonController::class, 'index']);

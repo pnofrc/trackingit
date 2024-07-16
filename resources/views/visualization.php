@@ -102,7 +102,7 @@
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
-                <b class="selected"><a href="/visualization">INDICATORI</a></b>
+                <b><a class="selected" href="/visualization">INDICATORI</a></b>
                 <b><a href="/blog">MATERIALI</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
