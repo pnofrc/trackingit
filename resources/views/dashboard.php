@@ -102,7 +102,6 @@
 
 
 
- Function to fetch and add GeoJSON data
  function addGeoJSON(url) {
             fetch(url)
                 .then(response => {
