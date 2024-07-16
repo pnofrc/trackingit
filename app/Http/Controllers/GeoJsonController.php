@@ -13,6 +13,7 @@ class GeoJsonController extends Controller
         $places = GeoJsonData::select('name', DB::raw("ST_AsGeoJSON(geom)::json AS geom"))
                 ->get();
                 
+                dd($places);
 
     return response()->json($places);
 }
