@@ -1,21 +1,30 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\GeoJsonData;
+use App\Models\Municipality;
+use App\Models\SllArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GeoJsonController extends Controller
 {
-    // Fetch all GeoJSON data
-    public function index()
+    // Fetch all GeoJSON Muncipality data
+    public function indexMunicipalities()
     {
-        $places = GeoJsonData::select('name', DB::raw("ST_AsGeoJSON(geom)::json AS geom"))
+        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(geom)::json AS geom"))
                 ->get();
                 
-                dd($places);
 
     return response()->json($places);
+}
+
+public function indexSLL()
+{
+    $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(geom)::json AS geom"))
+            ->get();
+            
+
+return response()->json($places);
 }
 
 }

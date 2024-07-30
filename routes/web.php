@@ -23,4 +23,12 @@ Route::get('/about', function () {
 
 use App\Http\Controllers\GeoJsonController;
 
-Route::get('/geojson', [GeoJsonController::class, 'index']);
+Route::get('/comuni', [GeoJsonController::class, 'indexMunicipalities']);
+Route::get('/sll', [GeoJsonController::class, 'indexSLL']);
+
+
+
+use App\Http\Controllers\CsvUploadController;
+
+Route::post('/upload-sll-area-csv', [CsvUploadController::class, 'uploadSllAreaCsv'])->name('upload-sll-area-csv');
+Route::post('/upload-municipality-csv', [CsvUploadController::class, 'uploadMunicipalityCsv'])->name('upload-municipality-csv');

@@ -88,27 +88,63 @@
         </div>
     </div>
 
+    <label class="switch" id="apiToggle">
+        <p>Toggle Comuni vs SLL</p>
+        <input type="checkbox">
+        <span class="slider round"></span>
+    </label>
+
+    <div id="loadingSpinner">
+        <img src="https://i.gifer.com/ZKZg.gif" alt="Loading Spinner">
+    </div>
+
     <script src="app.js"></script>
 
     <script>
-    var map = L.map('map').setView([42.682492765949576, 12.552070799113139], 7);
-    var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-        subdomains: 'abcd',
-        maxZoom: 9,
-        minZoom: 6
+  // Initialize the map
+var map = L.map('map').setView([42.682492765949576, 12.552070799113139], 7);
+var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 9,
+    minZoom: 8
+}).addTo(map);
+
+// Global variables
+let geotoggle = true;
+let api = '/sll';
+let geojsonLayers = [];
+
+// Function to show the loading spinner
+function showLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'block';
+}
+
+// Function to hide the loading spinner
+function hideLoadingSpinner() {
+    document.getElementById('loadingSpinner').style.display = 'none';
+}
+
+// Function to fetch and update GeoJSON layers
+function fetchAndUpdateGeoJSON() {
+    // Show the loading spinner
+    showLoadingSpinner();
+
+    // Clear existing GeoJSON layers from the map
+    geojsonLayers.forEach(obj => {
+        if (map.hasLayer(obj.layer)) {
+            map.removeLayer(obj.layer);
+        }
     });
-    tiles.addTo(map);
+    geojsonLayers = []; // Reset the layers array
 
-    var geojsonLayers = []; // Array to store GeoJSON layers
-
-    // Fetch data from Laravel controller
-    fetch('/geojson') // Adjust the URL endpoint to match your Laravel route
+    // Fetch data from the API
+    fetch(api)
         .then(response => response.json())
         .then(data => {
             data.forEach(place => {
                 var geojson = JSON.parse(place.geom);
-                
+
                 // Create a Leaflet GeoJSON layer
                 var geojsonLayer = L.geoJSON(geojson, {
                     onEachFeature: function (feature, layer) {
@@ -132,8 +168,8 @@
                     var layer = obj.layer;
                     var bounds = obj.bounds;
 
-                    if (currentZoom >= 9 && visibleBounds.intersects(bounds)) {
-                        // Add layer to map if zoom level is >= 8 and bounds intersect with visible bounds
+                    if (visibleBounds.intersects(bounds)) {
+                        // Add layer to map if zoom level is >= 9 and bounds intersect with visible bounds
                         if (!map.hasLayer(layer)) {
                             map.addLayer(layer);
                         }
@@ -151,7 +187,33 @@
 
             // Initial call to update visible layers
             updateVisibleLayers();
+
+            // Hide the loading spinner once the data is processed
+            hideLoadingSpinner();
+        })
+        .catch(error => {
+            console.error('Error fetching GeoJSON data:', error);
+            // Hide the loading spinner if there's an error
+            hideLoadingSpinner();
         });
+}
+
+// Initial data fetch
+fetchAndUpdateGeoJSON();
+
+// Function to toggle between APIs
+function toggleGeo() {
+    geotoggle = !geotoggle;
+    api = geotoggle ? '/sll' : '/comuni';
+
+    // Fetch and update data with the new API endpoint
+    fetchAndUpdateGeoJSON();
+}
+
+// Add event listener for the toggle switch
+document.getElementById('apiToggle').addEventListener('change', toggleGeo);
+
+
 </script>
 
 </body>
