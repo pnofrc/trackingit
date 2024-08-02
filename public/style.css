@@ -255,6 +255,7 @@ position: absolute;
 top: 5vh;
 right: 3vw;
 padding: 1rem;
+overflow-y: scroll;
 }
 
 #layers span, .title{
@@ -614,6 +615,20 @@ span.model{
 #loadingSpinner img {
     width: 50px; /* Adjust size as needed */
 }
+
+
+#data-table{
+    font-size: 1.3vw;
+    border: none;
+}
+#data-table th {
+    text-align: left;
+}
+th, td {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 5px;
+  }
 
 @media only screen and (max-width: 600px) {
         .footer, #slide-update, .description-platform{

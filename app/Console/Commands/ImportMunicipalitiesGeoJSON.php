@@ -11,8 +11,14 @@ class ImportMunicipalitiesGeoJSON extends Command
     protected $signature = 'import:municipalities {file}';
     protected $description = 'Import municipalities GeoJSON data into database';
 
+
+
+
     public function handle()
     {
+
+        ini_set('memory_limit', '1G'); // Increase to 1 GB or another suitable value
+        
         $filePath = $this->argument('file');
 
         if (!file_exists($filePath)) {

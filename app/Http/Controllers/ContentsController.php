@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use App\Models\News;
 use App\Models\Latests;
+use App\Models\SllAreaData;
 
 use Illuminate\Http\Request;
 
@@ -30,5 +31,15 @@ class ContentsController extends Controller
         $news =  News::get();
 
 		return view('news', ['news' => $news]);
+    }
+
+    public function viewDashboard(){
+        return view('dashboard', ['sllAreaData' => []]);
+    }
+
+    public function getSllAreaData($id){
+        $sllAreaData = SllAreaData::where('COD_SLL_2011_2018', $id)->get();
+
+        return response()->json($sllAreaData);
     }
 }
