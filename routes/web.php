@@ -29,3 +29,5 @@ use App\Http\Controllers\ContentsController;
 
 Route::get('/getSllAreaData/{id}', [ContentsController::class, 'getSllAreaData']);
 Route::get('/getMunicipalityData/{id}', [ContentsController::class, 'getMunicipalityData']);
+
+Route::get('/getIndicatorRange/{indicator}', [ContentsController::class, 'getIndicatorRange']);

@@ -7,7 +7,7 @@
     <title>Dashboard</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src=" https://cdn.jsdelivr.net/npm/chroma-js@2.6.0/index.min.js "></script>
+
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
@@ -30,30 +30,6 @@
 </head>
 
 <body>
-
-
-
-<div class="indicators_dropdown">
-        <label for="indicatorSelect1">Select Indicator 1:</label>
-        <select id="indicatorSelect1">
-            <option value="POP11">POP11</option>
-            <option value="PST11">PST11</option>
-            <option value="PD11">PD11</option>
-            <option value="RedMed11">RedMed11</option>
-            <!-- Add other indicators as needed -->
-        </select>
-
-        <label for="indicatorSelect2">Select Indicator 2:</label>
-        <select id="indicatorSelect2">
-            <option value="POP21">POP21</option>
-            <option value="PST21">PST21</option>
-            <option value="PD21">PD21</option>
-            <option value="RedMed21">RedMed21</option>
-            <!-- Add other indicators as needed -->
-        </select>
-
-        <button onclick="pickIndicators()">Pick</button>
-    </div>
 
     <div id="map"></div>
 
@@ -173,28 +149,6 @@
         function hideLoadingSpinner() {
             document.getElementById('loadingSpinner').style.display = 'none';
         }
-
-
-        function fetchIndicatorRange(indicator) {
-            return axios.get(`/getIndicatorRange/${indicator}`).then(response => response.data);
-        }
-
-        function getColor(value1, value2) {
-            const color1 = chroma.scale('Blues').domain([range1.min, range1.max])(value1).hex();
-            const color2 = chroma.scale('Reds').domain([range2.min, range2.max])(value2).hex();
-            return chroma.blend(color1, color2, 'multiply').hex();
-        }
-
-        function pickIndicators(){
-            const indicator1 = fetchIndicatorRange(document.getElementById('indicatorSelect1').value);
-            const indicator2 = fetchIndicatorRange(document.getElementById('indicatorSelect2').value);
-
-            getColor(indicator1)
-
-        }
-
-
-
         // Function to fetch and update GeoJSON layers
         function fetchAndUpdateGeoJSON() {
             // Show the loading spinner
@@ -335,12 +289,6 @@
                 document.getElementById(field).textContent = data[0][field];
             });
         }
-
-
-
-
-            
-
 
     </script>
 

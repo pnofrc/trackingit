@@ -630,6 +630,13 @@ th, td {
     padding: 5px;
   }
 
+.indicators_dropdown{
+    position: absolute;
+    z-index: 100;
+    top: 2rem;
+    left: 2rem;
+}
+
 @media only screen and (max-width: 600px) {
         .footer, #slide-update, .description-platform{
             display: none;
