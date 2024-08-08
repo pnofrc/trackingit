@@ -23,11 +23,11 @@ Route::get('/about', function () {
 use App\Http\Controllers\GeoJsonController;
 
 Route::get('/comuni', [GeoJsonController::class, 'indexMunicipalities']);
-Route::get('/sll', [GeoJsonController::class, 'indexSLL']);
+Route::get('/Sll', [GeoJsonController::class, 'indexSLL']);
 
-use App\Http\Controllers\ContentsController;
+Route::get('/getSllAreaData/{id}', [GeoJsonController::class, 'getSllAreaData']);
+Route::get('/getMunicipalityData/{id}', [GeoJsonController::class, 'getMunicipalityData']);
 
-Route::get('/getSllAreaData/{id}', [ContentsController::class, 'getSllAreaData']);
-Route::get('/getMunicipalityData/{id}', [ContentsController::class, 'getMunicipalityData']);
+Route::get('/getIndicatorRange/{indicator}', [GeoJsonController::class, 'getIndicatorRange']);
 
-Route::get('/getIndicatorRange/{indicator}', [ContentsController::class, 'getIndicatorRange']);
+Route::get('/getSllIndicatorsData/{indicators}', [GeoJsonController::class, 'indexSllWithIndicators']);

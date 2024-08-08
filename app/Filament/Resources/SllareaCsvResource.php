@@ -122,11 +122,8 @@ class SllareaCsvResource extends Resource
         // Parse records
         foreach ($csv->getRecords() as $record) {
             SllAreaData::updateOrCreate(
-                ['COD_SLL_2011_2018' => $record['COD_SLL_2011_2018']],
-                [
-                    'DEN_SLL_2011_2018' => 'spetta', //TODO: !!!
-
-                    // 'DEN_SLL_2011_2018' => $record['DEN_SLL_2011_2018'] ?? null,
+                ['COD_SLL_2011_2018' => $record['COD_SLL_2011_2018'],
+                    'DEN_SLL_2011_2018' =>$record['DEN_SLL_2011_2018'] ?? null,
                     'POP11' => $record['POP11'] ?? null,
                     'PST11' => $record['PST11'] ?? null,
                     'PD11' => $record['PD11'] ?? null,
@@ -172,8 +169,6 @@ class SllareaCsvResource extends Resource
                 ]
             );
         }
-    
-dd('ok');
     }
     
 

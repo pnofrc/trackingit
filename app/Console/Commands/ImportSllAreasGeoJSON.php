@@ -13,7 +13,7 @@ class ImportSllAreasGeoJSON extends Command
 
     public function handle()
     {
-        ini_set('memory_limit', '1G'); // Increase to 1 GB or another suitable value
+        ini_set('memory_limit', '1G'); // Increase to 1 GB the memory
 
         $filePath = $this->argument('file');
 

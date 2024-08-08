@@ -13,7 +13,7 @@ class CreateSllAreaDataTable extends Migration
             $table->id();
             $table->string('COD_SLL_2011_2018');
             $table->string('DEN_SLL_2011_2018');
-            $table->integer('POP11');
+            $table->float('POP11');
             $table->float('PST11');
             $table->float('PD11');
             $table->float('RedMed11');
