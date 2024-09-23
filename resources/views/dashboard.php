@@ -69,38 +69,38 @@
         /* Indicators */
 
 
-        .indicators_dropdown{
+        .indicators_dropdown {
             position: relative;
             z-index: 100;
             display: flex;
             gap: 1rem;
         }
 
-        select, .viz{
+        select,
+        .viz {
             background: none;
-  border: none;
-  background: background: #00000066;
+            border: none;
+            background: background: #00000066;
 
 
-  border-radius: 1rem;
-  font-family: 'bold';
-  display: flex;
-  flex-direction: column;
-  width: 200px;
-  border-radius: 1rem;
-  background: #B9C0C2;
-  padding-left: 14px;
-  color: white;
-  height: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center
+            border-radius: 1rem;
+            font-family: 'bold';
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            border-radius: 1rem;
+            background: #B9C0C2;
+            padding-left: 14px;
+            color: white;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center
         }
 
-        .viz{
+        .viz {
             background: #839196;
             padding-left: 0
-
         }
 
         .switch {
@@ -161,7 +161,7 @@
             border-radius: 1rem;
         }
 
-        .switch .selection{
+        .switch .selection {
             position: relative;
             display: flex;
             z-index: 100;
@@ -171,12 +171,11 @@
             height: 100%;
             font-family: 'bold';
             color: #839196
-            
         }
 
 
 
-        .picking{
+        .picking {
             display: flex;
             top: 3rem;
             position: relative;
@@ -185,56 +184,56 @@
             width: 90%;
         }
 
-        .selected{
+        .selected {
             color: white;
 
         }
 
-        select{
+        select {
             display: flex;
             align-items: center;
         }
 
-        .corpus{
+        .corpus {
             z-index: 100000;
         }
-
     </style>
 </head>
 
 <body>
 
-<div id="corpus" class="corpus animate__animated">
+    <div id="corpus" class="corpus animate__animated">
 
-<div id="fakeMenuBackground"></div>
+        <div id="fakeMenuBackground"></div>
 
-<div class="blackDot start clickMenu"></div>
+        <div class="blackDot start clickMenu"></div>
 
-<div id="menu">
-    <div id="backMenu"></div>
+        <div id="menu">
+            <div id="backMenu"></div>
 
-    <div class="internMenu">
-        <b><a href="/">HOME</a></b>
-        <b><a href="/dashboard">DASHBOARD</a></b>
-        <b><a href="/visualization">INDICATORI</a></b>
-        <b><a href="/blog">MATERIALI</a></b>
-        <b><a class="selected" href="/news">NEWS</a></b>
-        <b><a href="/about">ABOUT</a></b>
-    </div>
-</div>
+            <div class="internMenu">
+                <b><a href="/">HOME</a></b>
+                <b><a href="/dashboard">DASHBOARD</a></b>
+                <b><a href="/indicatori">INDICATORI</a></b>
+                <b><a href="/materiali">MATERIALI</a></b>
+                <b><a class="selected" href="/news">NEWS</a></b>
+                <b><a href="/about">ABOUT</a></b>
+            </div>
+        </div>
 
-<div class="burger clickMenu">
-    <div id="backBurger"></div>
-    <div class="blackDot"></div>
-    <span>MENU</span>
-    </div>
+        <div class="burger clickMenu">
+            <div id="backBurger"></div>
+            <div class="blackDot"></div>
+            <span>MENU</span>
+        </div>
     </div>
 
     <div class="picking">
 
         <label class="switch" id="apiToggle">
             <div class="selection">
-                <p id='sll' class="selected">SLL</p><p id='comuni'>COMUNI</p>
+                <p id='sll' class="selected">SLL</p>
+                <p id='comuni'>COMUNI</p>
             </div>
             <input type="checkbox">
             <span class="slider round"></span>
@@ -243,21 +242,71 @@
         <div class="indicators_dropdown">
             <div>
                 <select id="indicatorSelect1">
-                    <option value="POP11">POP11</option>
-                    <option value="PST11">PST11</option>
-                    <option value="PD11">PD11</option>
-                    <option value="RedMed11">RedMed11</option>
-                    <!-- Add other indicators as needed -->
+                    <option value="POP21">POP21</option>
+                    <option value="TPOP01_21">TPOP01_21</option>
+                    <option value="TPOP11_21">TPOP11_21</option>
+                    <option value="PST21">PST21</option>
+                    <option value="VPST01_21">VPST01_21</option>
+                    <option value="VPST11_21">VPST11_21</option>
+                    <option value="PIS21">PIS21</option>
+                    <option value="VPIS01_21">VPIS01_21</option>
+                    <option value="VPIS11_21">VPIS11_21</option>
+                    <option value="RedMed21">RedMed21</option>
+                    <option value="TRedMed01_21">TRedMed01_21</option>
+                    <option value="TRedMed11_21">TRedMed11_21</option>
+                    <option value="Dis21">Dis21</option>
+                    <option value="VDis11_21">VDis11_21</option>
+                    <option value="AddLog21">AddLog21</option>
+                    <option value="TAddLog01_21">TAddLog01_21</option>
+                    <option value="TAddLog11_21">TAddLog11_21</option>
+                    <option value="XAdd_21">XAdd_21</option>
+                    <option value="VXAdd_01_21">VXAdd_01_21</option>
+                    <option value="VXAdd_11_21">VXAdd_11_21</option>
+                    <option value="QLAdd_IT01">QLAdd_IT01</option>
+                    <option value="QLAdd_IT11">QLAdd_IT11</option>
+                    <option value="QLAdd_IT21">QLAdd_IT21</option>
+                    <option value="VQLAdd_IT01_21">VQLAdd_IT01_21</option>
+                    <option value="VQLAdd_IT11_21">VQLAdd_IT11_21</option>
+                    <option value="StCAT21">StCAT21</option>
+                    <option value="UIU13_21">UIU13_21</option>
+                    <option value="Imm21">Imm21</option>
+                    <option value="VImm13_21">VImm13_21</option>
+
                 </select>
             </div>
             <div>
                 <select id="indicatorSelect2">
-                    <option value="NONE">Indicatore 2</option>
+                    <option value="NONE">INDICATORE 2</option>
                     <option value="POP21">POP21</option>
+                    <option value="TPOP01_21">TPOP01_21</option>
+                    <option value="TPOP11_21">TPOP11_21</option>
                     <option value="PST21">PST21</option>
-                    <option value="PD21">PD21</option>
+                    <option value="VPST01_21">VPST01_21</option>
+                    <option value="VPST11_21">VPST11_21</option>
+                    <option value="PIS21">PIS21</option>
+                    <option value="VPIS01_21">VPIS01_21</option>
+                    <option value="VPIS11_21">VPIS11_21</option>
                     <option value="RedMed21">RedMed21</option>
-                    <!-- Add other indicators as needed -->
+                    <option value="TRedMed01_21">TRedMed01_21</option>
+                    <option value="TRedMed11_21">TRedMed11_21</option>
+                    <option value="Dis21">Dis21</option>
+                    <option value="VDis11_21">VDis11_21</option>
+                    <option value="AddLog21">AddLog21</option>
+                    <option value="TAddLog01_21">TAddLog01_21</option>
+                    <option value="TAddLog11_21">TAddLog11_21</option>
+                    <option value="XAdd_21">XAdd_21</option>
+                    <option value="VXAdd_01_21">VXAdd_01_21</option>
+                    <option value="VXAdd_11_21">VXAdd_11_21</option>
+                    <option value="QLAdd_IT01">QLAdd_IT01</option>
+                    <option value="QLAdd_IT11">QLAdd_IT11</option>
+                    <option value="QLAdd_IT21">QLAdd_IT21</option>
+                    <option value="VQLAdd_IT01_21">VQLAdd_IT01_21</option>
+                    <option value="VQLAdd_IT11_21">VQLAdd_IT11_21</option>
+                    <option value="StCAT21">StCAT21</option>
+                    <option value="UIU13_21">UIU13_21</option>
+                    <option value="Imm21">Imm21</option>
+                    <option value="VImm13_21">VImm13_21</option>
+
                 </select>
             </div>
             <button class='viz' onclick="pickIndicators()">Visualizza</button>
@@ -515,7 +564,7 @@
             minZoom: 7
         }).addTo(map);
         // Global variables
-        let geotoggle = true;
+        let geotoggle = false;
         let api = 'Sll';
         let geojsonLayers = [];
         // Function to show the loading spinner
@@ -676,13 +725,11 @@
         // Function to update the table with fetched data
         function updateTable(data) {
             const fields = [
-                'COD_SLL_2011_2018', 'DEN_SLL_2011_2018', 'POP11', 'PST11', 'PD11', 'RedMed11', 'Dis11',
-                'AddTot11', 'AddLog11', 'QLAdd_IT11', 'ULTot11', 'ULLog11', 'AddULLog11', 'QLUL_IT11',
-                'PCSuolo12', 'POP21', 'TPOP11_21', 'TSM11_21', 'PST21', 'VPST11_21', 'PD21', 'VPD11_21',
-                'RedMed21', 'TRedMed11_21', 'Dis21', 'VDis11_21', 'AddTot21', 'TAddTot11_21', 'AddLog21',
-                'TAddLog11_21', 'QLAdd_IT21', 'VQLAdd_IT11_21', 'ULTot21', 'TULTot11_21', 'AddULTot21',
-                'VAddULTot11_21', 'ULLog21', 'TULLog11_21', 'AddULLog21', 'VAddULLog11_21', 'QLUL_IT21',
-                'VQLUL_IT11_21', 'PCSuolo21', 'VPCSuolo11_21'
+                'COD_SLL_2011_2018', 'DEN_SLL_2011_2018', 'POP21', 'TPOP01_21', 'TPOP11_21', 'PST21',
+                'VPST01_21', 'VPST11_21', 'PIS21', 'VPIS01_21', 'VPIS11_21', 'RedMed21', 'TRedMed01_21',
+                'TRedMed11_21', 'Dis21', 'VDis11_21', 'AddLog21', 'TAddLog01_21', 'TAddLog11_21',
+                'XAdd_21', 'VXAdd_01_21', 'VXAdd_11_21', 'QLAdd_IT01', 'QLAdd_IT11', 'QLAdd_IT21',
+                'VQLAdd_IT01_21', 'VQLAdd_IT11_21', 'StCAT21', 'UIU13_21', 'Imm21', 'VImm13_21'
             ];
             fields.forEach(field => {
                 document.getElementById(field).textContent = data[0][field];

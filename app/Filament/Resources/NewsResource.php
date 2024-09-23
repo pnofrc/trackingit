@@ -22,8 +22,11 @@ use Filament\Tables\Filters\SelectFilter;
 class NewsResource extends Resource
 {
     protected static ?string $model = News::class;
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?int $navigationSort = 7;
+    public static ?string $label = 'News';
+    
+    public static ?string $navigationLabel = 'Gestione News';
+        protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -40,7 +43,7 @@ class NewsResource extends Resource
                 DatePicker::make('date')->required(),
                 TextInput::make('city')->required(),
                 TextInput::make('external_link')->required(),
-                FileUpload::make('picture')->preserveFilenames()->maxSize(20000)->directory('storage')
+                FileUpload::make('picture')->preserveFilenames()->maxSize(1000)->directory('storage')
        
             ]);
     }

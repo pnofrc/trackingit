@@ -300,7 +300,6 @@ padding-left: 1rem;
 .dataset{
 margin-top: 2rem;
 padding: 1rem;
-
 }
 .dataset span{
 font-family: 'bold';
@@ -468,8 +467,12 @@ display: block;
 }
 
 .row{
-    display: flex;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    align-items: center;
+    gap: 1rem;
 }
+
 
 .column{
     display: flex;

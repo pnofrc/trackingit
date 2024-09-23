@@ -20,8 +20,12 @@ use Filament\Forms\Components\DatePicker;
 class BlogResource extends Resource
 {
     protected static ?string $model = Blog::class;
-
+    protected static ?int $navigationSort = 6;
     protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+
+    public static ?string $navigationLabel = 'Gestione Materiali';
+    public static ?string $label = 'Materiali';
+
 
     public static function form(Form $form): Form
     {
@@ -31,8 +35,8 @@ class BlogResource extends Resource
                 TextInput::make('author')->required(),
                 RichEditor::make('content')->required()->fileAttachmentsDirectory('storage'),  
                 DatePicker::make('date')->required(),
-                FileUpload::make('picture')->preserveFilenames()->maxSize(20000)->directory('storage')->required(),
-                FileUpload::make('pdf')->preserveFilenames()->maxSize(20000)->directory('storage')->required()
+                FileUpload::make('picture')->preserveFilenames()->maxSize(1000)->directory('storage')->required(),
+                FileUpload::make('pdf')->preserveFilenames()->maxSize(10000)->directory('storage')->required()
        
             ]);
     }

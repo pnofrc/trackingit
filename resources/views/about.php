@@ -56,24 +56,32 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Giancarlo	Cotella<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Carlo	Salone<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Elisabetta Vitale Brovarone<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Elena Camilla	Pede<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Erblin Berisha<!--<br>POSIZIONE--></span>
+                </div>
+                <div class="column portrait">
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Alberto Valz Gris<!--<br>POSIZIONE--></span>
+                </div>
+                <div class="column portrait">
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Elia Silvestro<!--<br>POSIZIONE--></span>
                 </div>
             </div>
         </div>
@@ -86,20 +94,20 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Simonetta	Armondi<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Beatrice Galimberti<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Fabio	Manfredini<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Marco	Vedoà<!--<br>POSIZIONE--></span>
                 </div>
 
             </div>
@@ -113,18 +121,21 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Fabiano Compagnucci<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Alena	Myshko<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
-                    <span>NOME COGNOME<br>POSIZIONE</span>
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span>Arsène Perrot<!--<br>POSIZIONE--></span>
                 </div>
-
+                <div class="column portrait">
+                    <!--<img src="assets/grigio.png" alt="">-->
+                    <span></span>
+                </div>
             </div>
         </div>
     </div>
@@ -142,8 +153,8 @@
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
-                <b><a href="/visualization">INDICATORI</a></b>
-                <b><a href="/blog">MATERIALI</a></b>
+                <b><a href="/indicatori">INDICATORI</a></b>
+                <b><a href="/materiali">MATERIALI</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a class="selected" href="/about">ABOUT</a></b>
             </div>

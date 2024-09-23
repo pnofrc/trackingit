@@ -16,8 +16,11 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class MunicipalityCsvResource extends Resource
 {
     protected static ?string $model = MunicipalityCsv::class;
+    protected static ?int $navigationSort = 2;
+    protected static ?string $navigationIcon = 'heroicon-o-chevron-down';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    public static ?string $label = 'Dataset Comuni';
+    public static ?string $navigationLabel = 'Dataset Comuni';
 
     public static function form(Form $form): Form
     {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Municipality;
+
 use App\Models\SllArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -54,9 +55,10 @@ class GeoJsonController extends Controller
 
         $nameSll = SllAreaData::select('DEN_SLL_2011_2018')->get()->toArray();
 
-        // indicators data
-        $indicator1Data = SllAreaData::select($parsedIndicators[0])->get()->toArray();
 
+        // indicators data
+
+        $indicator1Data = SllAreaData::select($parsedIndicators[0])->get()->toArray();
         if($parsedIndicators[1] != 'NONE'){
             $indicator2Data = SllAreaData::select($parsedIndicators[1])->get()->toArray();
             
@@ -71,7 +73,7 @@ class GeoJsonController extends Controller
             return array_merge($a1, $a2, $a3);
         }, $nameSll, $indicator1Data,  $places);
         }
-        
+
 
         return $mixmix;
     }
@@ -98,5 +100,8 @@ class GeoJsonController extends Controller
 
 
     }
+
+
+
 
 }

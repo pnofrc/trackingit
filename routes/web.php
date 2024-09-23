@@ -1,26 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\GeoJsonController;
+use App\Http\Controllers\ContentsController;
 
-Route::get('/', 'App\Http\Controllers\ContentsController@getLatests');
+Route::get('/', [ContentsController::class, 'getLatests']);
 
-Route::get('/dashboard', 'App\Http\Controllers\ContentsController@viewDashboard');
+Route::get('/dashboard', [ContentsController::class, 'viewDashboard']);
 
+Route::get('/indicatori', [ContentsController::class, 'getDataViz']);
 
-Route::get('/visualization', function () {
-    return view('visualization');
-});
+Route::get('/materiali', [ContentsController::class, 'getBlog']);
 
-Route::get('/blog', 'App\Http\Controllers\ContentsController@getBlog');
-
-Route::get('/news', 'App\Http\Controllers\ContentsController@getNews');
-
+Route::get('/news', [ContentsController::class, 'getNews']);
 
 Route::get('/about', function () {
     return view('about');
 });
-
-use App\Http\Controllers\GeoJsonController;
 
 Route::get('/comuni', [GeoJsonController::class, 'indexMunicipalities']);
 Route::get('/Sll', [GeoJsonController::class, 'indexSLL']);
@@ -31,3 +27,9 @@ Route::get('/getMunicipalityData/{id}', [GeoJsonController::class, 'getMunicipal
 Route::get('/getIndicatorRange/{indicator}', [GeoJsonController::class, 'getIndicatorRange']);
 
 Route::get('/getSllIndicatorsData/{indicators}', [GeoJsonController::class, 'indexSllWithIndicators']);
+
+Route::get('/getHighways', [GeoJsonController::class, 'getHighways']);
+
+Route::get('/getInterports', [GeoJsonController::class, 'getInterports']);
+
+Route::get('/getCharts/{id}', [ContentsController::class, 'getCharts']);

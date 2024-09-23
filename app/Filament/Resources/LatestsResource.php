@@ -17,8 +17,10 @@ use Filament\Forms\Components\TextInput;
 class LatestsResource extends Resource
 {
     protected static ?string $model = Latests::class;
-
+    protected static ?int $navigationSort = 2;
     protected static ?string $navigationIcon = 'heroicon-o-chat-bubble-left-ellipsis';
+    public static ?string $label = 'Ultime Notizie';
+    public static ?string $navigationLabel = 'Gestione Ultime Notizie';
 
     public static function form(Form $form): Form
     {
