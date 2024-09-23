@@ -1,0 +1,780 @@
+{
+  "type": "FeatureCollection",
+  "name": "INTERPORTI",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "urn:ogc:def:crs:OGC:1.3:CRS84"
+    }
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 1,
+        "citta": "Bari",
+        "denominazione": "Interporto Regionale della Puglia",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Regionale della Puglia S.p.A.",
+        "sito_web": "http://www.interportopuglia.it/",
+        "indirizzo_via": "Viale Giuseppe Degennaro, 1",
+        "indirizzo_cap": 70132,
+        "contatti_soggetto_referente": "0800998301 �?? divella@interportopuglia.it",
+        "superficie_fondiaria": 400000,
+        "superficie_magazzini": 77400,
+        "superficie_magazzini_temp_ambiente": 57400,
+        "superficie_magazzini_temp_controllata": 20000,
+        "parcheggi_mezzi_pesanti": 300000,
+        "operatori_insediati": 50,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 600,
+        "numero_binari_di_lavorazione": "4 BINARI DA 600 MT + 12 BINARI DA 500 MT",
+        "ten_t_id_corridoio": "Scandinavo - Mediterraneo",
+        "lat": 41.130411,
+        "lon": 16.81098
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          16.81098,
+          41.130411
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 2,
+        "citta": "Bentivoglio",
+        "denominazione": "Interporto Bologna",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Bologna S.p.A.",
+        "sito_web": "http://www.interporto.it/",
+        "indirizzo_via": "Palazzina Doganale Interporto Bologna",
+        "indirizzo_cap": 40010,
+        "contatti_soggetto_referente": "leone@bo.interporto.it",
+        "superficie_fondiaria": 3713093,
+        "superficie_magazzini": 518248,
+        "superficie_magazzini_temp_ambiente": 460590,
+        "superficie_magazzini_temp_controllata": 57658,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": 120,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 750,
+        "numero_binari_di_lavorazione": "17 BINARI (LUNGHEZZA ND)",
+        "ten_t_id_corridoio": "Baltico �?? Adriatico, Mediterraneo, Scandinavo - Mediterraneo",
+        "lat": 44.622286,
+        "lon": 11.387699
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.387699,
+          44.622286
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 3,
+        "citta": "Cervignano del Friuli",
+        "denominazione": "Interporto Cervignano del Friuli",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Cervignano del Friuli S.p.A.",
+        "sito_web": "http://www.interportocervignano.it/interporto.html",
+        "indirizzo_via": "Viale Venezia, 22",
+        "indirizzo_cap": 33052,
+        "contatti_soggetto_referente": "operativo@interportocervignano.it",
+        "superficie_fondiaria": 460000,
+        "superficie_magazzini": 24000,
+        "superficie_magazzini_temp_ambiente": 23400,
+        "superficie_magazzini_temp_controllata": 600,
+        "parcheggi_mezzi_pesanti": 50000,
+        "operatori_insediati": 6,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 450,
+        "numero_binari_di_lavorazione": "6 BINARI DA 750 MT + 2 BINARI DA 450 MT",
+        "ten_t_id_corridoio": "Baltico �?? Adriatico e Mediterraneo",
+        "lat": 45.829446,
+        "lon": 13.331417
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.331417,
+          45.829446
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 4,
+        "citta": "Livorno",
+        "denominazione": "Interporto Toscano",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Toscano Amerigo Vespucci S.p.A.",
+        "sito_web": "https://www.interportotoscano.com/",
+        "indirizzo_via": "Via delle Colline, 100",
+        "indirizzo_cap": 57017,
+        "contatti_soggetto_referente": "bertini@interportotoscano.com",
+        "superficie_fondiaria": 2500000,
+        "superficie_magazzini": 106600,
+        "superficie_magazzini_temp_ambiente": 73500,
+        "superficie_magazzini_temp_controllata": 33100,
+        "parcheggi_mezzi_pesanti": 70000,
+        "operatori_insediati": 36,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 600,
+        "numero_binari_di_lavorazione": "2 BINARI DA 650 MT",
+        "ten_t_id_corridoio": "Scandinavo - Mediterraneo",
+        "lat": 43.606025,
+        "lon": 10.405855
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.405855,
+          43.606025
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 5,
+        "citta": "Maddaloni",
+        "denominazione": "ISE Interporto Sud Europa",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Sud Europa S.p.A.",
+        "sito_web": "http://www.interportosudeuropa.it/",
+        "indirizzo_via": "c/o Interporto Marcianise-Maddaloni Ed. Lotto 1/C",
+        "indirizzo_cap": 81024,
+        "contatti_soggetto_referente": "mena.nuzzo@gruppobarletta.com",
+        "superficie_fondiaria": 4100000,
+        "superficie_magazzini": 350000,
+        "superficie_magazzini_temp_ambiente": 352000,
+        "superficie_magazzini_temp_controllata": 25000,
+        "parcheggi_mezzi_pesanti": 3000,
+        "operatori_insediati": 25,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 750,
+        "numero_binari_di_lavorazione": "2 BINARI DA 750 MT +��9 BINARI DA��750 MT",
+        "ten_t_id_corridoio": "Scandinavo - Mediterraneo",
+        "lat": 41.011452,
+        "lon": 14.353938
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.353938,
+          41.011452
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 6,
+        "citta": "Mortara",
+        "denominazione": "Terminal Intermodale di Mortara",
+        "ragione_sociale_soggetto_di_gestione": "Polo Logistico Integrato di Mortara S.p.A. e\\nT.I.MO. S.r.l. - Terminal Intermodale di Mortara",
+        "sito_web": "http://www.poloinmortara.it/\\nhttp://www.terminalmortara.it",
+        "indirizzo_via": "Via XI Settembre, snc",
+        "indirizzo_cap": 27036,
+        "contatti_soggetto_referente": "0382 305811 ",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 45.2468499,
+        "lon": 8.716033924
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.716033924,
+          45.2468499
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 7,
+        "citta": "Nola",
+        "denominazione": "Interporto Campano",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Campano S.p.A.",
+        "sito_web": "http://www.interportocampano.it/",
+        "indirizzo_via": "Interporto di Nola - Edificio Servizi D1",
+        "indirizzo_cap": 80035,
+        "contatti_soggetto_referente": "s.sellitto@interportocampano.it 3346736376",
+        "superficie_fondiaria": 2900000,
+        "superficie_magazzini": 416000,
+        "superficie_magazzini_temp_ambiente": 389575,
+        "superficie_magazzini_temp_controllata": 26000,
+        "parcheggi_mezzi_pesanti": 414000,
+        "operatori_insediati": 138,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 750,
+        "numero_binari_di_lavorazione": "7 BINARI DA 900 MT",
+        "ten_t_id_corridoio": "Scandinavo - Mediterraneo",
+        "lat": 40.963562,
+        "lon": 14.482518
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.482518,
+          40.963562
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 8,
+        "citta": "Novara",
+        "denominazione": "Interporto di Novara",
+        "ragione_sociale_soggetto_di_gestione": "CIM S.p.A. - Interporto di Novara",
+        "sito_web": "http://www.cimspa.it/",
+        "indirizzo_via": "Via Carlo Panseri, 118",
+        "indirizzo_cap": 28100,
+        "contatti_soggetto_referente": "335/8056529 ",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 45.4650994,
+        "lon": 8.65317064
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.65317064,
+          45.4650994
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 9,
+        "citta": "Orte",
+        "denominazione": "Interporto Centro Italia",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Centro Italia Orte S.p.A.",
+        "sito_web": "http://www.interportocentro.it/\\nhttp://www.interportodiorte.it",
+        "indirizzo_via": "Via dei Gladiatori, snc",
+        "indirizzo_cap": 1028,
+        "contatti_soggetto_referente": "761490024",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 42.4598419,
+        "lon": 12.39085295
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.39085295,
+          42.4598419
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 10,
+        "citta": "Padova",
+        "denominazione": "Interporto Padova",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Padova S.p.A.",
+        "sito_web": "http://www.interportopd.it/",
+        "indirizzo_via": "Galleria Spagna, 35",
+        "indirizzo_cap": 35127,
+        "contatti_soggetto_referente": "049 7621811",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 45.38794108,
+        "lon": 11.92475177
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.92475177,
+          45.38794108
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 11,
+        "citta": "Parma",
+        "denominazione": "Interporto di Parma",
+        "ragione_sociale_soggetto_di_gestione": "Ce.P.I.M. S.p.A. - Interporto di Parma",
+        "sito_web": "http://www.cepimspa.it/",
+        "indirizzo_via": "Piazza Europa, 1",
+        "indirizzo_cap": 43010,
+        "contatti_soggetto_referente": "matte.crema@cepimspa.it",
+        "superficie_fondiaria": 2521815,
+        "superficie_magazzini": 574000,
+        "superficie_magazzini_temp_ambiente": 530000,
+        "superficie_magazzini_temp_controllata": 44000,
+        "parcheggi_mezzi_pesanti": 113522,
+        "operatori_insediati": 103,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 350,
+        "numero_binari_di_lavorazione": "3 BINARI DA 350 MT",
+        "ten_t_id_corridoio": "Mediterraneo e Scandinavo - Mediterraneo",
+        "lat": 44.847531,
+        "lon": 10.235101
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.235101,
+          44.847531
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 12,
+        "citta": "Pescara",
+        "denominazione": "Interporto d'Abruzzo",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Val Pescara S.p.A.",
+        "sito_web": "http://www.interportoabruzzo.it/",
+        "indirizzo_via": "S.S.5 Tiburtina Valeria Localit�� Staccioli",
+        "indirizzo_cap": 65025,
+        "contatti_soggetto_referente": "a.zuccarini@interportovp.it",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 42.31848556,
+        "lon": 14.06793702
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          14.06793702,
+          42.31848556
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 13,
+        "citta": "Portogruaro",
+        "denominazione": "Interporto di Portogruaro",
+        "ragione_sociale_soggetto_di_gestione": "Portogruaro Interporto S.p.A.",
+        "sito_web": "http://www.interportoportogruaro.it/",
+        "indirizzo_via": "Zona Industriale Noiari - Localit�� Summaga",
+        "indirizzo_cap": 30026,
+        "contatti_soggetto_referente": "N/D",
+        "superficie_fondiaria": 300000,
+        "superficie_magazzini": 33000,
+        "superficie_magazzini_temp_ambiente": 8000,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": 48,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 478,
+        "numero_binari_di_lavorazione": "4 BINARI DA 500 MT + 2 BINARI DA 360 MT",
+        "ten_t_id_corridoio": "Baltico - Adriatico e Mediterraneo",
+        "lat": 45.767403,
+        "lon": 12.806057
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.806057,
+          45.767403
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 14,
+        "citta": "Prato",
+        "denominazione": "Interporto della Toscana centrale",
+        "ragione_sociale_soggetto_di_gestione": "Interporto della Toscana Centrale S.p.A.",
+        "sito_web": "http://www.interportodellatoscana.com",
+        "indirizzo_via": "Via di Gonfienti, 4",
+        "indirizzo_cap": 59100,
+        "contatti_soggetto_referente": "TEL: 0574/594362 - EMAIL: ufficiotecnico@interportoprato.it",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 43.86428759,
+        "lon": 11.12759227
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.12759227,
+          43.86428759
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 15,
+        "citta": "Rivalta Scrivia",
+        "denominazione": "Rivalta Terminal Europa",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Rivalta Scrivia S.p.A.",
+        "sito_web": "http://www.katoennatie.com",
+        "indirizzo_via": "Strada Comunale Savonesa, 12 - Rivalta Scrivia",
+        "indirizzo_cap": 15057,
+        "contatti_soggetto_referente": "0131031109 Lisa GIANI - segreteria@pec.rivaltaterminal.eu",
+        "superficie_fondiaria": 1250000,
+        "superficie_magazzini": 430000,
+        "superficie_magazzini_temp_ambiente": 410000,
+        "superficie_magazzini_temp_controllata": 20000,
+        "parcheggi_mezzi_pesanti": 200000,
+        "operatori_insediati": null,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 440,
+        "numero_binari_di_lavorazione": "4 BINARI DA 450 MT",
+        "ten_t_id_corridoio": "Reno - Alpi",
+        "lat": 44.867871,
+        "lon": 8.802864
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.802864,
+          44.867871
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 16,
+        "citta": "Rovigo",
+        "denominazione": "Interporto di Rovigo",
+        "ragione_sociale_soggetto_di_gestione": "Interporto di Rovigo S.p.A.",
+        "sito_web": "http://www.interportorovigo.it/",
+        "indirizzo_via": "Viale delle Industrie, 53",
+        "indirizzo_cap": 45100,
+        "contatti_soggetto_referente": "3387903905",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 45.03427691,
+        "lon": 11.80808086
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.80808086,
+          45.03427691
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 17,
+        "citta": "Orbassano",
+        "denominazione": "Interporto di Torino",
+        "ragione_sociale_soggetto_di_gestione": "S.I.TO - Societ�� Interporto di Torino S.p.A.",
+        "sito_web": "http://www.sitospa.it/",
+        "indirizzo_via": "Tangenziale Sud - Prima Strada, 2",
+        "indirizzo_cap": 10043,
+        "contatti_soggetto_referente": "0113975975 - 3336804201-logistica.marigo@sitospa.it",
+        "superficie_fondiaria": 3000000,
+        "superficie_magazzini": 900000,
+        "superficie_magazzini_temp_ambiente": 867900,
+        "superficie_magazzini_temp_controllata": 32100,
+        "parcheggi_mezzi_pesanti": 150000,
+        "operatori_insediati": 200,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 600,
+        "numero_binari_di_lavorazione": "2 BINARI DA 450 MT + 2 BINARI DA 600 MT",
+        "ten_t_id_corridoio": "Mediterraneo",
+        "lat": 45.037135,
+        "lon": 7.56439
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.56439,
+          45.037135
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 18,
+        "citta": "Trento",
+        "denominazione": "Interporto di Trento",
+        "ragione_sociale_soggetto_di_gestione": "Interbrennero S.p.A.",
+        "sito_web": "http://www.interbrennero.it/site/ibsite/",
+        "indirizzo_via": "Via Innsbruck, 13-15",
+        "indirizzo_cap": 38121,
+        "contatti_soggetto_referente": "0461993244 - imoda@tin.it",
+        "superficie_fondiaria": 1000000,
+        "superficie_magazzini": 246000,
+        "superficie_magazzini_temp_ambiente": 215000,
+        "superficie_magazzini_temp_controllata": 25000,
+        "parcheggi_mezzi_pesanti": 35000,
+        "operatori_insediati": 130,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 720,
+        "numero_binari_di_lavorazione": "3 BINARI DA 720 MT + 4 BINARI DA 550 MT + 2 BINARI DA 400 MT",
+        "ten_t_id_corridoio": "Scandinavo - Mediterraneo",
+        "lat": 46.107973,
+        "lon": 11.092176
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          11.092176,
+          46.107973
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 19,
+        "citta": "Trieste",
+        "denominazione": "Interporto di Trieste",
+        "ragione_sociale_soggetto_di_gestione": "Interporto di Trieste S.p.A.",
+        "sito_web": "http://www.interportotrieste.it/",
+        "indirizzo_via": "Localit�� Fernetti",
+        "indirizzo_cap": 34016,
+        "contatti_soggetto_referente": "petz@interportotrieste.it",
+        "superficie_fondiaria": 229000,
+        "superficie_magazzini": 33000,
+        "superficie_magazzini_temp_ambiente": 33000,
+        "superficie_magazzini_temp_controllata": 0,
+        "parcheggi_mezzi_pesanti": 80000,
+        "operatori_insediati": 30,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 450,
+        "numero_binari_di_lavorazione": "3 BINARI DA 450 MT + 3 BINARI DA 350 MT",
+        "ten_t_id_corridoio": "Mediterraneo e Baltico - Adriatico",
+        "lat": 45.699069,
+        "lon": 13.823225
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.823225,
+          45.699069
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 20,
+        "citta": "Vado",
+        "denominazione": "Interporto di Vado",
+        "ragione_sociale_soggetto_di_gestione": "Interporto di Vado I.O. S.p.A.",
+        "sito_web": "http://www.interportovio.it/",
+        "indirizzo_via": "Via Trieste, 25",
+        "indirizzo_cap": 17047,
+        "contatti_soggetto_referente": "197750220 LEO@INTERPORTOVADO.IT",
+        "superficie_fondiaria": 232000,
+        "superficie_magazzini": 59000,
+        "superficie_magazzini_temp_ambiente": 41900,
+        "superficie_magazzini_temp_controllata": 17100,
+        "parcheggi_mezzi_pesanti": 4000,
+        "operatori_insediati": 10,
+        "dogana": "N/D",
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": "N/D",
+        "ten_t_id_corridoio": "Reno - Alpi",
+        "lat": 44.265537,
+        "lon": 8.437719
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.437719,
+          44.265537
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 21,
+        "citta": "Verona",
+        "denominazione": "Interporto Quadrante Europa",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Quadrante Europa - Consorzio ZAI",
+        "sito_web": "http://www.quadranteeuropa.it/it/interporto.html",
+        "indirizzo_via": "Via Sommacampagna, 61",
+        "indirizzo_cap": 37137,
+        "contatti_soggetto_referente": "Tel. 045 8622060 - Email: consorzio.zai@qevr.it",
+        "superficie_fondiaria": 4200000,
+        "superficie_magazzini": 400000,
+        "superficie_magazzini_temp_ambiente": 250000,
+        "superficie_magazzini_temp_controllata": 150000,
+        "parcheggi_mezzi_pesanti": 17000,
+        "operatori_insediati": 130,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 600,
+        "numero_binari_di_lavorazione": "5 BINARI DA 650 MT + 10 BINARI DA 550 MT + 3 BINARI DA 550 MT",
+        "ten_t_id_corridoio": "Scandinavo - Mediterraneo e Mediterraneo",
+        "lat": 45.417002,
+        "lon": 10.926164
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          10.926164,
+          45.417002
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 22,
+        "citta": "Jesi",
+        "denominazione": "Interporto delle Marche",
+        "ragione_sociale_soggetto_di_gestione": "Interporto Marche S.p.A.",
+        "sito_web": "http://www.interportomarche.it/",
+        "indirizzo_via": "Via Coppetella, 4 ",
+        "indirizzo_cap": 60035,
+        "contatti_soggetto_referente": "Tel. 0731 605182 - e-mail e PEC: segreteria@interportomarche.it",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 43.56143369,
+        "lon": 13.300637
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.300637,
+          43.56143369
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 23,
+        "citta": "Venezia ",
+        "denominazione": "Interporto di Venezia",
+        "ragione_sociale_soggetto_di_gestione": "Interporto di Venezia S.p.A.",
+        "sito_web": "http://www.interporto.ve.it/",
+        "indirizzo_via": "Via dell'Elettricit��, 21\\t",
+        "indirizzo_cap": 30175,
+        "contatti_soggetto_referente": "Tel. 041 2591110",
+        "superficie_fondiaria": 230000,
+        "superficie_magazzini": 70097,
+        "superficie_magazzini_temp_ambiente": 70097,
+        "superficie_magazzini_temp_controllata": 0,
+        "parcheggi_mezzi_pesanti": 1500,
+        "operatori_insediati": 12,
+        "dogana": "S",
+        "lunghezza_massima_treno_ricevibile": 300,
+        "numero_binari_di_lavorazione": "2 BINARI (TOTALE 4600 MT)",
+        "ten_t_id_corridoio": "Baltico - Adriatico e Mediterraneo",
+        "lat": 45.465592,
+        "lon": 12.230975
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          12.230975,
+          45.465592
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "idinterporto": 24,
+        "citta": "Catania",
+        "denominazione": "Societ�� degli Interporti Siciliani",
+        "ragione_sociale_soggetto_di_gestione": "Societ�� degli Interporti Siciliani S.p.A.",
+        "sito_web": "http://www.interporti.sicilia.it/",
+        "indirizzo_via": "Via Ottava Strada, 101 Zona Industriale",
+        "indirizzo_cap": 95121,
+        "contatti_soggetto_referente": "Tel. 0957357272 095592131- e-mail e PEC: info@interporti.sicilia.it",
+        "superficie_fondiaria": null,
+        "superficie_magazzini": null,
+        "superficie_magazzini_temp_ambiente": null,
+        "superficie_magazzini_temp_controllata": null,
+        "parcheggi_mezzi_pesanti": null,
+        "operatori_insediati": null,
+        "dogana": null,
+        "lunghezza_massima_treno_ricevibile": null,
+        "numero_binari_di_lavorazione": null,
+        "ten_t_id_corridoio": null,
+        "lat": 37.44254314,
+        "lon": 15.05579094
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          15.05579094,
+          37.44254314
+        ]
+      }
+    }
+  ]
+}
