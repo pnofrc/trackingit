@@ -43,7 +43,7 @@
 
             <div class="blog-image">
                 <span class="title">{{ $new['title'] }}</span>
-                <img src="{{ $new['picture'] }}">
+                <img src="/storage/{{ $new['picture'] }}">
             </div>
 
             <div class="blog-info">

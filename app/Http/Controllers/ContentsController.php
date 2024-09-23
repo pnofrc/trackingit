@@ -76,7 +76,6 @@ class ContentsController extends Controller
     {
 
         $visualizations = Indicator::select('id','name','description')->get();
-
         return view('visualization', ['visualizations' => $visualizations]);
     }
 

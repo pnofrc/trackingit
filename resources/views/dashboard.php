@@ -711,6 +711,7 @@
             getIndicatorsData(indicator1Name, indicator2Name)
         }
         pickIndicators()
+
         // Function to toggle between APIs
         function toggleGeo() {
             geotoggle = !geotoggle;
@@ -718,10 +719,12 @@
             document.getElementById('comuni').classList.toggle('selected')
             document.getElementById('sll').classList.toggle('selected')
             // Fetch and update data with the new API endpoint
-            fetchAndUpdateGeoJSON();
+            pickIndicators()
         }
+
         // Add event listener for the toggle switch
         document.getElementById('apiToggle').addEventListener('change', toggleGeo);
+
         // Function to update the table with fetched data
         function updateTable(data) {
             const fields = [

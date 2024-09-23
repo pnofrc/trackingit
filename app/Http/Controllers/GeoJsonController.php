@@ -42,6 +42,13 @@ class GeoJsonController extends Controller
 
     // Fetch data of a municipality
 
+    public function getComuniAreaData($id)
+    {
+        // TODO: edit qua COMUNI
+        $comuniAreaData = SllAreaData::where('COD_COM_2011_2018', $id)->get();
+        return response()->json($comuniAreaData);
+    }
+
 
     // Fetch SLL with indicators
     public function indexSllWithIndicators($indicators)
@@ -50,8 +57,8 @@ class GeoJsonController extends Controller
         $parsedIndicators = explode('+', $indicators);
 
         // SLL data
-        $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(geom)::json AS geom"))
-        ->get()->toArray();
+        $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
+            ->get()->toArray();
 
         $nameSll = SllAreaData::select('DEN_SLL_2011_2018')->get()->toArray();
 
@@ -59,19 +66,54 @@ class GeoJsonController extends Controller
         // indicators data
 
         $indicator1Data = SllAreaData::select($parsedIndicators[0])->get()->toArray();
-        if($parsedIndicators[1] != 'NONE'){
+        if ($parsedIndicators[1] != 'NONE') {
             $indicator2Data = SllAreaData::select($parsedIndicators[1])->get()->toArray();
-            
-             // merge all the values in an array
-        $mixmix = array_map(function($a1, $a2, $a3, $a4) {
-            return array_merge($a1, $a2, $a3, $a4);
-        }, $nameSll, $indicator1Data, $indicator2Data, $places);
+
+            // merge all the values in an array
+            $mixmix = array_map(function ($a1, $a2, $a3, $a4) {
+                return array_merge($a1, $a2, $a3, $a4);
+            }, $nameSll, $indicator1Data, $indicator2Data, $places);
 
         } else {
-        // merge all the values in an array
-        $mixmix = array_map(function($a1, $a2, $a3 ) {
-            return array_merge($a1, $a2, $a3);
-        }, $nameSll, $indicator1Data,  $places);
+            // merge all the values in an array
+            $mixmix = array_map(function ($a1, $a2, $a3) {
+                return array_merge($a1, $a2, $a3);
+            }, $nameSll, $indicator1Data, $places);
+        }
+
+
+        return $mixmix;
+    }
+
+    public function indexComuniWithIndicators($indicators)
+    {
+
+        $parsedIndicators = explode('+', $indicators);
+
+        // Comuni data //TODO: COMUNI
+        $places = SllArea::select('comuni_2011', DB::raw("SST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
+            ->get()->toArray();
+
+        $nameComuni = SllAreaData::select('DEN_SLL_2011_2018')->get()->toArray();
+
+
+        // indicators data
+
+        $indicator1Data = SllAreaData::select($parsedIndicators[0])->get()->toArray();
+        if ($parsedIndicators[1] != 'NONE') {
+            $indicator2Data = SllAreaData::select($parsedIndicators[1])->get()->toArray();
+
+            // merge all the values in an array
+            $mixmix = array_map(function ($a1, $a2, $a3, $a4) {
+                return array_merge($a1, $a2, $a3, $a4);
+            }, $nameComuni, $indicator1Data, $indicator2Data, $places);
+
+        } else {
+            // merge all the values in an array
+            $mixmix = array_map(function ($a1, $a2, $a3) {
+                return array_merge($a1, $a2, $a3);
+                // TODO: COMUNI
+            }, $nameComuni, $indicator1Data, $places);
         }
 
 
@@ -82,13 +124,13 @@ class GeoJsonController extends Controller
     // get min and max of an idicator (for the color visualization)
     public function getIndicatorRange($indicator)
     {
-      
-        if($indicator == "NONE"){
+
+        if ($indicator == "NONE") {
             return response()->json([
                 'min' => 0,
                 'max' => 0
             ]);
-        } else {    
+        } else {
             $minValue = SllAreaData::min($indicator);
             $maxValue = SllAreaData::max($indicator);
 

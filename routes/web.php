@@ -27,6 +27,8 @@ Route::get('/getMunicipalityData/{id}', [GeoJsonController::class, 'getMunicipal
 Route::get('/getIndicatorRange/{indicator}', [GeoJsonController::class, 'getIndicatorRange']);
 
 Route::get('/getSllIndicatorsData/{indicators}', [GeoJsonController::class, 'indexSllWithIndicators']);
+Route::get('/getComuniIndicatorsData/{indicators}', [GeoJsonController::class, 'indexComuniWithIndicators']);
+
 
 Route::get('/getHighways', [GeoJsonController::class, 'getHighways']);
 

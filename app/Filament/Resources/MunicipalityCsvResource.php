@@ -4,7 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MunicipalityCsvResource\Pages;
 use App\Filament\Resources\MunicipalityCsvResource\RelationManagers;
-use App\Models\MunicipalityCsv;
+use App\Models\MunicipalityCSV;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -34,13 +34,28 @@ class MunicipalityCsvResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('title'),
+                Tables\Columns\TextColumn::make('updated_at')->date(),
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('download')
+                    ->label('Download DataSet')
+                    ->action(function (MunicipalityCSV $record) {
+                        return redirect()->to($record->file);
+                    })
+                    ->openUrlInNewTab(),
+
+                Tables\Actions\Action::make('parse')
+                    ->label('Parse CSV')
+                    ->action(function (MunicipalityCSV $record) {
+                        $resource = new \App\Filament\Resources\MunicipalityCsvResource();
+                        $resource->parseCsv($record->file);
+                    })
+                    ->color('primary'),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

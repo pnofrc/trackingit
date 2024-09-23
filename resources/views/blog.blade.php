@@ -33,7 +33,8 @@
             <div class="article">
 
 
-                <img class="blog-image" src="assets/dataviz.png">
+
+                <img class="blog-image" src="/storage/{{ $blog['picture'] }}">
 
                 <div class="blog-info">
 
@@ -43,7 +44,7 @@
                     {!! $blog['content'] !!}
                 </div>
 
-                <a class="link-blog-download-pdf" href="{{ $blog['pdf'] }}" download>
+                <a class="link-blog-download-pdf" href="/storage/{{ $blog['pdf'] }}" download>
                     <button class="blog-download-pdf button-ext">
                         <span>DOWNLOAD PDF</span>
                         <img src="assets/download.png" alt="">

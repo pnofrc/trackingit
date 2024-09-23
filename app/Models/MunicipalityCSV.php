@@ -11,7 +11,7 @@ class MunicipalityCSV extends Model
 
     protected $fillable = [
         'title',
-       'file',
-       'content'
+        'file',
+        'content'
     ];
 }

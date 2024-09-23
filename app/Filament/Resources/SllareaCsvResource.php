@@ -24,11 +24,11 @@ use App\Imports\ParsedSLLDataImport;
 
 class SllareaCsvResource extends Resource
 {
-    protected static ?string $model = SllareaCsv::class;
+    protected static ?string $model = SllareaCSV::class;
     protected static ?int $navigationSort = 4;
     protected static ?string $navigationIcon = 'heroicon-o-chevron-double-down';
 
-    public static ?string $label = 'Materiali';
+    public static ?string $label = 'Dataset aree SLL';
 
     public static ?string $navigationLabel = 'Dataset aree SLL';
 
@@ -53,7 +53,6 @@ class SllareaCsvResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('title'),
                 Tables\Columns\TextColumn::make('updated_at')->date(),
-                // Toggle::make('online')
             ])
             ->filters([
                 //
@@ -61,14 +60,14 @@ class SllareaCsvResource extends Resource
             ->actions([
                 Tables\Actions\Action::make('download')
                     ->label('Download DataSet')
-                    ->action(function (SllareaCsv $record) {
+                    ->action(function (SllAreaCSV $record) {
                         return redirect()->to($record->file);
                     })
                     ->openUrlInNewTab(),
 
                 Tables\Actions\Action::make('parse')
                     ->label('Parse CSV')
-                    ->action(function (SllareaCsv $record) {
+                    ->action(function (SllAreaCSV $record) {
                         $resource = new \App\Filament\Resources\SllareaCsvResource();
                         $resource->parseCsv($record->file);
                     })
