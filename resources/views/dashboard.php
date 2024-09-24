@@ -529,6 +529,67 @@
             maxZoom: 15,
             minZoom: 6
         }).addTo(map);
+
+
+
+
+        // Show interports on the map
+
+        map.createPane('topPane');
+        map.getPane('topPane').style.zIndex = 650;
+        fetch('/getInterports')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(interport => {
+                    const geoJSONGeom = JSON.parse(interport.geom);
+
+                    // Assumi che sia un Point (per usare L.circleMarker su punti)
+                    if (geoJSONGeom.type === 'Point') {
+                        const coordinates = geoJSONGeom.coordinates;
+
+                        // Crea il marker nel pane 'topPane' per mantenerlo in cima
+                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
+                            pane: 'topPane',   // Specifica che questo marker va nel pane 'topPane'
+                            radius: 8,         // Dimensione del cerchio
+                            color: '#800080',  // Colore del bordo (viola)
+                            fillColor: '#800080', // Colore di riempimento (viola)
+                            fillOpacity: 0.7   // Trasparenza del riempimento
+                        }).addTo(map);
+
+                        // Aggiungi un popup con il nome e la città dell'interport
+                        marker.bindPopup(`
+                    <strong>${interport.name}</strong><br>
+                    <em>${interport.city}</em>
+                `);
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading interports:', error));
+
+
+        map.createPane('topPane2');
+        map.getPane('topPane2').style.zIndex = 640;
+
+        // Show highways on the map
+        fetch('/getHighways')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(highway => {
+                    const geoJSONGeom = JSON.parse(highway.geom); // Converte da stringa JSON a oggetto GeoJSON
+                    L.geoJSON(geoJSONGeom, {
+                        style: {
+                            pane: 'topPane2',
+                            color: '#8668B2',
+                            weight: 2,
+                            opacity: 1,
+                            fillOpacity: 1
+                        }
+                    }).addTo(map);
+                })
+            }).catch(error => console.error('Error loading static GeoJSON 1:', error));
+
+
+
         // Global variables
         let geotoggle = false;
         let api = 'Sll';
@@ -589,7 +650,7 @@
                                     opacity: 1,
                                     color: '#ffffff', // Border color set to white
                                     dashArray: '3',
-                                    fillOpacity: 0.7,
+                                    fillOpacity: 1,
                                 };
                             }
                             // Reference to the external div

@@ -8,13 +8,15 @@ use App\Models\SllArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\SllAreaData;
+use App\Models\Interport;
+use App\Models\Highway;
 
 class GeoJsonController extends Controller
 {
     // Fetch all GeoJSON Muncipality data
     public function indexMunicipalities()
     {
-        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(geom)::json AS geom"))
+        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
             ->get();
 
 
@@ -25,7 +27,7 @@ class GeoJsonController extends Controller
     // Fetch all GeoJSON SLL data
     public function indexSLL()
     {
-        $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(geom)::json AS geom"))
+        $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
             ->get();
 
 
@@ -91,7 +93,7 @@ class GeoJsonController extends Controller
         $parsedIndicators = explode('+', $indicators);
 
         // Comuni data //TODO: COMUNI
-        $places = SllArea::select('comuni_2011', DB::raw("SST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
+        $places = SllArea::select('comuni_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
             ->get()->toArray();
 
         $nameComuni = SllAreaData::select('DEN_SLL_2011_2018')->get()->toArray();
@@ -118,6 +120,19 @@ class GeoJsonController extends Controller
 
 
         return $mixmix;
+    }
+
+    public function getInterports()
+    {
+        $interports = Interport::select('name', 'city', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))->get();
+        
+        return response()->json($interports); // Devi restituire la risposta JSON
+    }
+
+    public function getHighways()
+    {
+        $highways = Highway::select('name', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))->get();
+        return response()->json($highways); // Devi restituire la risposta JSON
     }
 
 

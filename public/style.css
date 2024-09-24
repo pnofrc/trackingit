@@ -707,7 +707,7 @@ button:hover,
 }
 
 .news-contents {
-  width: 25%;
+  width: 27%;
 }
 
 .button-ext {
@@ -1029,4 +1029,9 @@ td {
   .description-platform p{
     margin-top: 15rem;
   }
+
+  .news-contents {
+    width: 100%;
+  }
+  
 }

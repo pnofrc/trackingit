@@ -45,7 +45,7 @@
         <span class="visualization-title title">News</span>
 
         <div class="news-contents">
-            <span class="model">TIPO DI CONTENUTI</span>
+            <span onclick="filtering('all')" class="model">TIPO DI CONTENUTI</span>
             <span onclick="filtering('Evento')" class="model">EVENTO</span>
             <span onclick="filtering('Pubblicazione')" class="model">PUBBLICAZIONE</span>
             <span onclick="filtering('Altro')" class="model">ALTRO</span>
@@ -63,6 +63,8 @@
 
         @foreach ($news as $new)
             <hr class="{{ $new['news_type'] }} news">
+
+
             <div class="desktop article news {{ $new['news_type'] }}">
 
                 <div class="blog-image">
@@ -89,9 +91,9 @@
             </div>
 
 
+            {{-- divisore --}}
 
 
-            
             <div class="mobile article news {{ $new['news_type'] }}">
 
                 <span class="title">{{ $new['title'] }}</span>
@@ -103,7 +105,9 @@
                 </div>
 
                 <div class="blog-image">
-                    <img src="/storage/{{ $new['picture'] }}">
+                    @if ($new['picture'])
+                        <img src="/storage/{{ $new['picture'] }}">
+                    @endif
                 </div>
 
                 <div class="blog-info">
@@ -117,16 +121,14 @@
                 </div>
 
             </div>
-
-            </div>
         @endforeach
-
     </div>
+    {{-- </div> --}}
 
 
     <div id="menu-mobile" class="animate__animated mobile">
         <b><a href="/">HOME</a></b>
-        <b><a class="selected"  href="/news">NEWS</a></b>
+        <b><a class="selected" href="/news">NEWS</a></b>
         <b><a href="/about">ABOUT</a></b>
     </div>
 
@@ -163,37 +165,44 @@
 
         function filtering(type) {
             let news_array = document.querySelectorAll('.news')
-            news_array.forEach(element => {
-                element.style.display = "none"
-            });
-            document.querySelectorAll(`.${type}`).forEach(element => {
-                element.style.display = 'flex'
-            });
+            if (type == 'all') {
+                news_array.forEach(element => {
+                    element.style.display = "flex"
+                });
+            } else {
+                news_array.forEach(element => {
+                    element.style.display = "none"
+                });
+                document.querySelectorAll(`.${type}`).forEach(element => {
+                    element.style.display = 'flex'
+                });
+
+            }
         }
 
-    function openMenuMobile() {
-                // document.querySelector('#menu').classList.remove()
-                // document.querySelector('#menu').classList.add('animate__slideInUp')
-    
-                // document.querySelector('.layeredBack').classList.remove()
-                // document.querySelector('.layeredBack').classList.add()
-    
-                  document.querySelector('#menu-mobile').style.display = 'flex'
+        function openMenuMobile() {
+            // document.querySelector('#menu').classList.remove()
+            // document.querySelector('#menu').classList.add('animate__slideInUp')
 
-                document.querySelector('.layeredBack').style.display = 'block'
-            }
-    
-            
-            document.querySelector('.layeredBack').addEventListener('click', () => {
-                // document.querySelector('#menu').classList.remove()
-                // document.querySelector('#menu').classList.add()
-    
-                // document.querySelector('.layeredBack').classList.remove()
-                // document.querySelector('.layeredBack').classList.add()
-                    document.querySelector('#menu-mobile').style.display = 'none'
-                document.querySelector('.layeredBack').style.display = 'none'
-            })
-        </script>
+            // document.querySelector('.layeredBack').classList.remove()
+            // document.querySelector('.layeredBack').classList.add()
+
+            document.querySelector('#menu-mobile').style.display = 'flex'
+
+            document.querySelector('.layeredBack').style.display = 'block'
+        }
+
+
+        document.querySelector('.layeredBack').addEventListener('click', () => {
+            // document.querySelector('#menu').classList.remove()
+            // document.querySelector('#menu').classList.add()
+
+            // document.querySelector('.layeredBack').classList.remove()
+            // document.querySelector('.layeredBack').classList.add()
+            document.querySelector('#menu-mobile').style.display = 'none'
+            document.querySelector('.layeredBack').style.display = 'none'
+        })
+    </script>
 </body>
 
 </html>
