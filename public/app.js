@@ -4,6 +4,7 @@
  let burgers = document.querySelectorAll('.clickMenu')
 
  let burger = document.querySelector('.burger')
+ let titleBurger = document.querySelector('.burger span')
 
  let fake = document.querySelector('#fakeMenuBackground')
  let backMenu =document.querySelector('#backMenu')
@@ -43,7 +44,20 @@
            toggle = !toggle
         }
     })
-//  });
+
+
+    burger.addEventListener('mouseover', () =>{
+        if (toggle) {
+            burger.style.opacity = '50%'
+            burger.classList.add('animate__bounce')
+        }
+    })
+
+
+    burger.addEventListener('mouseleave', () =>{
+        burger.style.opacity = '100%'
+        burger.classList.remove('animate__bounce')
+    })
 
  fake.addEventListener('click', () => {
      if (!toggle) {

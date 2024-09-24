@@ -4,10 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>News</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -23,11 +27,10 @@
 <body>
 
     <div class="news-header">
-        <span class="visualization-title">Titolo pagina<br>
-            Sottotitolo più lungo esplicativo</span>
+        <span class="visualization-title title">News</span>
 
         <div class="news-contents">
-            <span class="title">TIPO DI CONTENUTI</span>
+            <span class="model">TIPO DI CONTENUTI</span>
             <span onclick="filtering('Evento')" class="model">EVENTO</span>
             <span onclick="filtering('Pubblicazione')" class="model">PUBBLICAZIONE</span>
             <span onclick="filtering('Altro')" class="model">ALTRO</span>
@@ -67,7 +70,7 @@
 
     </div>
 
-    <div id="corpus" class="corpus animate__animated">
+    <div id="corpus" class="corpus animate__animated ">
 
         <div id="fakeMenuBackground"></div>
 
@@ -86,7 +89,7 @@
             </div>
         </div>
 
-        <div class="burger clickMenu">
+        <div class="burger animate__animated clickMenu">
             <div id="backBurger"></div>
             <div class="blackDot"></div>
             <span>MENU</span>

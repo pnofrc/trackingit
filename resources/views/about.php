@@ -8,6 +8,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -41,8 +45,8 @@
         gruppo di ricerca. 
     </span>
 
-    <b class="margin chapter">Avanzamento e fasi del progetto</b>
-    <img class="margin" src="assets/fasiprogett.png" alt="">
+    <!-- <b class="margin chapter">Avanzamento e fasi del progetto</b>
+    <img class="margin" src="assets/fasiprogett.png" alt=""> -->
 
     <b class="chapter margin">Unità locali e partecipanti</b>
 
@@ -56,31 +60,31 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Giancarlo	Cotella<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Carlo	Salone<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Elisabetta Vitale Brovarone<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Elena Camilla	Pede<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Erblin Berisha<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Alberto Valz Gris<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Elia Silvestro<!--<br>POSIZIONE--></span>
                 </div>
             </div>
@@ -94,19 +98,19 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Simonetta	Armondi<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Beatrice Galimberti<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Fabio	Manfredini<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Marco	Vedoà<!--<br>POSIZIONE--></span>
                 </div>
 
@@ -121,19 +125,19 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Fabiano Compagnucci<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Alena	Myshko<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span>Arsène Perrot<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <!--<img src="assets/grigio.png" alt="">-->
+                    <img src="assets/grigio.png" alt="">
                     <span></span>
                 </div>
             </div>
@@ -142,7 +146,7 @@
 
     </div>
 
-    <div id="corpus" class="corpus animate__animated">
+    <div id="corpus" class="corpus animate__animated ">
 
             <div id="fakeMenuBackground"></div>
 
@@ -160,7 +164,7 @@
             </div>
         </div>
 
-        <div class="burger clickMenu">
+        <div class="burger animate__animated clickMenu">
             <div id="backBurger"></div>
             <div class="blackDot"></div>
             <span>MENU</span>

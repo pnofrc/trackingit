@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Dashboard</title>
     <meta name="description" content="">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -22,6 +26,8 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
+
+       
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
@@ -84,10 +90,9 @@
 
 
             border-radius: 1rem;
-            font-family: 'bold';
             display: flex;
             flex-direction: column;
-            width: 200px;
+            width: 10vw;
             border-radius: 1rem;
             background: #B9C0C2;
             padding-left: 14px;
@@ -108,6 +113,11 @@
             width: 300px;
             height: 25px;
             z-index: 1000;
+        }
+
+        .switch:hover {
+            order: dashed 1px black;
+            border-radius: 1rem;
         }
 
         /* .switch p {
@@ -169,10 +179,14 @@
             width: 100%;
             align-items: center;
             height: 100%;
-            font-family: 'bold';
             color: #839196
         }
 
+        .indicators_dropdown div select,
+        button,
+        .selection {
+            cursor: pointer
+        }
 
 
         .picking {
@@ -202,7 +216,7 @@
 
 <body>
 
-    <div id="corpus" class="corpus animate__animated">
+    <div id="corpus" class="corpus animate__animated ">
 
         <div id="fakeMenuBackground"></div>
 
@@ -221,7 +235,7 @@
             </div>
         </div>
 
-        <div class="burger clickMenu">
+        <div class="burger animate__animated clickMenu">
             <div id="backBurger"></div>
             <div class="blackDot"></div>
             <span>MENU</span>
@@ -331,6 +345,7 @@
 
             <table id="data-table" border="1">
                 <tbody>
+
                     <tr>
                         <th>COD_SLL_2011_2018</th>
                         <td id="COD_SLL_2011_2018"></td>
@@ -340,88 +355,48 @@
                         <td id="DEN_SLL_2011_2018"></td>
                     </tr>
                     <tr>
-                        <th>POP11</th>
-                        <td id="POP11"></td>
-                    </tr>
-                    <tr>
-                        <th>PST11</th>
-                        <td id="PST11"></td>
-                    </tr>
-                    <tr>
-                        <th>PD11</th>
-                        <td id="PD11"></td>
-                    </tr>
-                    <tr>
-                        <th>RedMed11</th>
-                        <td id="RedMed11"></td>
-                    </tr>
-                    <tr>
-                        <th>Dis11</th>
-                        <td id="Dis11"></td>
-                    </tr>
-                    <tr>
-                        <th>AddTot11</th>
-                        <td id="AddTot11"></td>
-                    </tr>
-                    <tr>
-                        <th>AddLog11</th>
-                        <td id="AddLog11"></td>
-                    </tr>
-                    <tr>
-                        <th>QLAdd_IT11</th>
-                        <td id="QLAdd_IT11"></td>
-                    </tr>
-                    <tr>
-                        <th>ULTot11</th>
-                        <td id="ULTot11"></td>
-                    </tr>
-                    <tr>
-                        <th>ULLog11</th>
-                        <td id="ULLog11"></td>
-                    </tr>
-                    <tr>
-                        <th>AddULLog11</th>
-                        <td id="AddULLog11"></td>
-                    </tr>
-                    <tr>
-                        <th>QLUL_IT11</th>
-                        <td id="QLUL_IT11"></td>
-                    </tr>
-                    <tr>
-                        <th>PCSuolo12</th>
-                        <td id="PCSuolo12"></td>
-                    </tr>
-                    <tr>
                         <th>POP21</th>
                         <td id="POP21"></td>
+                    </tr>
+                    <tr>
+                        <th>TPOP01_21</th>
+                        <td id="TPOP01_21"></td>
                     </tr>
                     <tr>
                         <th>TPOP11_21</th>
                         <td id="TPOP11_21"></td>
                     </tr>
                     <tr>
-                        <th>TSM11_21</th>
-                        <td id="TSM11_21"></td>
-                    </tr>
-                    <tr>
                         <th>PST21</th>
                         <td id="PST21"></td>
+                    </tr>
+                    <tr>
+                        <th>VPST01_21</th>
+                        <td id="VPST01_21"></td>
                     </tr>
                     <tr>
                         <th>VPST11_21</th>
                         <td id="VPST11_21"></td>
                     </tr>
                     <tr>
-                        <th>PD21</th>
-                        <td id="PD21"></td>
+                        <th>PIS21</th>
+                        <td id="PIS21"></td>
                     </tr>
                     <tr>
-                        <th>VPD11_21</th>
-                        <td id="VPD11_21"></td>
+                        <th>VPIS01_21</th>
+                        <td id="VPIS01_21"></td>
+                    </tr>
+                    <tr>
+                        <th>VPIS11_21</th>
+                        <td id="VPIS11_21"></td>
                     </tr>
                     <tr>
                         <th>RedMed21</th>
                         <td id="RedMed21"></td>
+                    </tr>
+                    <tr>
+                        <th>TRedMed01_21</th>
+                        <td id="TRedMed01_21"></td>
                     </tr>
                     <tr>
                         <th>TRedMed11_21</th>
@@ -436,77 +411,66 @@
                         <td id="VDis11_21"></td>
                     </tr>
                     <tr>
-                        <th>AddTot21</th>
-                        <td id="AddTot21"></td>
-                    </tr>
-                    <tr>
-                        <th>TAddTot11_21</th>
-                        <td id="TAddTot11_21"></td>
-                    </tr>
-                    <tr>
                         <th>AddLog21</th>
                         <td id="AddLog21"></td>
+                    </tr>
+                    <tr>
+                        <th>TAddLog01_21</th>
+                        <td id="TAddLog01_21"></td>
                     </tr>
                     <tr>
                         <th>TAddLog11_21</th>
                         <td id="TAddLog11_21"></td>
                     </tr>
                     <tr>
+                        <th>XAdd_21</th>
+                        <td id="XAdd_21"></td>
+                    </tr>
+                    <tr>
+                        <th>VXAdd_01_21</th>
+                        <td id="VXAdd_01_21"></td>
+                    </tr>
+                    <tr>
+                        <th>VXAdd_11_21</th>
+                        <td id="VXAdd_11_21"></td>
+                    </tr>
+                    <tr>
+                        <th>QLAdd_IT01</th>
+                        <td id="QLAdd_IT01"></td>
+                    </tr>
+                    <tr>
+                        <th>QLAdd_IT11</th>
+                        <td id="QLAdd_IT11"></td>
+                    </tr>
+                    <tr>
                         <th>QLAdd_IT21</th>
                         <td id="QLAdd_IT21"></td>
+                    </tr>
+                    <tr>
+                        <th>VQLAdd_IT01_21</th>
+                        <td id="VQLAdd_IT01_21"></td>
                     </tr>
                     <tr>
                         <th>VQLAdd_IT11_21</th>
                         <td id="VQLAdd_IT11_21"></td>
                     </tr>
                     <tr>
-                        <th>ULTot21</th>
-                        <td id="ULTot21"></td>
+                        <th>StCAT21</th>
+                        <td id="StCAT21"></td>
                     </tr>
                     <tr>
-                        <th>TULTot11_21</th>
-                        <td id="TULTot11_21"></td>
+                        <th>UIU13_21</th>
+                        <td id="UIU13_21"></td>
                     </tr>
                     <tr>
-                        <th>AddULTot21</th>
-                        <td id="AddULTot21"></td>
+                        <th>Imm21</th>
+                        <td id="Imm21"></td>
                     </tr>
                     <tr>
-                        <th>VAddULTot11_21</th>
-                        <td id="VAddULTot11_21"></td>
+                        <th>VImm13_21</th>
+                        <td id="VImm13_21"></td>
                     </tr>
-                    <tr>
-                        <th>ULLog21</th>
-                        <td id="ULLog21"></td>
-                    </tr>
-                    <tr>
-                        <th>TULLog11_21</th>
-                        <td id="TULLog11_21"></td>
-                    </tr>
-                    <tr>
-                        <th>AddULLog21</th>
-                        <td id="AddULLog21"></td>
-                    </tr>
-                    <tr>
-                        <th>VAddULLog11_21</th>
-                        <td id="VAddULLog11_21"></td>
-                    </tr>
-                    <tr>
-                        <th>QLUL_IT21</th>
-                        <td id="QLUL_IT21"></td>
-                    </tr>
-                    <tr>
-                        <th>VQLUL_IT11_21</th>
-                        <td id="VQLUL_IT11_21"></td>
-                    </tr>
-                    <tr>
-                        <th>PCSuolo21</th>
-                        <td id="PCSuolo21"></td>
-                    </tr>
-                    <tr>
-                        <th>VPCSuolo11_21</th>
-                        <td id="VPCSuolo11_21"></td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
@@ -556,12 +520,12 @@
             return rgbToHex(mixedR, mixedG, mixedB);
         }
         // Initialize the map
-        var map = L.map('map').setView([42.682492765949576, 12.552070799113139], 7);
+        var map = L.map('map').setView([42.682492765949576, 12.552070799113139], 6);
         var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
             maxZoom: 9,
-            minZoom: 7
+            minZoom: 4
         }).addTo(map);
         // Global variables
         let geotoggle = false;
@@ -614,7 +578,7 @@
                                 place2data = undefined
                             }
                             let color = mixColor(min1, max1, min2, max2, place[indicator1Name],
-                                place2data, '#ff0000', '#00ff00');
+                                place2data, '#3FC692', '#8668B2');
 
                             function style(feature) {
                                 return {
@@ -710,6 +674,7 @@
             const indicator2Name = document.getElementById('indicatorSelect2').value;
             getIndicatorsData(indicator1Name, indicator2Name)
         }
+
         pickIndicators()
 
         // Function to toggle between APIs
@@ -736,6 +701,7 @@
             ];
             fields.forEach(field => {
                 document.getElementById(field).textContent = data[0][field];
+                console.log(field)
             });
         }
     </script>

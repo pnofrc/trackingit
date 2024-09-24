@@ -3,4 +3,6 @@ php artisan import:interport '/Users/poni/trackingit/public/datasets/INTERPORTI.
 php artisan import:sllareas '/Users/poni/trackingit/public/datasets/SLL_basemap.geojson'
 php artisan import:municipalities '/Users/poni/trackingit/public/datasets/municipalities_basemap.geojson'
 
+import:sllareas /var/www/vhosts/gifted-borg.217-160-114-177.plesk.page/httpdocs/public/datasets/SLL_basemap.geojson
+
 caricare csv, parse

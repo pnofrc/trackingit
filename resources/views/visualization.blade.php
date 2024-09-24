@@ -8,6 +8,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
@@ -34,8 +38,7 @@
 
 <body>
 
-    <span class="visualization-title">Titolo grafico per indicatore numero 2: <br>
-        Sottotitolo più lungo esplicativo</span>
+    <span class="visualization-title">Indicatori</span>
 
     <div id="visualization-dashboard">
 
@@ -47,7 +50,7 @@
             </div>
 
             <br>
-            <div class="dataset-visualization">
+            <div ">
 
                 <span class="title">DATASET</span>
 
@@ -74,7 +77,7 @@
 
     </div>
 
-    <div id="corpus" class="corpus animate__animated">
+    <div id="corpus" class="corpus animate__animated ">
 
         <div id="fakeMenuBackground"></div>
 
@@ -93,9 +96,9 @@
             </div>
         </div>
 
-        <div class="burger clickMenu">
+        <div class="burger animate__animated clickMenu">
             <div id="backBurger"></div>
-            <div class="blackDot"></div>
+            <div class="blackDot "></div>
             <span>MENU</span>
         </div>
     </div>

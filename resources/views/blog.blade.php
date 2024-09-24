@@ -8,6 +8,10 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -18,13 +22,13 @@
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
+
     </style>
 </head>
 
 <body>
 
-    <span class="visualization-title">Materiali e approfondimenti <br>
-        Sottotitolo più lungo esplicativo</span>
+    <span class="visualization-title title">Materiali e approfondimenti</span>
 
     <div id="blog">
 
@@ -38,16 +42,16 @@
 
                 <div class="blog-info">
 
-                    <h3>DATA {{ $blog['date'] }}</h3>
+                    <p class="blog-date subtitle">DATA {{ $blog['date'] }}</p>
 
-                    <h2> {{ $blog['title'] }} <br>{{ $blog['author'] }}</h2>
+                    <p class="blog-title title"> {{ $blog['title'] }} <br>{{ $blog['author'] }}</p>
                     {!! $blog['content'] !!}
                 </div>
 
                 <a class="link-blog-download-pdf" href="/storage/{{ $blog['pdf'] }}" download>
                     <button class="blog-download-pdf button-ext">
                         <span>DOWNLOAD PDF</span>
-                        <img src="assets/download.png" alt="">
+                        <img class="arrow" src="assets/download.png" alt="">
                     </button>
                 </a>
 
@@ -56,7 +60,7 @@
 
     </div>
 
-    <div id="corpus" class="corpus animate__animated">
+    <div id="corpus" class="corpus animate__animated ">
 
         <div id="fakeMenuBackground"></div>
 
@@ -74,7 +78,7 @@
             </div>
         </div>
 
-        <div class="burger clickMenu">
+        <div class="burger animate__animated clickMenu">
             <div id="backBurger"></div>
             <div class="blackDot"></div>
             <span>MENU</span>
@@ -82,6 +86,18 @@
     </div>
 
     <script src="app.js"></script>
+    <script>
+        document.querySelectorAll('.link-blog-download-pdf').forEach(element => {
+            element.addEventListener('mouseover', () =>{
+                element.style.filter = 'invert'
+                element.querySelector(".arrow").style.filter = "invert()"
+            })
+            element.addEventListener('mouseleave', () =>{
+                element.style.filter = 'invert'
+                element.querySelector(".arrow").style.filter = "unset"
+            })
+        });
+    </script>
 
 </body>
 

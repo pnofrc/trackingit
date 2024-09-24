@@ -16,10 +16,14 @@
         <img src="assets/back.png" alt="">
     </div>
 
-    <div class="corpus">
+    <div class="blackDot mobile"></div>
 
-        <div id="slide-update">
-            <marquee behavior="smooth" direction="left" id="latests">
+
+
+    <div class="corpus animate__animated">
+
+        <div id="slide-update" class="desktop">
+            <marquee scrollamount="5" behavior="smooth" direction="left" id="latests">
                 @foreach ($latests as $latest) <span>{{$latest['latests']}}</span> @endforeach
             </marquee>
         </div>
@@ -30,10 +34,10 @@
         </div>
 
         <div id="menu">
-            <b><a class="selected"href="/">HOME</a></b>
-            <b><a href="/dashboard">DASHBOARD</a></b>
-            <b><a href="/indicatori">INDICATORI</a></b>
-            <b><a href="/materiali">MATERIALI</a></b>
+            <b><a class="selected" href="/">HOME</a></b>
+            <b class="desktop"><a href="/dashboard">DASHBOARD</a></b>
+            <b class="desktop"><a href="/indicatori">INDICATORI</a></b>
+            <b class="desktop"><a href="/materiali">MATERIALI</a></b>
             <b><a href="/news">NEWS</a></b>
             <b><a href="/about">ABOUT</a></b>
         </div>
@@ -41,7 +45,7 @@
         <div class="void"></div>
 
         <img class="footer" src="assets/down.png" alt="">
-        <img src="assets/up-mobile.png" class="header-mobile" alt="">
+        <img src="assets/loghi-mobile.png" class="header-mobile" alt="">
 
     </div>
 
