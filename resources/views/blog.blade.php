@@ -8,10 +8,16 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <title>Tracking-it | Materiali</title>
+    <meta name="description"
+        content="TRACKING-IT is a research project invastigating the new Italian Geographies of logistics.">
+    <meta name="author" content="Politecnico di Torino, Politecnico di Milano, Gran Sasso Science Institute">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="og:image" content="http://tr.acking.it/assets/up-mobile.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -23,6 +29,16 @@
             transform: translate3d(-100%, 0, 0)
         }
 
+
+        #backMenu {
+            background-color: #D4DAD4;
+            filter: blur(30px);
+            height: 150px;
+            width: 9%;
+            position: absolute;
+            z-index: -2;
+            right: -6vw;
+        }
     </style>
 </head>
 
@@ -88,11 +104,11 @@
     <script src="app.js"></script>
     <script>
         document.querySelectorAll('.link-blog-download-pdf').forEach(element => {
-            element.addEventListener('mouseover', () =>{
+            element.addEventListener('mouseover', () => {
                 element.style.filter = 'invert'
                 element.querySelector(".arrow").style.filter = "invert()"
             })
-            element.addEventListener('mouseleave', () =>{
+            element.addEventListener('mouseleave', () => {
                 element.style.filter = 'invert'
                 element.querySelector(".arrow").style.filter = "unset"
             })

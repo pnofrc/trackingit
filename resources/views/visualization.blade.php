@@ -4,14 +4,19 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <meta name="description" content="">
+    <title>Tracking-it | Indicatori</title>
+    <meta name="description"
+        content="TRACKING-IT is a research project invastigating the new Italian Geographies of logistics.">
+    <meta name="author" content="Politecnico di Torino, Politecnico di Milano, Gran Sasso Science Institute">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="og:image" content="http://tr.acking.it/assets/up-mobile.png" />
+
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
@@ -19,7 +24,7 @@
             transform: translate3d(-100%, 0, 0)
         }
 
-        .showSelectedDataset{
+        .showSelectedDataset {
             border: solid 1px !important;
         }
 
@@ -38,7 +43,7 @@
 
 <body>
 
-    <span class="visualization-title">Indicatori</span>
+    {{-- <span class="visualization-title">Indicatori</span> --}}
 
     <div id="visualization-dashboard">
 
@@ -54,12 +59,14 @@
 
                 <span class="title">DATASET</span>
 
-                @foreach ($visualizations as $viz)
-                    <div class="dataset @if ($loop->first) showSelectedDataset @endif" id={{ str_replace(' ', '_', $viz['name']) }} onclick="selectDataset({{ $viz['id'] }},{{ str_replace(' ', '_', $viz['name'])  }})">
-                        <span>{{ $viz['name'] }}</span>
+                 @foreach ($visualizations as $viz)
+                <div class="dataset @if ($loop->first) showSelectedDataset @endif"
+                    id={{ str_replace(' ', '_', $viz['name']) }}
+                    onclick="selectDataset({{ $viz['id'] }},{{ str_replace(' ', '_', $viz['name']) }})">
+                    <span>{{ $viz['name'] }}</span>
 
-                        {!! $viz['description'] !!}
-                    </div>
+                    {!! $viz['description'] !!}
+                </div>
                 @endforeach
 
             </div>
@@ -89,9 +96,9 @@
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
-                <b><a href="/indicatori">INDICATORI</a></b>
+                <b><a class="selected" href="/indicatori">INDICATORI</a></b>
                 <b><a href="/materiali">MATERIALI</a></b>
-                <b><a class="selected" href="/news">NEWS</a></b>
+                <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>
         </div>
@@ -163,13 +170,13 @@
         })
 
         // select the dataset
-        function selectDataset(n,id) {
+        function selectDataset(n, id) {
             if (selectedDataset != n) {
                 selectedDataset = n
                 document.querySelectorAll('.dataset').forEach(dataset => {
                     dataset.classList.remove('showSelectedDataset')
                 });
-                document.querySelector('#'+id.id).classList.add('showSelectedDataset')
+                document.querySelector('#' + id.id).classList.add('showSelectedDataset')
                 getChart()
             }
         }

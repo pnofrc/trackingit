@@ -4,12 +4,16 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dashboard</title>
-    <meta name="description" content="">
-    <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-  />
+    <title>Tracking-it | Dashboard</title>
+    <meta name="description"
+        content="TRACKING-IT is a research project invastigating the new Italian Geographies of logistics.">
+    <meta name="author" content="Politecnico di Torino, Politecnico di Milano, Gran Sasso Science Institute">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <meta name="og:image" content="http://tr.acking.it/assets/up-mobile.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
@@ -26,8 +30,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <style>
-
-       
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
@@ -227,10 +229,10 @@
 
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
-                <b><a href="/dashboard">DASHBOARD</a></b>
+                <b><a class="selected" href="/dashboard">DASHBOARD</a></b>
                 <b><a href="/indicatori">INDICATORI</a></b>
                 <b><a href="/materiali">MATERIALI</a></b>
-                <b><a class="selected" href="/news">NEWS</a></b>
+                <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>
         </div>
@@ -524,8 +526,8 @@
         var tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: 'abcd',
-            maxZoom: 9,
-            minZoom: 4
+            maxZoom: 15,
+            minZoom: 6
         }).addTo(map);
         // Global variables
         let geotoggle = false;
