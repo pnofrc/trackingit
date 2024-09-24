@@ -1033,5 +1033,7 @@ td {
   .news-contents {
     width: 100%;
   }
-  
+  .blog-info {
+    width: 100%;
+  }
 }

@@ -6,3 +6,8 @@ php artisan import:municipalities '/Users/poni/trackingit/public/datasets/munici
 import:sllareas /var/www/vhosts/gifted-borg.217-160-114-177.plesk.page/httpdocs/public/datasets/SLL_basemap.geojson
 
 caricare csv, parse
+
+
+/var/www/vhosts/gifted-borg.217-160-114-177.plesk.page/httpdocs/public/datasets/INTERPORTI.geojson
+
+import:highway /Users/poni/trackingit/public/datasets/AUTO.geojson
