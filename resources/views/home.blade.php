@@ -23,10 +23,19 @@
         <img src="assets/back.png" alt="">
     </div>
 
-    <div class="layeredBack mobile"></div>
+    <div class="layeredBack mobile fixed"></div>
 
-    <div class="mobile blackDotContainer ">
+    <div class="mobile blackDotContainer fixed ">
         <div class="blackDot" onclick="openMenuMobile()"></div>
+    </div>
+
+    <div id="menu-mobile" class="animate__animate fixed mobile">
+        <div class="tondo"></div>
+        <div class="flex">
+            <b><a class="selected" href="/">HOME</a></b>
+            <b><a href="/news">NEWS</a></b>
+            <b><a href="/about">ABOUT</a></b>
+        </div>
     </div>
 
     <p class="mobile alert">Visitaci da uno schermo più grande per accedere a tutte le pagine di questo sito</p>
@@ -50,9 +59,9 @@
 
         <div id="menu" class="animate__animated">
             <b><a class="selected" href="/">HOME</a></b>
-            <b class="desktop"><a href="/dashboard">DASHBOARD</a></b>
-            <b class="desktop"><a href="/indicatori">INDICATORI</a></b>
-            <b class="desktop"><a href="/materiali">MATERIALI</a></b>
+            <b><a href="/dashboard">DASHBOARD</a></b>
+            <b><a href="/indicatori">INDICATORI</a></b>
+            <b><a href="/materiali">MATERIALI</a></b>
             <b><a href="/news">NEWS</a></b>
             <b><a href="/about">ABOUT</a></b>
         </div>
@@ -66,28 +75,31 @@
 
     <script>
 
-function openMenuMobile() {
+        function openMenuMobile() {
             // document.querySelector('#menu').classList.remove()
             // document.querySelector('#menu').classList.add('animate__slideInUp')
 
             // document.querySelector('.layeredBack').classList.remove()
             // document.querySelector('.layeredBack').classList.add()
 
-              document.querySelector('#menu').style.display = 'flex'
+            document.querySelector('#menu-mobile').style.display = 'flex'
+
             document.querySelector('.layeredBack').style.display = 'block'
         }
 
-        
-        document.querySelector('.layeredBack').addEventListener('click', () => {
-            // document.querySelector('#menu').classList.remove()
-            // document.querySelector('#menu').classList.add()
+        var x = window.matchMedia("(max-width: 800px)")
 
-            // document.querySelector('.layeredBack').classList.remove()
-            // document.querySelector('.layeredBack').classList.add()
+        if (x.matches) { // If media query matches
+            document.querySelector('.layeredBack').addEventListener('click', () => {
+                // document.querySelector('#menu').classList.remove()
+                // document.querySelector('#menu').classList.add()
 
-             document.querySelector('#menu').style.display = 'none'
-            document.querySelector('.layeredBack').style.display = 'none'
-        })
+                // document.querySelector('.layeredBack').classList.remove()
+                // document.querySelector('.layeredBack').classList.add()
+                document.querySelector('#menu-mobile').style.display = 'none'
+                document.querySelector('.layeredBack').style.display = 'none'
+            })
+        }
     </script>
 
 

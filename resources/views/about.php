@@ -33,9 +33,6 @@
 
        
 
-        .layeredBack {
-            background: none;
-        }
     </style>
 </head>
 

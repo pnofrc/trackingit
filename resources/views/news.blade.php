@@ -25,6 +25,7 @@
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
+
         #backMenu {
             height: 150px;
             width: 115%;
@@ -50,10 +51,19 @@
 
     </div>
 
-    <div class="layeredBack mobile"></div>
+    <div class="layeredBack mobile fixed"></div>
 
-    <div class="mobile blackDotContainer ">
+    <div class="mobile blackDotContainer fixed ">
         <div class="blackDot" onclick="openMenuMobile()"></div>
+    </div>
+
+    <div id="menu-mobile" class="animate__animate fixed mobile">
+        <div class="tondo"></div>
+        <div class="flex">
+            <b><a href="/">HOME</a></b>
+            <b><a class="selected" href="/news">NEWS</a></b>
+            <b><a href="/about">ABOUT</a></b>
+        </div>
     </div>
 
     <div id="blog">
@@ -88,8 +98,6 @@
             </div>
 
 
-            {{-- divisore --}}
-
 
             <div class="mobile article news {{ $new['news_type'] }}">
 
@@ -120,7 +128,6 @@
             </div>
         @endforeach
     </div>
-    {{-- </div> --}}
 
 
     <div id="menu-mobile" class="animate__animated mobile">
@@ -158,10 +165,16 @@
     <script src="app.js"></script>
 
     <script>
+
+var x = window.matchMedia("(max-width: 800px)")
+
         // Filter for contents type
 
         function filtering(type) {
+
+           
             let news_array = document.querySelectorAll('.news')
+         
             if (type == 'all') {
                 news_array.forEach(element => {
                     element.style.display = "flex"
@@ -175,30 +188,34 @@
                 });
 
             }
+
+            if (!x.matches) { 
+                document.querySelectorAll('.mobile').forEach(element => {
+                    element.style.display ='none'
+                    console.log('dca')
+                });
+            }
+
         }
+
 
         function openMenuMobile() {
-            // document.querySelector('#menu').classList.remove()
-            // document.querySelector('#menu').classList.add('animate__slideInUp')
-
-            // document.querySelector('.layeredBack').classList.remove()
-            // document.querySelector('.layeredBack').classList.add()
-            document.body.style.overflowY = 'hidden';
             document.querySelector('#menu-mobile').style.display = 'flex'
-
             document.querySelector('.layeredBack').style.display = 'block'
+            document.body.style.overflowY = 'hidden';
+
         }
 
 
-        document.querySelector('.layeredBack').addEventListener('click', () => {
-            // document.querySelector('#menu').classList.remove()
-            // document.querySelector('#menu').classList.add()
-            document.body.style.overflowY = 'unset';
-            // document.querySelector('.layeredBack').classList.remove()
-            // document.querySelector('.layeredBack').classList.add()
-            document.querySelector('#menu-mobile').style.display = 'none'
-            document.querySelector('.layeredBack').style.display = 'none'
-        })
+
+        if (x.matches) { // If media query matches
+            document.querySelector('.layeredBack').addEventListener('click', () => {
+                document.querySelector('#menu-mobile').style.display = 'none'
+                document.querySelector('.layeredBack').style.display = 'none'
+                document.body.style.overflowY = 'unset';
+
+            })
+        }
     </script>
 </body>
 

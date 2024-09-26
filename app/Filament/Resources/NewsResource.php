@@ -38,12 +38,12 @@ class NewsResource extends Resource
                         'Evento' => 'Evento',
                         'Pubblicazione' => 'Pubblicazione',
                         'Altro' => 'Altro',
-                    ]),
+                    ])->required(),
                 RichEditor::make('content')->required(),  
                 DatePicker::make('date')->required(),
                 TextInput::make('city'),
                 TextInput::make('external_link')->required(),
-                FileUpload::make('picture')->preserveFilenames()->maxSize(1000)->directory('storage')
+                FileUpload::make('picture')->preserveFilenames()->maxSize(1000)->directory('storage')->required()
        
             ]);
     }
@@ -63,6 +63,7 @@ class NewsResource extends Resource
                         'Pubblicazione' => 'Pubblicazione',
                         'Altro' => 'Altro',
                     ])
+                    
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
