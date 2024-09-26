@@ -1,5 +1,10 @@
 <x-filament-panels::page>
 
+<style>
+    h2{
+        font-size: 3rem
+    }
+</style>
 
 
 <p>Questa è la pagina delle istruzioni per la gestione della piattaforma TRACKING-IT</p>
@@ -90,7 +95,7 @@ I Materiali sono gli articoli del blog  (http://tr.acking.it/materiali). Mettera
 <h2>Gestione News</h2>
 
 <p>
-Funziona come la pagina materiali ma sarà applicabile il tipo della News (news type) e potrai selezionare tra "Evento”, "Pubblicazione” ed "altro”; la città dell’evento (city), il collegamento per un sito web esterno.</p>
+Funziona come la pagina materiali ma sarà applicabile il tipo della News (news type) e potrai selezionare tra "Evento”, "Pubblicazione” ed "altro”; la città dell’evento (city); il collegamento per un sito web esterno.</p>
 
 <img src="/instructions/news.png">
 

@@ -96,7 +96,6 @@ class SllareaCsvResource extends Resource
     protected function parseCsv($file)
     {
 
-
         $filePath = Storage::disk('public')->path($file);
         if (!file_exists($filePath)) {
             dd('no');

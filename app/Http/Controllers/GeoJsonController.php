@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Municipality;
+use App\Models\MunicipalityData;
 
 use App\Models\SllArea;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class GeoJsonController extends Controller
     // Fetch all GeoJSON Muncipality data
     public function indexMunicipalities()
     {
-        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
+        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.1))::json AS geom"))
             ->get();
 
 
@@ -44,11 +45,11 @@ class GeoJsonController extends Controller
 
     // Fetch data of a municipality
 
-    public function getComuniAreaData($id)
+    public function getComuniData($id)
     {
         // TODO: edit qua COMUNI
-        $comuniAreaData = SllAreaData::where('COD_COM_2011_2018', $id)->get();
-        return response()->json($comuniAreaData);
+        $comuniData = MunicipalityData::where('PRO_COM', $id)->get();
+        return response()->json($comuniData);
     }
 
 
@@ -93,17 +94,18 @@ class GeoJsonController extends Controller
         $parsedIndicators = explode('+', $indicators);
 
         // Comuni data //TODO: COMUNI
-        $places = SllArea::select('comuni_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
+        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.005))::json AS geom"))
             ->get()->toArray();
 
-        $nameComuni = SllAreaData::select('DEN_SLL_2011_2018')->get()->toArray();
+
+        $nameComuni = MunicipalityData::select('COMUNE')->get()->toArray();
 
 
         // indicators data
 
-        $indicator1Data = SllAreaData::select($parsedIndicators[0])->get()->toArray();
+        $indicator1Data = MunicipalityData::select($parsedIndicators[0])->get()->toArray();
         if ($parsedIndicators[1] != 'NONE') {
-            $indicator2Data = SllAreaData::select($parsedIndicators[1])->get()->toArray();
+            $indicator2Data = MunicipalityData::select($parsedIndicators[1])->get()->toArray();
 
             // merge all the values in an array
             $mixmix = array_map(function ($a1, $a2, $a3, $a4) {

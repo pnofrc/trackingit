@@ -41,7 +41,7 @@ class NewsResource extends Resource
                     ]),
                 RichEditor::make('content')->required(),  
                 DatePicker::make('date')->required(),
-                TextInput::make('city')->required(),
+                TextInput::make('city'),
                 TextInput::make('external_link')->required(),
                 FileUpload::make('picture')->preserveFilenames()->maxSize(1000)->directory('storage')
        

@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->longText(column: 'description');
-            $table->string('visualization_scatterplot');
-            $table->string('visualization_treemap');
+            $table->string('visualization_scatterplot')->nullable();
+            $table->string('visualization_treemap')->nullable();
             $table->timestamps();
         });
     }

@@ -28,17 +28,6 @@
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
-
-
-        #backMenu {
-            background-color: #D4DAD4;
-            filter: blur(30px);
-            height: 150px;
-            width: 9%;
-            position: absolute;
-            z-index: -2;
-            right: -6vw;
-        }
     </style>
 </head>
 

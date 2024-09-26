@@ -354,7 +354,7 @@
                     </tr>
                     <tr>
                         <th>DEN_SLL_2011_2018</th>
-                        <td id="DEN_SLL_2011_2018"></td>
+                        <td id="COMUNE"></td>
                     </tr>
                     <tr>
                         <th>POP21</th>
@@ -646,10 +646,10 @@
                             function style(feature) {
                                 return {
                                     fillColor: color, // Fill color based on the first value
-                                    weight: 2,
+                                    weight: 1,
                                     opacity: 1,
                                     color: '#ffffff', // Border color set to white
-                                    dashArray: '3',
+                                    dashArray: '1',
                                     fillOpacity: 1,
                                 };
                             }
@@ -658,10 +658,15 @@
 
                             function onEachFeature(feature, layer) {
                                 // Define the behavior for when the mouse is over the layer
-                                layer.on('mouseover', (e) => {
+                                layer.on('mouseover', (e) => { 
                                     // Show the external div and update its content
-                                    infoBox.innerHTML = 'Current Area: ' + place
-                                        .DEN_SLL_2011_2018;
+                                    if (api == 'Sll') {
+                                        infoBox.innerHTML = 'Current Area: ' + place
+                                            .DEN_SLL_2011_2018;
+                                    } else {
+                                        console.log(e)
+                                        infoBox.innerHTML = 'Current Area: ' + place.COMUNE;
+                                    }
                                     // Optionally, change the style of the layer
                                     e.target.setStyle({
                                         fillOpacity: 0.2
@@ -680,14 +685,27 @@
                                 layer.on('click', () => {
                                     document.getElementById('layers').style.display =
                                         'block'
-                                    axios.get('/get' + api + 'AreaData/' + place.sll_2011)
-                                        .then(response => {
-                                            updateTable(response.data);
-                                        })
-                                        .catch(error => {
-                                            console.error('Error fetching data:',
-                                                error);
-                                        });
+                                    if (api == 'Sll') {
+                                        axios.get('/get' + api + 'AreaData/' + place.sll_2011)
+                                            .then(response => {
+                                                updateTable(response.data);
+                                            })
+                                            .catch(error => {
+                                                console.error('Error fetching data:',
+                                                    error);
+                                            });
+                                    } else {
+                                        axios.get('/get' + api + 'Data/' + place.municipality_code)
+                                            .then(response => {
+                                                updateTable(response.data);
+                                                console.log(response.data)
+                                            })
+                                            .catch(error => {
+                                                console.error('Error fetching data:',
+                                                    error);
+                                            });
+                                    }
+
                                 });
                             }
                             var geojsonLayer = L.geoJSON(geojson, {
@@ -743,7 +761,7 @@
         // Function to toggle between APIs
         function toggleGeo() {
             geotoggle = !geotoggle;
-            api = geotoggle ? 'Sll' : 'comuni';
+            api = geotoggle ? 'Comuni' : 'Sll' 
             document.getElementById('comuni').classList.toggle('selected')
             document.getElementById('sll').classList.toggle('selected')
             // Fetch and update data with the new API endpoint
@@ -756,7 +774,7 @@
         // Function to update the table with fetched data
         function updateTable(data) {
             const fields = [
-                'COD_SLL_2011_2018', 'DEN_SLL_2011_2018', 'POP21', 'TPOP01_21', 'TPOP11_21', 'PST21',
+                'COD_SLL_2011_2018', 'COMUNE', 'POP21', 'TPOP01_21', 'TPOP11_21', 'PST21',
                 'VPST01_21', 'VPST11_21', 'PIS21', 'VPIS01_21', 'VPIS11_21', 'RedMed21', 'TRedMed01_21',
                 'TRedMed11_21', 'Dis21', 'VDis11_21', 'AddLog21', 'TAddLog01_21', 'TAddLog11_21',
                 'XAdd_21', 'VXAdd_01_21', 'VXAdd_11_21', 'QLAdd_IT01', 'QLAdd_IT11', 'QLAdd_IT21',

@@ -22,7 +22,7 @@ Route::get('/comuni', [GeoJsonController::class, 'indexMunicipalities']);
 Route::get('/Sll', [GeoJsonController::class, 'indexSLL']);
 
 Route::get('/getSllAreaData/{id}', [GeoJsonController::class, 'getSllAreaData']);
-Route::get('/getMunicipalityData/{id}', [GeoJsonController::class, 'getMunicipalityData']);
+Route::get('/getComuniData/{id}', [GeoJsonController::class, 'getComuniData']);
 
 Route::get('/getIndicatorRange/{indicator}', [GeoJsonController::class, 'getIndicatorRange']);
 

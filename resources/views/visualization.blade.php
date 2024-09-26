@@ -28,15 +28,10 @@
             border: solid 1px !important;
         }
 
-
-        #backMenu {
-            background-color: #D4DAD4;
-            filter: blur(30px);
-            height: 150px;
-            width: 9%;
-            position: absolute;
-            z-index: -2;
-            right: -6vw;
+        .unselectable {
+            background: grey !important;
+            pointer-events: none;
+            color: white
         }
     </style>
 </head>
@@ -49,24 +44,26 @@
 
         <div class="visualization-navigator">
             <div class="kind-visualization">
-                <span class="title">VISUAL MODEL</span>
-                <span id='scatterplot' class="model selected-viz">SCATTERPLOT</span>
-                <span id='treemap' class="model">TREEMAP</span>
+                <span class="model">VISUAL MODEL</span>
+                <span id='scatterplot'
+                    onclick="pickChart('visualization_scatterplot')"class="visualization_scatterplot model selected-viz">SCATTERPLOT</span>
+                <span id='treemap' onclick="pickChart('visualization_treemap')"
+                    class="visualization_treemap model">TREEMAP</span>
             </div>
 
             <br>
-            <div ">
+            <div>
 
                 <span class="title">DATASET</span>
 
-                 @foreach ($visualizations as $viz)
-                <div class="dataset @if ($loop->first) showSelectedDataset @endif"
-                    id={{ str_replace(' ', '_', $viz['name']) }}
-                    onclick="selectDataset({{ $viz['id'] }},{{ str_replace(' ', '_', $viz['name']) }})">
-                    <span>{{ $viz['name'] }}</span>
+                @foreach ($visualizations as $viz)
+                    <div class="dataset @if ($loop->first) showSelectedDataset @endif"
+                        id={{ str_replace(' ', '_', $viz['name']) }}
+                        onclick="selectDataset({{ $viz['id'] }},{{ str_replace(' ', '_', $viz['name']) }})">
+                        <span>{{ $viz['name'] }}</span>
 
-                    {!! $viz['description'] !!}
-                </div>
+                        {!! $viz['description'] !!}
+                    </div>
                 @endforeach
 
             </div>
@@ -113,13 +110,27 @@
     <script src="app.js"></script>
 
     <script>
-        let treemap = document.getElementById('treemap')
-        let scatterplot = document.getElementById('scatterplot')
+        let treemap = document.querySelector('.visualization_treemap')
+        let scatterplot = document.querySelector('.visualization_scatterplot')
         let chart = document.getElementById('allora')
         let selectedChartType = 'scatterplot'
         let selectedDataset = 0
         let viz = document.querySelector("img");
-        let charts
+
+        let visualizations = {
+            'visualization_scatterplot': '',
+            'visualization_treemap': ''
+        }
+        // let charts
+        let current = 'visualization_scatterplot'
+
+
+        // get the other value of the object
+        function getOtherVisualization(key) {
+            let keys = Object.keys(visualizations);
+            return keys.find(k => k !== key);
+        }
+
 
         // Get the id of the last uploaded (the first in db) dataset' chart
         @foreach ($visualizations as $viz)
@@ -130,47 +141,55 @@
         @endforeach
 
 
-        // function to show on the page the selecte data viz
 
-        function showChart() {
-            let current = 'visualization_' + selectedChartType
-            viz.src = '/storage/' + charts[0][current]
-            viz.alt = `Indicatore di tipo ${selectedChartType} del dataset ${charts[0]['name']}`
+        function pickChart(type) {
+            current = type
+        
+            console.log(current)
+            document.querySelector(`.${current}`).classList.add('selected-viz')
+            document.querySelector(`.${getOtherVisualization(current)}`).classList.remove('selected-viz')
+
+            viz.src = '/storage/' + charts[current]
+            viz.alt = `Indicatore di tipo ${selectedChartType} del dataset ${charts['name']}`
         }
 
         // function to get the two charts
         function getChart() {
-            axios.get(`/getCharts/${selectedDataset}`)
+                axios.get(`/getCharts/${selectedDataset}`)
                 .then(response => {
-                    charts = response.data;
-                    showChart()
+                    charts = response.data[0];
+                    // store data in temp object
+                    let treemapData = charts.visualization_treemap
+                    let scatterplotData = charts.visualization_scatterplot
+                    visualizations.visualization_treemap = treemapData
+                    visualizations.visualization_scatterplot = scatterplotData
+                    // check if a data visualization is null
+                    for (let key in visualizations) {
+                        if (visualizations[key] == null) {
+                            console.log(visualizations[key])
+                            document.querySelector(`.${key}`).classList.add('unselectable')
+                            pickChart(getOtherVisualization(key))
+                        }
+                    }
+                    console.log(current)
+                    pickChart(current)
                 })
                 .catch(error => {
                     console.error('Error fetching data:', error);
                 });
         }
 
-        // toggle the selected chart type and get visualized
-        treemap.addEventListener('click', () => {
-            if (scatterplot.classList.contains('selected-viz')) {
-                scatterplot.classList.remove('selected-viz')
-                treemap.classList.add("selected-viz")
-                selectedChartType = 'treemap'
-                showChart()
-            }
-        })
 
-        scatterplot.addEventListener('click', () => {
-            if (treemap.classList.contains('selected-viz')) {
-                treemap.classList.remove('selected-viz')
-                scatterplot.classList.add("selected-viz")
-                selectedChartType = 'scatterplot'
-                showChart()
-            }
-        })
 
         // select the dataset
         function selectDataset(n, id) {
+            // remove unselectable class
+            document.querySelectorAll('.model').forEach(model => {
+                if (model.classList.contains('unselectable')) {
+                    model.classList.remove('unselectable')
+                }
+            });
+
             if (selectedDataset != n) {
                 selectedDataset = n
                 document.querySelectorAll('.dataset').forEach(dataset => {
@@ -183,6 +202,7 @@
 
         // call the function as the page load
         getChart()
+
     </script>
 </body>
 

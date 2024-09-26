@@ -9,6 +9,8 @@ class MunicipalityCSV extends Model
 {
     use HasFactory;
 
+    protected $table = 'municipality_csv';
+
     protected $fillable = [
         'title',
         'file',

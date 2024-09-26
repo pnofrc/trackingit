@@ -25,17 +25,14 @@
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
-
-
         #backMenu {
-            background-color: #D4DAD4;
-            filter: blur(30px);
             height: 150px;
-            width: 9%;
+            width: 115%;
             position: absolute;
             z-index: -2;
             right: -6vw;
         }
+
     </style>
 </head>
 
@@ -186,7 +183,7 @@
 
             // document.querySelector('.layeredBack').classList.remove()
             // document.querySelector('.layeredBack').classList.add()
-
+            document.body.style.overflowY = 'hidden';
             document.querySelector('#menu-mobile').style.display = 'flex'
 
             document.querySelector('.layeredBack').style.display = 'block'
@@ -196,7 +193,7 @@
         document.querySelector('.layeredBack').addEventListener('click', () => {
             // document.querySelector('#menu').classList.remove()
             // document.querySelector('#menu').classList.add()
-
+            document.body.style.overflowY = 'unset';
             // document.querySelector('.layeredBack').classList.remove()
             // document.querySelector('.layeredBack').classList.add()
             document.querySelector('#menu-mobile').style.display = 'none'

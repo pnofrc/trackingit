@@ -35,13 +35,11 @@ class IndicatorResource extends Resource
                 FileUpload::make('visualization_treemap')
                     ->directory('visualization')  // Directory to store the uploaded files
                     ->maxSize(1024)
-                    ->preserveFilenames()
-                    ->required(),
+                    ->preserveFilenames(),
                 FileUpload::make('visualization_scatterplot')
                     ->directory('visualization')  // Directory to store the uploaded files
                     ->maxSize(1024)
-                    ->preserveFilenames()
-                    ->required(),
+                    ->preserveFilenames(),
             ]);
     }
 

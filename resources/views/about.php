@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
@@ -32,12 +31,10 @@
             background-color: var(--lighter);
         }
 
-        #backMenu {
-            height: 150px;
-            width: 9%;
-            position: absolute;
-            z-index: -2;
-            right: -6vw;
+       
+
+        .layeredBack {
+            background: none;
         }
     </style>
 </head>
@@ -60,7 +57,7 @@
 
         <div class="uni">
 
-            <span>Politecnico di Torino</span>
+            <span class="uniNames">Politecnico di Torino</span>
             <div class="logo-container">
                 <img src="assets/polito.png" alt="logo" class="logo">
             </div>
@@ -99,7 +96,7 @@
 
         <div class="uni">
 
-            <span>Politecnico di Milano</span>
+            <span class="uniNames">Politecnico di Milano</span>
 
             <div class="logo-container">
                 <img src="assets/polimi.png" alt="logo" class="logo">
@@ -126,9 +123,9 @@
             </div>
         </div>
 
-        <div class=" uni">
+        <div class="uni">
 
-            <span>Gran Sasso Science Institute</span>
+            <span class="uniNames">Gran Sasso Science Institute</span>
 
             <div class="logo-container">
                 <img src="assets/gssi.png" alt="logo" class="logo">
@@ -147,24 +144,29 @@
                     <img src="assets/grigio.png" alt="">
                     <span>Arsène Perrot<!--<br>POSIZIONE--></span>
                 </div>
-                <div class="column portrait">
+                <!-- <div class="column portrait">
                     <img src="assets/grigio.png" alt="">
                     <span></span>
-                </div>
+                </div> -->
             </div>
         </div>
+
+
+        <span class="colophonNoi">
+            Graphic Design: Matteo Bettini<br>
+            Coding: Computomanzia
+        </span>
     </div>
 
     </div>
 
-    <!-- <div class="layeredBack about mobile fixed"></div> -->
+    <div class="layeredBack mobile fixed"></div>
 
     <div class="mobile blackDotContainer fixed ">
         <div class="blackDot" onclick="openMenuMobile()"></div>
     </div>
 
-    <div id="menu-mobile" class="animate__animate fixed mobile"
-        style="display: flex;align-items: center;justify-content: center;/* border-radius: 50%; */gap: 0;">
+    <div id="menu-mobile" class="animate__animate fixed mobile">
         <div class="tondo"></div>
         <div class="flex">
             <b><a href="/">HOME</a></b>

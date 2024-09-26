@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('news_type');
             $table->date('date');
-            $table->string('city');
+            $table->string('city')->nullable();
             $table->string('external_link');
             $table->text('content');
             $table->string('picture')->nullable();

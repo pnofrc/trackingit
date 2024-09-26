@@ -488,7 +488,7 @@ button:hover,
 #visualization-dashboard {
   width: 94vw;
   height: 80vh;
-  top: 5vh;
+  top: 3rem;
     position: absolute;
   margin-left: 3vw;
   display: flex;
@@ -638,7 +638,7 @@ button:hover,
 /* about */
 
 .colophon {
-  margin: 2.5% 5%;
+  margin: 3rem 5%;
   font-size: var(--bigger);
   font-weight: 300;
   display: block;
@@ -668,7 +668,7 @@ button:hover,
 }
 
 .units {
-  gap: 4rem;
+  gap:4rem;
   margin-left: 5vw;
   width: 90vw;
   margin-bottom: 5rem;
@@ -743,7 +743,6 @@ span.model {
 }
 
 .news-contents {
-  width: 100%;
   margin: 3rem 0;
   font-size: var(--text);
 }
@@ -774,9 +773,6 @@ span.model {
   width: 50px; /* Adjust size as needed */
 }
 
-tr {
-  border: red 10px solid;
-}
 
 th,
 td {
@@ -784,9 +780,15 @@ td {
   font-size: var(--text);
   border: none;
 }
+
+#data-table{
+  border: none;
+
+}
 #data-table th {
   text-align: left;
 }
+
 th,
 td {
   border: none;
@@ -801,7 +803,25 @@ td {
   display: none;
 }
 
+.uni{
+  display: flex;
+}
+
+.uniNames{
+  display: none !important;
+}
+
+
+.colophonNoi{
+  font-size: 9px;
+}
+
 @media only screen and (max-width: 1000px) {
+
+  .uniNames{
+    display: block !important;
+  }
+
   .mobile {
     display: block;
   }
@@ -864,7 +884,7 @@ td {
 
   .header-mobile {
     position: absolute;
-    top: 1rem;
+    top: 3rem;
     display: inline;
     width: 90%;
     z-index: 8;
@@ -922,6 +942,10 @@ td {
     gap: 2rem;
   }
 
+  .units {
+    gap:2rem;
+  }
+
   .blog-image {
     width: 100%;
   }
@@ -942,13 +966,13 @@ td {
   }
 
   .colophon {
-    margin: 10%;
+    margin: 3rem 1rem;
     font-size: var(--text);
     line-height: 16px !important;
   }
 
   .chapter {
-    margin: 10%;
+    margin: 1rem;
     font-size: var(--text);
   }
 
@@ -957,7 +981,8 @@ td {
   }
 
   .units {
-    margin-left: 10%;
+    width: unset;
+    margin:0 1rem
   }
 
   .visualization-title {
@@ -981,13 +1006,13 @@ td {
   }
 
   .uni {
-    gap: 20px;
     display: flex;
     flex-direction: column;
   }
 
   .uni span,
   .portrait span {
+    display: flex;
     font-size: 9px;
     line-height: 9px;
   }
@@ -1013,7 +1038,7 @@ td {
     width: 550px;
     height: 600px;
     border-radius: 50%;
-    margin-bottom: -80%;
+    margin-bottom: -100%;
     z-index: 0;
 }
 
@@ -1035,5 +1060,10 @@ td {
   }
   .blog-info {
     width: 100%;
+  }
+
+  .blog-info p{
+    font-weight: 400;
+    font-size: var(--text);
   }
 }
