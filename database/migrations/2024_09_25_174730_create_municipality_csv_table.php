@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('blogs', function (Blueprint $table) {
+        Schema::create('municipality_csv', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->string('author');
-            $table->date('date')->nullable();
-            $table->text('content');
-            $table->string('picture');
-            $table->string('pdf');
+            $table->string('file');
+            $table->boolean('online')->default('false');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('blogs');
+        Schema::dropIfExists('municipality_csv');
     }
 };

@@ -8,7 +8,7 @@ Route::get('/', [ContentsController::class, 'getLatests']);
 
 Route::get('/dashboard', [ContentsController::class, 'viewDashboard']);
 
-Route::get('/indicatori', [ContentsController::class, 'getDataViz']);
+Route::get('/data', [ContentsController::class, 'getDataViz']);
 
 Route::get('/materiali', [ContentsController::class, 'getBlog']);
 

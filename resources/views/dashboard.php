@@ -13,8 +13,8 @@
     <meta name="og:image" content="http://tr.acking.it/assets/up-mobile.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+-->    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Leaflet CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
@@ -230,8 +230,8 @@
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
                 <b><a class="selected" href="/dashboard">DASHBOARD</a></b>
-                <b><a href="/indicatori">INDICATORI</a></b>
-                <b><a href="/materiali">MATERIALI</a></b>
+                <b><a href="/data">DATA</a></b>
+                <b><a href="/materiali">INFO SHEETS</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>
@@ -249,7 +249,7 @@
         <label class="switch" id="apiToggle">
             <div class="selection">
                 <p id='sll' class="selected">SLL</p>
-                <p id='comuni'>COMUNI</p>
+                <p id='comuni'>MUNICIPALITIES</p>
             </div>
             <input type="checkbox">
             <span class="slider round"></span>
@@ -325,7 +325,7 @@
 
                 </select>
             </div>
-            <button class='viz' onclick="pickIndicators()">Visualizza</button>
+            <button class='viz' onclick="pickIndicators()">Show</button>
         </div>
 
     </div>
@@ -349,12 +349,12 @@
                 <tbody>
 
                     <tr>
-                        <th>COD_SLL_2011_2018</th>
-                        <td id="COD_SLL_2011_2018"></td>
+                        <th>ID</th> <!-- ID-->
+                        <td id="id-data"></td>
                     </tr>
                     <tr>
-                        <th>DEN_SLL_2011_2018</th>
-                        <td id="COMUNE"></td>
+                        <th>NAME</th> <!--NAME-->
+                        <td id="name-data"></td>
                     </tr>
                     <tr>
                         <th>POP21</th>
@@ -774,15 +774,32 @@
         // Function to update the table with fetched data
         function updateTable(data) {
             const fields = [
-                'COD_SLL_2011_2018', 'COMUNE', 'POP21', 'TPOP01_21', 'TPOP11_21', 'PST21',
+                'id-data', 'name-data', 'POP21', 'TPOP01_21', 'TPOP11_21', 'PST21',
                 'VPST01_21', 'VPST11_21', 'PIS21', 'VPIS01_21', 'VPIS11_21', 'RedMed21', 'TRedMed01_21',
                 'TRedMed11_21', 'Dis21', 'VDis11_21', 'AddLog21', 'TAddLog01_21', 'TAddLog11_21',
                 'XAdd_21', 'VXAdd_01_21', 'VXAdd_11_21', 'QLAdd_IT01', 'QLAdd_IT11', 'QLAdd_IT21',
                 'VQLAdd_IT01_21', 'VQLAdd_IT11_21', 'StCAT21', 'UIU13_21', 'Imm21', 'VImm13_21'
             ];
             fields.forEach(field => {
+                if(field ==id-data){
+                    if (api == 'Sll') {
+                        field = 'COD_SLL_2011_2018'
+                    } else {
+                        field = 'PRO_COM'
+                    }
+                    
+                    
+                    
+                } else if(field == 'name-data'){
+
+                    if (api == 'Sll') {
+                        field = 'DEN_SLL_2011_2018'
+                    } else {
+                        field = 'COMUNE'
+                    }
+                }
+
                 document.getElementById(field).textContent = data[0][field];
-                console.log(field)
             });
         }
     </script>

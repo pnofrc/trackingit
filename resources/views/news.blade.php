@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+-->    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -43,10 +43,10 @@
         <span class="visualization-title title">News</span>
 
         <div class="news-contents">
-            <span onclick="filtering('all')" class="model">TIPO DI CONTENUTI</span>
-            <span onclick="filtering('Evento')" class="model">EVENTO</span>
-            <span onclick="filtering('Pubblicazione')" class="model">PUBBLICAZIONE</span>
-            <span onclick="filtering('Altro')" class="model">ALTRO</span>
+            <span onclick="filtering('all')" class="model">CONTENTS</span>
+            <span onclick="filtering('Evento')" class="model">EVENT</span>
+            <span onclick="filtering('Pubblicazione')" class="model">PUBLICATION</span>
+            <span onclick="filtering('Altro')" class="model">OTHER</span>
         </div>
 
     </div>
@@ -148,8 +148,8 @@
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
-                <b><a href="/indicatori">INDICATORI</a></b>
-                <b><a href="/materiali">MATERIALI</a></b>
+                <b><a href="/data">DATA</a></b>
+                <b><a href="/materiali">INFO SHEETS</a></b>
                 <b><a class="selected" href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>

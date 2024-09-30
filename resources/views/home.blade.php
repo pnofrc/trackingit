@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <p class="mobile alert">Visitaci da uno schermo più grande per accedere a tutte le pagine di questo sito</p>
+    <p class="mobile alert">Visit us from a larger screen to access all pages of this site.</p>
 
 
 
@@ -53,15 +53,15 @@
         </div>
 
         <div class="description-platform ">
-            <p><b>TRACKING-IT</b> is a research project invastigating the new <i>Italian Geographies of logistics</i>.
+            <p><b>TRACKING-IT</b> is a research project investigating the new Italian geographies of logistics</i>.
             </p>
         </div>
 
         <div id="menu" class="animate__animated">
             <b><a class="selected" href="/">HOME</a></b>
             <b><a href="/dashboard">DASHBOARD</a></b>
-            <b><a href="/indicatori">INDICATORI</a></b>
-            <b><a href="/materiali">MATERIALI</a></b>
+            <b><a href="/data">DATA</a></b>
+            <b><a href="/materiali">INFO SHEETS</a></b>
             <b><a href="/news">NEWS</a></b>
             <b><a href="/about">ABOUT</a></b>
         </div>

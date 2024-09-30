@@ -15,7 +15,8 @@
     burger.addEventListener('click', () => {
         if (toggle) {
             corpus.classList.add('animate__slideInLeft')
-            corpus.classList.remove('.animate__slideOutLeft')
+            corpus.classList.remove('animate__slideOutLeft')
+
             document.body.style.setProperty('--backLight', '#F9FECE');
             burger.style.left = '-48%'
             

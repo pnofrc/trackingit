@@ -17,8 +17,8 @@
     <meta name="og:image" content="http://tr.acking.it/assets/up-mobile.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+-->    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -47,7 +47,7 @@
 
                 <div class="blog-info">
 
-                    <p class="blog-date subtitle">DATA {{ $blog['date'] }}</p>
+                    {{-- <p class="blog-date subtitle">DATA {{ $blog['date'] }}</p> --}}
 
                     <p class="blog-title title"> {{ $blog['title'] }} <br>{{ $blog['author'] }}</p>
                     {!! $blog['content'] !!}
@@ -76,8 +76,8 @@
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
-                <b><a href="/indicatori">INDICATORI</a></b>
-                <b><a class="selected" href="/materiali">MATERIALI</a></b>
+                <b><a href="/data">DATA</a></b>
+                <b><a class="selected" href="/materiali">INFO SHEETS</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>

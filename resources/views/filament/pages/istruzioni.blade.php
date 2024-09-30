@@ -75,11 +75,11 @@ Clicca "Nuovo”, quindi si aprirà sempre la pagina dove potrai scrivere il tit
 <h2>Gestione Indicatori</h2>
 
 <p>
-Gli indicatori sono le data visualisation che saranno visibili nella pagina Indicatori (http://tr.acking.it/indicatori).
+Gli data sono le data visualisation che saranno visibili nella pagina Indicatori (http://tr.acking.it/data).
 Clicchi su Nuovo e avrai una pagina dove mettere il Nome (name) del dataset, la Descrizione (description), caricare l’immagine tremar (Visualisation treemap) e l’immagine scatterplot (Visualisation scatterplot).
 </p>
 
-<img src="/instructions/indicatori.png">
+<img src="/instructions/data.png">
 
 
 

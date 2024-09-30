@@ -16,8 +16,8 @@
     <meta name="og:image" content="http://tr.acking.it/assets/up-mobile.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+<!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+-->    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
@@ -38,11 +38,7 @@
 
 <body>
 
-    <span class="colophon"><b>TRACKING-IT is a research project</b> invastigating the new Italian Geographies of
-        logistics. Nelle prossime settimane verranno inoltre analizzati i dati delle superfici dedicate alla logistica
-        (capannoni e superfici libere) derivanti dall’incrocio del database EUBUCCO e con i dati forniti da ISPRA sul
-        consumo di suolo della logistica, disponibili grazie all’incontro con il dott. Munafò e i dati forniti dal suo
-        gruppo di ricerca. 
+    <span class="colophon"><b>TRACKING-IT is a research project</b> investigating the new Italian geographies of logistics. The project focuses on the new spatial articulations of the logistics sector in Italy, assuming that the logistics sector has grown significantly over the last 20 years and that this growth has determined several effects on the spatial organization of various places along the peninsula.
     </span>
 
     <!-- <b class="margin chapter">Avanzamento e fasi del progetto</b>
@@ -183,8 +179,8 @@
             <div class="internMenu">
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
-                <b><a href="/indicatori">INDICATORI</a></b>
-                <b><a href="/materiali">MATERIALI</a></b>
+                <b><a href="/data">DATA</a></b>
+                <b><a href="/materiali">INFO SHEETS</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a class="selected" href="/about">ABOUT</a></b>
             </div>
