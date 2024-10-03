@@ -68,8 +68,11 @@
 
         <div class="void"></div>
 
-        <img class="footer" src="assets/down.png" alt="">
-        <img src="assets/loghi-mobile.png" class="header-mobile" alt="">
+        <div class="footer">
+            <img src="assets/1.png" alt="">
+            <img src="assets/2.png" alt="">
+        </div>
+        
 
     </div>
 

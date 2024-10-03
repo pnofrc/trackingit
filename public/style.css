@@ -390,7 +390,15 @@ button:hover,
 
 .footer {
   z-index: 0;
-  width: 50%;
+  position: absolute;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+.footer img{
+  width: 100%;
 }
 
 .header-mobile {
@@ -873,7 +881,7 @@ td {
     position: fixed;
   }
 
-  .footer,
+
   #slide-update {
     display: none;
   }
@@ -882,12 +890,10 @@ td {
     font-size: var(--bigger);
   }
 
-  .header-mobile {
-    position: absolute;
-    top: 3rem;
-    display: inline;
-    width: 90%;
-    z-index: 8;
+  .footer {
+    flex-direction: column;
+    top: 1rem;
+    height: max-content;
   }
 
   .back img {
