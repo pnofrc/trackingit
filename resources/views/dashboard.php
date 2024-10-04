@@ -177,19 +177,25 @@
             position: relative;
             display: flex;
             z-index: 100;
-            justify-content: space-around;
+    
             width: 100%;
             align-items: center;
             height: 100%;
             color: #839196
         }
 
+
+        .switch .selection p{
+            text-align: center;
+            width: 100%;
+        }
+
+
         .indicators_dropdown div select,
         button,
         .selection {
             cursor: pointer
         }
-
 
         .picking {
             display: flex;
@@ -348,14 +354,7 @@
             <table id="data-table" border="1">
                 <tbody>
 
-                    <tr>
-                        <th>ID</th> <!-- ID-->
-                        <td id="id-data"></td>
-                    </tr>
-                    <tr>
-                        <th>NAME</th> <!--NAME-->
-                        <td id="name-data"></td>
-                    </tr>
+                  
                     <tr>
                         <th>POP21</th>
                         <td id="POP21"></td>
@@ -688,6 +687,7 @@
                                     if (api == 'Sll') {
                                         axios.get('/get' + api + 'AreaData/' + place.sll_2011)
                                             .then(response => {
+                                            console.log(response.data[0].id)
                                                 updateTable(response.data);
                                             })
                                             .catch(error => {
@@ -781,7 +781,8 @@
                 'VQLAdd_IT01_21', 'VQLAdd_IT11_21', 'StCAT21', 'UIU13_21', 'Imm21', 'VImm13_21'
             ];
             fields.forEach(field => {
-                if(field ==id-data){
+                let originalField = field
+                if(field == "id-data"){
                     if (api == 'Sll') {
                         field = 'COD_SLL_2011_2018'
                     } else {
@@ -798,8 +799,8 @@
                         field = 'COMUNE'
                     }
                 }
-
-                document.getElementById(field).textContent = data[0][field];
+                console.log(data[0][field])
+                document.getElementById(originalField).textContent = data[0][field];
             });
         }
     </script>
