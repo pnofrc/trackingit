@@ -383,7 +383,7 @@ button:hover,
   text-transform: lowercase;
   width: 90%;
   height: 2rem;
-  margin-top: 0.5rem;
+  margin-top: 5vh;
   border-radius: 1rem;
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.05));
 }
@@ -410,12 +410,14 @@ button:hover,
   align-items: center;
   text-align: center;
   flex-direction: column;
+  justify-content: flex-start;
+  height: 100vh;
 }
 
 .description-platform p {
   width: 85%;
-  font-size: 50px;
-  margin-top: -3rem;
+  font-size: 5vh;
+  margin-top: 11vh;
 }
 
 .void {
