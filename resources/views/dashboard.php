@@ -354,9 +354,16 @@
             <table id="data-table" border="1">
                 <tbody>
 
-                  
                     <tr>
-                        <th>POP21</th>
+                        <th>ID</th> <!-- ID-->
+                        <td id="id-data"></td>
+                    </tr>
+                    <tr>
+                        <th>NAME</th> <!--NAME-->
+                        <td id="name-data"></td>
+                    </tr>
+                    <tr>
+                        <th>Popolazione totale 2021</th>
                         <td id="POP21"></td>
                     </tr>
                     <tr>
@@ -662,7 +669,6 @@
                                     if (api == 'Sll') {
                                         infoBox.innerHTML = 'Current Area: ' + place
                                             .DEN_SLL_2011_2018;
-                                    } else {
                                         console.log(e)
                                         infoBox.innerHTML = 'Current Area: ' + place.COMUNE;
                                     }
@@ -687,7 +693,6 @@
                                     if (api == 'Sll') {
                                         axios.get('/get' + api + 'AreaData/' + place.sll_2011)
                                             .then(response => {
-                                            console.log(response.data[0].id)
                                                 updateTable(response.data);
                                             })
                                             .catch(error => {
@@ -698,7 +703,6 @@
                                         axios.get('/get' + api + 'Data/' + place.municipality_code)
                                             .then(response => {
                                                 updateTable(response.data);
-                                                console.log(response.data)
                                             })
                                             .catch(error => {
                                                 console.error('Error fetching data:',
@@ -799,7 +803,6 @@
                         field = 'COMUNE'
                     }
                 }
-                console.log(data[0][field])
                 document.getElementById(originalField).textContent = data[0][field];
             });
         }
