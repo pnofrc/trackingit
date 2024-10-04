@@ -61,7 +61,7 @@ class SllareaCsvResource extends Resource
                 Tables\Actions\Action::make('download')
                     ->label('Download DataSet')
                     ->action(function (SllAreaCSV $record) {
-                        return redirect()->to($record->file);
+                        return redirect()->to('storage/'.$record->file);
                     })
                     ->openUrlInNewTab(),
 
