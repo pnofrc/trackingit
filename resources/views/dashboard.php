@@ -667,9 +667,10 @@
                                 layer.on('mouseover', (e) => { 
                                     // Show the external div and update its content
                                     if (api == 'Sll') {
-                                        infoBox.innerHTML = 'Current Area: ' + place
-                                            .DEN_SLL_2011_2018;
-                                        console.log(e)
+                                        console.lo
+                                        infoBox.innerHTML = 'Current Area: ' + place.DEN_SLL_2011_2018;
+                                       
+                                    } else {
                                         infoBox.innerHTML = 'Current Area: ' + place.COMUNE;
                                     }
                                     // Optionally, change the style of the layer
@@ -683,7 +684,7 @@
                                     infoBox.innerHTML = 'Current Area: '
                                     // Reset the style of the layer
                                     e.target.setStyle({
-                                        fillOpacity: 0.7
+                                        fillOpacity: 1
                                     });
                                 });
                                 // Define the behavior for when the layer is clicked
