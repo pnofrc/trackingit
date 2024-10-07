@@ -32,6 +32,9 @@
         }
 
        
+    .colophonNoi a{
+    color: 'black' !important
+    }
 
     </style>
 </head>
