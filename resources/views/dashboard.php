@@ -85,7 +85,7 @@
         }
 
         select,
-        .viz {
+        .viz, #translate {
             background: none;
             border: none;
             background: background: #00000066;
@@ -103,6 +103,10 @@
             display: flex;
             align-items: center;
             justify-content: center
+        }
+
+        #translate{
+            height: unset
         }
 
         .viz {
@@ -332,6 +336,8 @@
                 </select>
             </div>
             <button class='viz' onclick="pickIndicators()">Show</button>
+
+            <div id="translate"></div>
         </div>
 
     </div>
@@ -355,127 +361,127 @@
                 <tbody>
 
                     <tr>
-                        <th>ID</th> <!-- ID-->
+                        <th id="ID">ID</th> <!-- ID-->
                         <td id="id-data"></td>
                     </tr>
                     <tr>
-                        <th>NAME</th> <!--NAME-->
+                        <th id="Nome">NAME</th> <!--NAME-->
                         <td id="name-data"></td>
                     </tr>
                     <tr>
-                        <th>Popolazione totale 2021</th>
+                        <th id="Popolazione Totale 2021">POP21</th>
                         <td id="POP21"></td>
                     </tr>
                     <tr>
-                        <th>TPOP01_21</th>
+                        <th id="Trend Popolazione Totale 2001-2021">TPOP01_21</th>
                         <td id="TPOP01_21"></td>
                     </tr>
                     <tr>
-                        <th>TPOP11_21</th>
+                        <th id="Trend Popolazione Totale 2011-2021">TPOP11_21</th>
                         <td id="TPOP11_21"></td>
                     </tr>
                     <tr>
-                        <th>PST21</th>
+                        <th id="Percentuale Popolazione Straniera Residente 2021">PST21</th>
                         <td id="PST21"></td>
                     </tr>
                     <tr>
-                        <th>VPST01_21</th>
+                        <th id="Variazione Percentuale Popolazione Straniera Residente 2001-2021">VPST01_21</th>
                         <td id="VPST01_21"></td>
                     </tr>
                     <tr>
-                        <th>VPST11_21</th>
+                        <th id="Variazione Percentuale Popolazione Straniera Residente 2011-2021">VPST11_21</th>
                         <td id="VPST11_21"></td>
                     </tr>
                     <tr>
-                        <th>PIS21</th>
+                        <th id="Percentuale Popolazione con Istruzione Superiore (Diplomati + Laureati) 2021">PIS21</th>
                         <td id="PIS21"></td>
                     </tr>
                     <tr>
-                        <th>VPIS01_21</th>
+                        <th id="Variazione Percentuale popolazione con Istruzione Superiore (Diplomati + Laureati) 2001-2021">VPIS01_21</th>
                         <td id="VPIS01_21"></td>
                     </tr>
                     <tr>
-                        <th>VPIS11_21</th>
+                        <th id="Variazione Percentuale popolazione con Istruzione Superiore (Diplomati + Laureati) 2001-2021">VPIS11_21</th>
                         <td id="VPIS11_21"></td>
                     </tr>
                     <tr>
-                        <th>RedMed21</th>
+                        <th id="Reddito Medio 2021">RedMed21</th>
                         <td id="RedMed21"></td>
                     </tr>
                     <tr>
-                        <th>TRedMed01_21</th>
+                        <th id="Trend Reddito Medio 2001-2021">TRedMed01_21</th>
                         <td id="TRedMed01_21"></td>
                     </tr>
                     <tr>
-                        <th>TRedMed11_21</th>
+                        <th id="Trend Reddito Medio 2011-2021">TRedMed11_21</th>
                         <td id="TRedMed11_21"></td>
                     </tr>
                     <tr>
-                        <th>Dis21</th>
+                        <th id="Tasso di Disoccupazione 2021">Dis21</th>
                         <td id="Dis21"></td>
                     </tr>
                     <tr>
-                        <th>VDis11_21</th>
+                        <th id="Variazione Tasso di Disoccupazione 2011-2021">VDis11_21</th>
                         <td id="VDis11_21"></td>
                     </tr>
                     <tr>
-                        <th>AddLog21</th>
+                        <th id="Addetti Logistica 2021">AddLog21</th>
                         <td id="AddLog21"></td>
                     </tr>
                     <tr>
-                        <th>TAddLog01_21</th>
+                        <th id="Trend Addetti Logistica 2001-2021">TAddLog01_21</th>
                         <td id="TAddLog01_21"></td>
                     </tr>
                     <tr>
-                        <th>TAddLog11_21</th>
+                        <th id="Trend Addetti Logistica 2011-2021">TAddLog11_21</th>
                         <td id="TAddLog11_21"></td>
                     </tr>
                     <tr>
-                        <th>XAdd_21</th>
+                        <th id="Addetti Logistica sul Totale Addetti Comunale 2021">XAdd_21</th>
                         <td id="XAdd_21"></td>
                     </tr>
                     <tr>
-                        <th>VXAdd_01_21</th>
+                        <th id="Variazione Addetti Logistica sul Totale Addetti Comunale 2001-2021">VXAdd_01_21</th>
                         <td id="VXAdd_01_21"></td>
                     </tr>
                     <tr>
-                        <th>VXAdd_11_21</th>
+                        <th id="Variazione Addetti Logistica sul Totale Addetti Comunale 2011-2021">VXAdd_11_21</th>
                         <td id="VXAdd_11_21"></td>
                     </tr>
                     <tr>
-                        <th>QLAdd_IT01</th>
+                        <th id="Quoziente di Localizzazione Addetti Comunale in Relazione all'Indice Nazionale 2001">QLAdd_IT01</th>
                         <td id="QLAdd_IT01"></td>
                     </tr>
                     <tr>
-                        <th>QLAdd_IT11</th>
+                        <th id="Quoziente di Localizzazione Addetti Comunale in Relazione all'Indice Nazionale 2011">QLAdd_IT11</th>
                         <td id="QLAdd_IT11"></td>
                     </tr>
                     <tr>
-                        <th>QLAdd_IT21</th>
+                        <th id="Quoziente di Localizzazione Addetti Comunale in Relazione all'Indice Nazionale 2021">QLAdd_IT21</th>
                         <td id="QLAdd_IT21"></td>
                     </tr>
                     <tr>
-                        <th>VQLAdd_IT01_21</th>
+                        <th id="Variazione Quoziente di Localizzazione Addetti Comunale in Relazione all'Indice Nazionale 2001-2021">VQLAdd_IT01_21</th>
                         <td id="VQLAdd_IT01_21"></td>
                     </tr>
                     <tr>
-                        <th>VQLAdd_IT11_21</th>
+                        <th id="Variazione Quoziente di Localizzazione Addetti Comunale in Relazione all'Indice Nazionale 2011-2021">VQLAdd_IT11_21</th>
                         <td id="VQLAdd_IT11_21"></td>
                     </tr>
                     <tr>
-                        <th>StCAT21</th>
+                        <th id="Stock Catastale D01 e D07 sulle UIU 2013-2021">StCAT21</th>
                         <td id="StCAT21"></td>
                     </tr>
                     <tr>
-                        <th>UIU13_21</th>
+                        <th id="Variazione UIU su Stock Totale 2021-2013">UIU13_21</th>
                         <td id="UIU13_21"></td>
                     </tr>
                     <tr>
-                        <th>Imm21</th>
+                        <th id="Valori Immobiliari Capannoni 2021">Imm21</th>
                         <td id="Imm21"></td>
                     </tr>
                     <tr>
-                        <th>VImm13_21</th>
+                        <th id="Variazione Valori Immobiliari Capannoni 2013-2021">VImm13_21</th>
                         <td id="VImm13_21"></td>
                     </tr>
 
@@ -485,7 +491,7 @@
     </div>
 
     <script src="app.js"></script>
-    <script>
+    <script defer async>
         // get mapped colors
         function mixColor(min1, max1, min2, max2, value1, value2, color1, color2) {
             // Helper function to convert hex color to RGB
@@ -665,9 +671,9 @@
                             function onEachFeature(feature, layer) {
                                 // Define the behavior for when the mouse is over the layer
                                 layer.on('mouseover', (e) => { 
+                                
                                     // Show the external div and update its content
                                     if (api == 'Sll') {
-                                        console.lo
                                         infoBox.innerHTML = 'Current Area: ' + place.DEN_SLL_2011_2018;
                                        
                                     } else {
@@ -775,6 +781,20 @@
 
         // Add event listener for the toggle switch
         document.getElementById('apiToggle').addEventListener('change', toggleGeo);
+
+        // display 'translation' of the indicators
+        document.querySelectorAll('tr').forEach(element => {
+            element.addEventListener('mouseover',() =>{
+                element.querySelector('th').style.textDecoration = 'underline'
+                document.getElementById('translate').textContent = element.querySelector('th').id
+            })
+
+            element.addEventListener('mouseout',() =>{
+                element.querySelector('th').style.textDecoration = ''
+                document.getElementById('translate').textContent = ''
+            })
+           
+        });
 
         // Function to update the table with fetched data
         function updateTable(data) {
