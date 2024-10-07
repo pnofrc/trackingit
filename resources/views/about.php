@@ -146,8 +146,9 @@
 
 
         <span class="colophonNoi">
-            Graphic Design: Matteo Bettini<br>
-            Coding: Computomanzia
+           <a href="http://instagram/4khd__">Graphic Design: Matteo Bettini</a><br>
+           <a href="http://federicoponi.it/computomanzia">Coding: Computomanzia [Federico Poni]</a>
+           <br><br><br><br><br><br><br><br><br>
         </span>
     </div>
 
