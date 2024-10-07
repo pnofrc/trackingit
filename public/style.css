@@ -689,7 +689,7 @@ button:hover,
   width: 15vw;
 }
 
-.portrait span {
+.portrait span , .colophonNoi{
   font-size: 1rem;
   margin-top: 0.5rem;
   line-height: 1.2rem;
@@ -824,7 +824,7 @@ td {
 
 
 .colophonNoi{
-  font-size: 9px;
+  color: 'black' !important
 }
 
 @media only screen and (max-width: 1000px) {
