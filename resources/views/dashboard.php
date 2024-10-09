@@ -241,7 +241,7 @@
                 <b><a href="/">HOME</a></b>
                 <b><a class="selected" href="/dashboard">DASHBOARD</a></b>
                 <b><a href="/data">DATA</a></b>
-                <b><a href="/materiali">INFO SHEETS</a></b>
+                <b><a href="/info-sheets">INFO SHEETS</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Tracking-it | Indicatori</title>
+    <title>Tracking-it | Data</title>
     <meta name="description"
         content="TRACKING-IT is a research project invastigating the new Italian Geographies of logistics.">
     <meta name="author" content="Politecnico di Torino, Politecnico di Milano, Gran Sasso Science Institute">
@@ -94,7 +94,7 @@
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
                 <b><a class="selected" href="/data">DATA</a></b>
-                <b><a href="/materiali">INFO SHEETS</a></b>
+                <b><a href="/info-sheets">INFO SHEETS</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>

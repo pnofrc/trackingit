@@ -86,9 +86,9 @@ Clicchi su Nuovo e avrai una pagina dove mettere il Nome (name) del dataset, la 
 <h2>Gestione Materiali</h2>
 
 <p>
-I Materiali sono gli articoli del blog  (http://tr.acking.it/materiali). Metterai un Titolo (title), un Autore (author), il Contenuto (content) dell’articolo, la data (date), l’immagine (picture) e infine il PDF.</p>
+I Materiali sono gli articoli del blog  (http://tr.acking.it/info-sheets). Metterai un Titolo (title), un Autore (author), il Contenuto (content) dell’articolo, la data (date), l’immagine (picture) e infine il PDF.</p>
 
-<img src="/instructions/materiali.png">
+<img src="/instructions/info-sheets.png">
 
 
 

@@ -10,7 +10,7 @@ Route::get('/dashboard', [ContentsController::class, 'viewDashboard']);
 
 Route::get('/data', [ContentsController::class, 'getDataViz']);
 
-Route::get('/materiali', [ContentsController::class, 'getBlog']);
+Route::get('/info-sheets', [ContentsController::class, 'getBlog']);
 
 Route::get('/news', [ContentsController::class, 'getNews']);
 

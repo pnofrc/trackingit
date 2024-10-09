@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
-    <title>Tracking-it | Materiali</title>
+    <title>Tracking-it | Info Sheets</title>
     <meta name="description"
         content="TRACKING-IT is a research project invastigating the new Italian Geographies of logistics.">
     <meta name="author" content="Politecnico di Torino, Politecnico di Milano, Gran Sasso Science Institute">
@@ -37,7 +37,7 @@
 
 <body>
 
-    <span class="visualization-title title">Materiali e approfondimenti</span>
+    <span class="visualization-title title">Info Sheets</span>
 
     <div id="blog">
 
@@ -81,7 +81,7 @@
                 <b><a href="/">HOME</a></b>
                 <b><a href="/dashboard">DASHBOARD</a></b>
                 <b><a href="/data">DATA</a></b>
-                <b><a class="selected" href="/materiali">INFO SHEETS</a></b>
+                <b><a class="selected" href="/info-sheets">INFO SHEETS</a></b>
                 <b><a href="/news">NEWS</a></b>
                 <b><a href="/about">ABOUT</a></b>
             </div>
