@@ -25,7 +25,7 @@
         }
 
         .showSelectedDataset {
-            border: solid 1px !important;
+            background: var(--backOpaque) !important;
         }
 
         .unselectable {
@@ -52,9 +52,9 @@
             </div>
 
             <br>
-            <div>
+            <div class="kind-visualization">
 
-                <span class="title">DATASET</span>
+                <span class="model">DATASET</span>
 
                 @foreach ($visualizations as $viz)
                     <div class="dataset @if ($loop->first) showSelectedDataset @endif"

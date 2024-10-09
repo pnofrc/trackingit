@@ -28,6 +28,10 @@
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
+
+        .blog-title{
+            margin-top: 0;
+        }
     </style>
 </head>
 

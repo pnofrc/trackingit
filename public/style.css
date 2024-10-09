@@ -895,6 +895,10 @@ td {
     height: max-content;
   }
 
+  .footer img{
+    width: 100%
+  }
+
   .back img {
     rotate: 90deg;
     width: 100%;
