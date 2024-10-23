@@ -64,8 +64,7 @@ class ContentsController extends Controller
 
     public function viewDashboard()
     {
-        $highways = $this->getHighways();
-        $interports = $this->getInterports();
+
 
         return view('dashboard', ['sllAreaData' => []]);
         // return view('dashboard', ['highways' => $highways, 'interports' => $interports,'sllAreaData' => [], 'MunicipalitiesData' => []]);

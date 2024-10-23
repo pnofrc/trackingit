@@ -492,6 +492,15 @@
 
     <script src="app.js"></script>
     <script defer async>
+
+
+fetch('/comuni')
+            .then(response => response.json())
+            .then(data => {
+                console.log(data)
+            })
+
+
         // get mapped colors
         function mixColor(min1, max1, min2, max2, value1, value2, color1, color2) {
             // Helper function to convert hex color to RGB

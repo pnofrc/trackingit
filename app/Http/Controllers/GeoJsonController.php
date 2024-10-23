@@ -14,26 +14,27 @@ use App\Models\Highway;
 
 class GeoJsonController extends Controller
 {
-    // Fetch all GeoJSON Muncipality data
-    public function indexMunicipalities()
-    {
-        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.1))::json AS geom"))
-            ->get();
+    // // Fetch all GeoJSON Muncipality data
+    // public function indexMunicipalities()
+    // {
+    //     $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.1))::json AS geom"))
+    //         ->get();
+
+    //         // dd($places);
+
+    //     return response()->json($places);
+    // }
 
 
-        return response()->json($places);
-    }
+    // // Fetch all GeoJSON SLL data
+    // public function indexSLL()
+    // {
+    //     $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
+    //         ->get();
 
 
-    // Fetch all GeoJSON SLL data
-    public function indexSLL()
-    {
-        $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
-            ->get();
-
-
-        return response()->json($places);
-    }
+    //     return response()->json($places);
+    // }
 
 
     // Fetch data of a SLL
@@ -47,7 +48,6 @@ class GeoJsonController extends Controller
 
     public function getComuniData($id)
     {
-        // TODO: edit qua COMUNI
         $comuniData = MunicipalityData::where('PRO_COM', $id)->get();
         return response()->json($comuniData);
     }
@@ -64,7 +64,6 @@ class GeoJsonController extends Controller
             ->get()->toArray();
 
         $nameSll = SllAreaData::select('DEN_SLL_2011_2018')->get()->toArray();
-
 
         // indicators data
 
@@ -88,46 +87,88 @@ class GeoJsonController extends Controller
         return $mixmix;
     }
 
+    // public function indexComuniWithIndicators($indicators)
+    // {
+
+    //     $parsedIndicators = explode('+', $indicators);
+
+    //     // Comuni data //TODO: COMUNI
+    //     $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.005))::json AS geom"))
+    //         ->get()->toArray();
+
+    //     $nameComuni = MunicipalityData::select('COMUNE', 'PRO_COM')->get()->toArray();
+
+    //     // indicators data
+
+    //     $indicator1Data = MunicipalityData::select($parsedIndicators[0])->get()->toArray();
+    //     if ($parsedIndicators[1] != 'NONE') {
+    //         $indicator2Data = MunicipalityData::select($parsedIndicators[1])->get()->toArray();
+
+    //         // merge all the values in an array
+    //         $mixmix = array_map(function ($a1, $a2, $a3, $a4) {
+    //             return array_merge($a1, $a2, $a3, $a4);
+    //         }, $nameComuni, $indicator1Data, $indicator2Data, $places);
+
+    //     } else {
+    //         // merge all the values in an array
+    //         $mixmix = array_map(function ($a1, $a2, $a3) {
+    //             return array_merge($a1, $a2, $a3);
+    //             // TODO: COMUNI
+    //         }, $nameComuni, $indicator1Data, $places);
+    //     }
+
+
+    //     return $mixmix;
+    // }
+
     public function indexComuniWithIndicators($indicators)
     {
-
         $parsedIndicators = explode('+', $indicators);
 
-        // Comuni data //TODO: COMUNI
+        // Comuni data
         $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.005))::json AS geom"))
             ->get()->toArray();
 
+        $nameComuni = MunicipalityData::select('COMUNE', 'PRO_COM')->get()->toArray();
 
-        $nameComuni = MunicipalityData::select('COMUNE')->get()->toArray();
-
-
-        // indicators data
-
-        $indicator1Data = MunicipalityData::select($parsedIndicators[0])->get()->toArray();
-        if ($parsedIndicators[1] != 'NONE') {
-            $indicator2Data = MunicipalityData::select($parsedIndicators[1])->get()->toArray();
-
-            // merge all the values in an array
-            $mixmix = array_map(function ($a1, $a2, $a3, $a4) {
-                return array_merge($a1, $a2, $a3, $a4);
-            }, $nameComuni, $indicator1Data, $indicator2Data, $places);
-
-        } else {
-            // merge all the values in an array
-            $mixmix = array_map(function ($a1, $a2, $a3) {
-                return array_merge($a1, $a2, $a3);
-                // TODO: COMUNI
-            }, $nameComuni, $indicator1Data, $places);
+        // Crea un array associativo per MunicipalData
+        $municipalityData = [];
+        foreach ($nameComuni as $data) {
+            $municipalityData[$data['PRO_COM']] = $data;
         }
 
+        // indicators data
+        $indicator1Data = MunicipalityData::select($parsedIndicators[0])->get()->toArray();
+
+        if ($parsedIndicators[1] != 'NONE') {
+            $indicator2Data = MunicipalityData::select($parsedIndicators[1])->get()->toArray();
+        }
+
+        // Combina i dati
+        $mixmix = [];
+        foreach ($places as $place) {
+            $proCom = $place['municipality_code'];
+            if (isset($municipalityData[$proCom])) {
+                $mergedData = array_merge($place, $municipalityData[$proCom]);
+
+                if ($parsedIndicators[1] != 'NONE' && isset($indicator2Data[$proCom])) {
+                    $mergedData = array_merge($mergedData, $indicator2Data[$proCom]);
+                } elseif (isset($indicator1Data[$proCom])) {
+                    $mergedData = array_merge($mergedData, $indicator1Data[$proCom]);
+                }
+
+                $mixmix[] = $mergedData;
+            }
+        }
 
         return $mixmix;
     }
 
+
     public function getInterports()
     {
         $interports = Interport::select('name', 'city', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))->get();
-        
+
         return response()->json($interports); // Devi restituire la risposta JSON
     }
 

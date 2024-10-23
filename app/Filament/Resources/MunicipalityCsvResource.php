@@ -141,7 +141,6 @@ class MunicipalityCsvResource extends Resource
         // Validate headers
         foreach ($expectedKeys as $key) {
             if (!in_array($key, $header)) {
-                dd($key);
                 dd('ATTENZIONE! FILE CSV NON COMPILATO CORRETTAMENTE');
             }
         }
@@ -149,6 +148,7 @@ class MunicipalityCsvResource extends Resource
 
         foreach ($csv->getRecords() as $record) {
 
+            // dd($record['PRO_COM'], $record['COMUNE']);
             MunicipalityData::updateOrCreate(
                 [
                     'PRO_COM' => $record['PRO_COM'],
