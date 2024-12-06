@@ -20,7 +20,7 @@
             document.body.style.setProperty('--backLight', '#F9FECE');
             burger.style.left = '-48%'
             
-            textMenu.innerHTML = 'CHIUDI'
+            textMenu.innerHTML = 'CLOSE'
             textMenu.style.rotate = '39deg'
             textMenu.style.marginTop = '6rem'
             burger.style.gap = '0';

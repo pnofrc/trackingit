@@ -36,6 +36,10 @@
     color: 'black' !important
     }
 
+    .propic{
+        filter: grayscale(100%)
+    }
+
     </style>
 </head>
 
@@ -60,31 +64,31 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polito-giancarlo-cotella.jpg" alt="">
                     <span>Giancarlo Cotella<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polito-carlo-salone.jpg" alt="">
                     <span>Carlo Salone<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polito-elisa-vitale.jpg" alt="">
                     <span>Elisabetta Vitale Brovarone<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/" alt="">
                     <span>Elena Camilla Pede<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/" alt="">
                     <span>Erblin Berisha<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polito-alberto-valz-gris.jpg" alt="">
                     <span>Alberto Valz Gris<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polito-elia-silvestro.jpeg" alt="">
                     <span>Elia Silvestro<!--<br>POSIZIONE--></span>
                 </div>
             </div>
@@ -100,19 +104,19 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polimi-simonetta-armondi.JPG" alt="">
                     <span>Simonetta Armondi<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polimi-beatrice-galimberti.jpg" alt="">
                     <span>Beatrice Galimberti<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polimi-fabio-manfredini.jpeg" alt="">
                     <span>Fabio Manfredini<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/polimi-marco-vedoa.jpeg" alt="">
                     <span>Marco Vedoà<!--<br>POSIZIONE--></span>
                 </div>
 
@@ -129,19 +133,19 @@
 
             <div class="row portraits">
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/gssi-fabiano-compagnucci.jpg" alt="">
                     <span>Fabiano Compagnucci<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/gssi-alena-myshko.png" alt="">
                     <span>Alena Myshko<!--<br>POSIZIONE--></span>
                 </div>
                 <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/gssi-arsène-perrot.jpg" alt="">
                     <span>Arsène Perrot<!--<br>POSIZIONE--></span>
                 </div>
                 <!-- <div class="column portrait">
-                    <img src="assets/grigio.png" alt="">
+                    <img class="propic" src="propic/" alt="">
                     <span></span>
                 </div> -->
             </div>
@@ -149,7 +153,7 @@
 
 
         <span class="colophonNoi">
-           <a href="http://instagram/600mt">Graphic Design: Matteo Bettini</a><br>
+           <a href="https://www.instagram.com/600mt/">Graphic Design: Matteo Bettini</a><br>
            <a href="http://federicoponi.it/computomanzia">Coding: Computomanzia [Federico Poni]</a>
            <br><br><br><br><br><br><br><br><br>
         </span>

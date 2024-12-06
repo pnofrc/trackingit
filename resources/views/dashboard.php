@@ -302,7 +302,7 @@
             </div>
             <div>
                 <select id="indicatorSelect2">
-                    <option value="NONE">INDICATORE 2</option>
+                    <option value="NONE">INDICATOR 2</option>
                     <option value="POP21">POP21</option>
                     <option value="TPOP01_21">TPOP01_21</option>
                     <option value="TPOP11_21">TPOP11_21</option>
@@ -647,13 +647,11 @@ fetch('/comuni')
                     .then(response => response.json())
                     .then(data => {
                         data.forEach(place => {
-                            var geojson;
-                            try {
-                                geojson = JSON.parse(place.geom);
-                            } catch (e) {
-                                console.error('Invalid JSON in place.geom:', place.geom);
-                                return;
+                            if (!place.geom) {
+                                console.warn('Missing geom for place:', place);
+                                return; 
                             }
+                            let geojson = JSON.parse(place.geom);
                             let place2data
                             // Assuming place has 'value1' and 'value2' for the two indicators
                             if (place[indicator2Name]) {

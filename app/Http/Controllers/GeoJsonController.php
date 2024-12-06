@@ -128,6 +128,7 @@ class GeoJsonController extends Controller
         // Comuni data
         $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.005))::json AS geom"))
             ->get()->toArray();
+        
 
         $nameComuni = MunicipalityData::select('COMUNE', 'PRO_COM')->get()->toArray();
 
