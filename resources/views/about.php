@@ -119,6 +119,10 @@
                     <img class="propic" src="propic/polimi-marco-vedoa.jpeg" alt="">
                     <span>Marco Vedoà<!--<br>POSIZIONE--></span>
                 </div>
+                <div class="column portrait">
+                    <img class="propic" src="propic/polimi-viviana-giavarini.jpg" alt="">
+                    <span>Viviana Giavarini<!--<br>POSIZIONE--></span>
+                </div>
 
             </div>
         </div>
