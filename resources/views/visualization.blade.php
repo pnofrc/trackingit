@@ -53,8 +53,12 @@
 
             <br>
             <div class="kind-visualization">
+                <div class="dataset-download">
 
                 <span class="model">DATASET</span>
+                    <a href="/datasets/DB_SSL_TRACKING-IT_Dahsboard.csv" download class="model">Download Dataset SSL</a>
+                    <a href="/datasets/dbComuni_LOGISTICA_dashboard.csv" download class="model">Download Dataset Comuni</a>
+                </div>
 
                 @foreach ($visualizations as $viz)
                     <div class="dataset @if ($loop->first) showSelectedDataset @endif"

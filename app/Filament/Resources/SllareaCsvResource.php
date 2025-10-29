@@ -3,9 +3,9 @@
 namespace App\Filament\Resources;
 use League\Csv\Reader;
 use Illuminate\Support\Facades\File;
-use App\Filament\Resources\SllareaCsvResource\Pages;
-use App\Filament\Resources\SllareaCsvResource\RelationManagers;
-use App\Models\SllareaCsv;
+use App\Filament\Resources\SllareaCSVResource\Pages;
+use App\Filament\Resources\SllareaCSVResource\RelationManagers;
+use App\Models\SllAreaCSV;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -22,9 +22,9 @@ use Filament\Facades\Filament;
 use App\Models\SllAreaData;
 use App\Imports\ParsedSLLDataImport;
 
-class SllareaCsvResource extends Resource
+class SllareaCSVResource extends Resource
 {
-    protected static ?string $model = SllareaCSV::class;
+    protected static ?string $model = SllAreaCSV::class;
     protected static ?int $navigationSort = 4;
     protected static ?string $navigationIcon = 'heroicon-o-chevron-double-down';
 
@@ -68,7 +68,7 @@ class SllareaCsvResource extends Resource
                 Tables\Actions\Action::make('parse')
                     ->label('Parse CSV')
                     ->action(function (SllAreaCSV $record) {
-                        $resource = new \App\Filament\Resources\SllareaCsvResource();
+                        $resource = new \App\Filament\Resources\SllareaCSVResource();
                         $resource->parseCsv($record->file);
                     })
                     ->color('primary'),
@@ -196,9 +196,9 @@ class SllareaCsvResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListSllareaCsvs::route('/'),
-            'create' => Pages\CreateSllareaCsv::route('/create'),
-            'edit' => Pages\EditSllareaCsv::route('/{record}/edit'),
+            'index' => Pages\ListSllareaCSVs::route('/'),
+            'create' => Pages\CreateSllareaCSV::route('/create'),
+            'edit' => Pages\EditSllareaCSV::route('/{record}/edit'),
         ];
     }
 }

@@ -316,6 +316,19 @@ button {
   color: unset;
 }
 
+.select{
+  width: 420px;
+
+}
+
+.download{
+  font-size: calc(var(--text) / 1.4);
+}
+/* 
+.dwn{
+  margin-bottom: 50px;
+} */
+
 a.selected,
 #menu b a:hover,
 .indicators_dropdown div select:hover,
@@ -481,6 +494,10 @@ button:hover,
   font-size: var(--subtitle);
 }
 
+.model{
+  cursor: default !important;
+}
+
 .dataset p {
   font-size: var(--text);
   font-weight: 400;
@@ -530,6 +547,13 @@ button:hover,
   padding-top: 2vw;
 }
 
+.dataset-download{
+  text-transform: uppercase; color: black; display: flex; flex-direction: column; gap: 1vh
+}
+.dataset-download a {
+text-decoration: none; color: black !important; 
+/* font-weight: 200; */
+}
 .kind-visualization,
 .dataset-visualization,
 .news-contents {
@@ -790,6 +814,10 @@ td {
   font-weight: 700;
   font-size: var(--text);
   border: none;
+}
+
+td{
+  text-align: right;
 }
 
 #data-table{
@@ -1075,4 +1103,9 @@ td {
     font-weight: 400;
     font-size: var(--text);
   }
+
+
 }
+
+
+

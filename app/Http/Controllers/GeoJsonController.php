@@ -15,26 +15,26 @@ use App\Models\Highway;
 class GeoJsonController extends Controller
 {
     // // Fetch all GeoJSON Muncipality data
-    // public function indexMunicipalities()
-    // {
-    //     $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.1))::json AS geom"))
-    //         ->get();
+    public function indexMunicipalities()
+    {
+        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.1))::json AS geom"))
+            ->get();
 
-    //         // dd($places);
+            // dd($places);
 
-    //     return response()->json($places);
-    // }
-
-
-    // // Fetch all GeoJSON SLL data
-    // public function indexSLL()
-    // {
-    //     $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
-    //         ->get();
+        return response()->json($places);
+    }
 
 
-    //     return response()->json($places);
-    // }
+    // Fetch all GeoJSON SLL data
+    public function indexSLL()
+    {
+        $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
+            ->get();
+
+
+        return response()->json($places);
+    }
 
 
     // Fetch data of a SLL
@@ -57,112 +57,73 @@ class GeoJsonController extends Controller
     public function indexSllWithIndicators($indicators)
     {
 
+        // $indicators non contiene più '+' e 'NONE' se hai corretto il frontend.
+        // Se il frontend invia ancora POP21+NONE, $parsedIndicators[1] sarà 'NONE'.
         $parsedIndicators = explode('+', $indicators);
+        $indicator1 = $parsedIndicators[0]; // Prende il primo (e unico) indicatore.
 
-        // SLL data
+        // 1. Prendi i dati SLL (geometria)
         $places = SllArea::select('sll_2011', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))
             ->get()->toArray();
 
-        $nameSll = SllAreaData::select('DEN_SLL_2011_2018')->get()->toArray();
-
-        // indicators data
-
-        $indicator1Data = SllAreaData::select($parsedIndicators[0])->get()->toArray();
-        if ($parsedIndicators[1] != 'NONE') {
-            $indicator2Data = SllAreaData::select($parsedIndicators[1])->get()->toArray();
-
-            // merge all the values in an array
-            $mixmix = array_map(function ($a1, $a2, $a3, $a4) {
-                return array_merge($a1, $a2, $a3, $a4);
-            }, $nameSll, $indicator1Data, $indicator2Data, $places);
-
-        } else {
-            // merge all the values in an array
-            $mixmix = array_map(function ($a1, $a2, $a3) {
-                return array_merge($a1, $a2, $a3);
-            }, $nameSll, $indicator1Data, $places);
-        }
-
-
-        return $mixmix;
-    }
-
-    // public function indexComuniWithIndicators($indicators)
-    // {
-
-    //     $parsedIndicators = explode('+', $indicators);
-
-    //     // Comuni data //TODO: COMUNI
-    //     $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.005))::json AS geom"))
-    //         ->get()->toArray();
-
-    //     $nameComuni = MunicipalityData::select('COMUNE', 'PRO_COM')->get()->toArray();
-
-    //     // indicators data
-
-    //     $indicator1Data = MunicipalityData::select($parsedIndicators[0])->get()->toArray();
-    //     if ($parsedIndicators[1] != 'NONE') {
-    //         $indicator2Data = MunicipalityData::select($parsedIndicators[1])->get()->toArray();
-
-    //         // merge all the values in an array
-    //         $mixmix = array_map(function ($a1, $a2, $a3, $a4) {
-    //             return array_merge($a1, $a2, $a3, $a4);
-    //         }, $nameComuni, $indicator1Data, $indicator2Data, $places);
-
-    //     } else {
-    //         // merge all the values in an array
-    //         $mixmix = array_map(function ($a1, $a2, $a3) {
-    //             return array_merge($a1, $a2, $a3);
-    //             // TODO: COMUNI
-    //         }, $nameComuni, $indicator1Data, $places);
-    //     }
-
-
-    //     return $mixmix;
-    // }
-
-    public function indexComuniWithIndicators($indicators)
-    {
-        $parsedIndicators = explode('+', $indicators);
-
-        // Comuni data
-        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.005))::json AS geom"))
+        // 2. Prendi i dati degli indicatori (inclusi ID e Nome per il merge)
+        $indicatorData = SllAreaData::select('COD_SLL_2011_2018', 'DEN_SLL_2011_2018', $indicator1)
             ->get()->toArray();
-        
 
-        $nameComuni = MunicipalityData::select('COMUNE', 'PRO_COM')->get()->toArray();
-
-        // Crea un array associativo per MunicipalData
-        $municipalityData = [];
-        foreach ($nameComuni as $data) {
-            $municipalityData[$data['PRO_COM']] = $data;
+        // Trasforma i dati degli indicatori in una mappa (key: sll_2011) per un merge efficiente
+        $indicatorMap = [];
+        foreach ($indicatorData as $data) {
+            $indicatorMap[$data['COD_SLL_2011_2018']] = $data;
         }
 
-        // indicators data
-        $indicator1Data = MunicipalityData::select($parsedIndicators[0])->get()->toArray();
-
-        if ($parsedIndicators[1] != 'NONE') {
-            $indicator2Data = MunicipalityData::select($parsedIndicators[1])->get()->toArray();
-        }
-
-        // Combina i dati
+        // 3. Esegui il merge (Geometria + Dati)
         $mixmix = [];
         foreach ($places as $place) {
-            $proCom = $place['municipality_code'];
-            if (isset($municipalityData[$proCom])) {
-                $mergedData = array_merge($place, $municipalityData[$proCom]);
-
-                if ($parsedIndicators[1] != 'NONE' && isset($indicator2Data[$proCom])) {
-                    $mergedData = array_merge($mergedData, $indicator2Data[$proCom]);
-                } elseif (isset($indicator1Data[$proCom])) {
-                    $mergedData = array_merge($mergedData, $indicator1Data[$proCom]);
-                }
-
-                $mixmix[] = $mergedData;
+            $sllCode = $place['sll_2011'];
+            if (isset($indicatorMap[$sllCode])) {
+                // Unisci i dati dell'indicatore con la geometria
+                $mixmix[] = array_merge($place, $indicatorMap[$sllCode]);
             }
         }
 
-        return $mixmix;
+
+        // 4. RESTITUISCI SEMPRE JSON
+        return response()->json($mixmix);
+    }
+
+
+public function indexComuniWithIndicators($indicators)
+    {
+        // $indicators ora contiene solo l'indicatore 1, ma lo gestiamo in modo sicuro
+        $parsedIndicators = explode('+', $indicators);
+        $indicator1 = $parsedIndicators[0];
+
+        // 1. Geometria dei Comuni
+        $places = Municipality::select('municipality_code', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.005))::json AS geom"))
+            ->get()->toArray();
+
+        // 2. Dati degli Indicatori + Nome/Codice per il merge
+        // Seleziona i campi necessari per il merge
+        $indicatorData = MunicipalityData::select('PRO_COM', 'COMUNE', $indicator1)->get()->toArray();
+
+        // Trasforma i dati in una mappa (key: PRO_COM)
+        $indicatorMap = [];
+        foreach ($indicatorData as $data) {
+            $indicatorMap[$data['PRO_COM']] = $data;
+        }
+
+        // 3. Combina Geometria + Dati
+        $mixmix = [];
+        foreach ($places as $place) {
+            $proCom = $place['municipality_code'];
+            if (isset($indicatorMap[$proCom])) {
+                // Unisci la geometria con i dati degli indicatori
+                $mixmix[] = array_merge($place, $indicatorMap[$proCom]);
+            }
+        }
+
+        // 4. RESTITUISCI SEMPRE JSON
+        return response()->json($mixmix);
     }
 
 
@@ -181,25 +142,34 @@ class GeoJsonController extends Controller
 
 
     // get min and max of an idicator (for the color visualization)
-    public function getIndicatorRange($indicator)
+    // get min and max of an idicator (for the color visualization)
+    public function getIndicatorRange($type, $indicator)
     {
-
         if ($indicator == "NONE") {
             return response()->json([
                 'min' => 0,
                 'max' => 0
             ]);
-        } else {
-            $minValue = SllAreaData::min($indicator);
-            $maxValue = SllAreaData::max($indicator);
-
-            return response()->json([
-                'min' => $minValue,
-                'max' => $maxValue
-            ]);
         }
 
+        // Seleziona il modello corretto in base al tipo (sll o comuni)
+        if (strtolower($type) == 'sll') {
+            $model = SllAreaData::class;
+        } elseif (strtolower($type) == 'comuni') {
+            $model = MunicipalityData::class;
+        } else {
+            // Gestione di un tipo non valido (es. errore 404)
+            return response()->json(['error' => 'Invalid data type specified.'], 400);
+        }
 
+        // Usa il modello dinamico
+        $minValue = $model::min($indicator);
+        $maxValue = $model::max($indicator);
+
+        return response()->json([
+            'min' => $minValue,
+            'max' => $maxValue
+        ]);
     }
 
 

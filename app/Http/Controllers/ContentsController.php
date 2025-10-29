@@ -8,7 +8,7 @@ use App\Models\Highway;
 
 use App\Models\Indicator;
 use App\Models\Interport;
-use App\Models\SllAreaCsv;
+use App\Models\SllAreaCSV;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 

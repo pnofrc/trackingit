@@ -35,3 +35,7 @@ Route::get('/getHighways', [GeoJsonController::class, 'getHighways']);
 Route::get('/getInterports', [GeoJsonController::class, 'getInterports']);
 
 Route::get('/getCharts/{id}', [ContentsController::class, 'getCharts']);
+
+    
+// 3. Route per i range (come discusso nell'ultima risposta)
+Route::get('/getIndicatorRange/{type}/{indicator}', [GeoJsonController::class, 'getIndicatorRange']);
