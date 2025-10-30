@@ -588,6 +588,10 @@ text-decoration: none; color: black !important;
   /* color: var(--lighter) !important; */
 }
 
+p.selected{
+   color: var(--lighter) !important;
+}
+
 /* blog */
 
 #blog {

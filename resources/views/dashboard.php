@@ -188,7 +188,7 @@
             width: 100%;
             margin: 0 auto;
             z-index: 100000 ;
-            color: var(--text) !important;
+            color: var(--text);
         text-decoration: none        }
 
         #indicatorSelect1,option{
@@ -795,16 +795,23 @@ fetch('/comuni')
 
         // Function to toggle between APIs
         function toggleGeo() {
-            geotoggle = !geotoggle;
+            // Leggi lo stato del checkbox per decidere l'API
+            const checkbox = document.querySelector('#apiToggle input[type="checkbox"]');
+            geotoggle = checkbox.checked; // true se checked (Comuni), false se unchecked (Sll)
+            
+            // Aggiorna la variabile globale api
             api = geotoggle ? 'Comuni' : 'Sll' 
-            document.getElementById('comuni').classList.toggle('selected')
-            document.getElementById('sll').classList.toggle('selected')
+            
+            // Aggiorna le classi 'selected' basandosi sul nuovo stato 'api'
+            document.getElementById('comuni').classList.toggle('selected', api === 'Comuni');
+            document.getElementById('sll').classList.toggle('selected', api === 'Sll');
+            
             // Fetch and update data with the new API endpoint
             pickIndicators()
-        }
+        }   
 
         // Add event listener for the toggle switch
-        document.getElementById('apiToggle').addEventListener('click', toggleGeo);
+document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('change', toggleGeo);
 
         // Funzione per aggiornare la tabella con i dati recuperati
         function updateTable(data) {
