@@ -25,6 +25,9 @@
     <script src="https://unpkg.com/leaflet.markercluster/dist/leaflet.markercluster.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-choropleth@1.1.4/dist/choropleth.min.js"></script>
+
+
     <style>
         .corpus {
             transform: translate3d(-100%, 0, 0)
@@ -625,161 +628,241 @@ fetch('/comuni')
             document.getElementById('loadingSpinner').style.display = 'none';
         }
 
-        function getIndicatorsData(indicator1Name) { // Funzione modificata per un solo indicatore
-            // Show the loading spinner
-            showLoadingSpinner();
-            // Clear existing GeoJSON layers from the map
-            geojsonLayers.forEach(obj => {
-                if (map.hasLayer(obj.layer)) {
-                    map.removeLayer(obj.layer);
-                }
-            });
-            geojsonLayers = []; // Reset the layers array
-            // Fetch the range (min and max) for the indicator
-            // Chiamata modificata per includere il tipo di API (Sll/Comuni)
-            const range1Promise = axios.get(`/getIndicatorRange/${api}/${indicator1Name}`).then(response => response.data);
+
+        async function getIndicatorsData(indicatorName) {
+    showLoadingSpinner();
+
+    // Rimuovi vecchi layer
+    geojsonLayers.forEach(obj => {
+        if (map.hasLayer(obj.layer)) map.removeLayer(obj.layer);
+    });
+    geojsonLayers = [];
+
+    try {
+        // Ottieni range e dati
+        const rangeResp = await axios.get(`/getIndicatorRange/${api}/${indicatorName}`);
+        const dataResp  = await fetch(`/get${api}IndicatorsData/${indicatorName}`);
+        const data = await dataResp.json();
+
+        const color = '#3FC692';
+
+        // Prepara GeoJSON valido
+        const features = data
+            .filter(p => p.geom)
+            .map(p => ({
+                type: 'Feature',
+                properties: { 
+                    value: p[indicatorName], 
+                    name: api === 'Sll' ? p.DEN_SLL_2011_2018 : p.COMUNE,
+                    code: api === 'Sll' ? p.sll_2011 : p.municipality_code
+                },
+                geometry: JSON.parse(p.geom)
+            }));
+
+        const geojson = { type: 'FeatureCollection', features };
+
+        // CREA CHOROPLETH
+        const choroplethLayer = L.choropleth(geojson, {
+            valueProperty: 'value',
+            scale: ['#f0f0f0', color],
+            steps: 6,
+            mode: 'q', // quantile
+            style: {
+                color: '#fff',
+                weight: 1,
+                fillOpacity: 0.9
+            },
+            onEachFeature: function(feature, layer) {
+                const infoBox = document.getElementById('info-box');
+                layer.on({
+                    mouseover: (e) => {
+                        infoBox.innerHTML = `Current Area: ${feature.properties.name}`;
+                        e.target.setStyle({ fillOpacity: 0.01 });
+                    },
+                    mouseout: (e) => {
+                        infoBox.innerHTML = 'Current Area: ';
+                        e.target.setStyle({ fillOpacity: 0.9 });
+                    },
+                    click: () => {
+                        document.getElementById('layers').style.display = 'block';
+                        const endpoint = api === 'Sll'
+                            ? `/get${api}AreaData/${feature.properties.code}`
+                            : `/get${api}Data/${feature.properties.code}`;
+                        axios.get(endpoint)
+                            .then(resp => updateTable(resp.data))
+                            .catch(err => console.error('Error fetching details:', err));
+                    }
+                });
+            }
+        }).addTo(map);
+
+        geojsonLayers.push({ layer: choroplethLayer, bounds: choroplethLayer.getBounds() });
+
+        // Aggiorna legenda dinamica
+        updateChoroplethLegend(choroplethLayer, indicatorName);
+
+        hideLoadingSpinner();
+    } catch (err) {
+        console.error('Error building choropleth:', err);
+        hideLoadingSpinner();
+    }
+}
+
+        // function getIndicatorsData(indicator1Name) { // Funzione modificata per un solo indicatore
+        //     // Show the loading spinner
+        //     showLoadingSpinner();
+        //     // Clear existing GeoJSON layers from the map
+        //     geojsonLayers.forEach(obj => {
+        //         if (map.hasLayer(obj.layer)) {
+        //             map.removeLayer(obj.layer);
+        //         }
+        //     });
+        //     geojsonLayers = []; // Reset the layers array
+        //     // Fetch the range (min and max) for the indicator
+        //     // Chiamata modificata per includere il tipo di API (Sll/Comuni)
+        //     const range1Promise = axios.get(`/getIndicatorRange/${api}/${indicator1Name}`).then(response => response.data);
             
-            // Wait for the promise to resolve
-            Promise.all([range1Promise]).then(([range1]) => {
-                const min1 = range1.min;
-                const max1 = range1.max;
-                const color= '#3FC692';
+        //     // Wait for the promise to resolve
+        //     Promise.all([range1Promise]).then(([range1]) => {
+        //         const min1 = range1.min;
+        //         const max1 = range1.max;
+        //         const color= '#3FC692';
 
-                updateDynamicLegend(indicator1Name, min1, max1, color);
+        //         updateDynamicLegend(indicator1Name, min1, max1, color);
 
-                // Modificata la rotta per recuperare i dati solo del primo indicatore
-                fetch('/get' + api + 'IndicatorsData/' + indicator1Name) 
-                    .then(response => {
-                         if (!response.ok) {
-                            // Se la risposta non è OK, lancia un errore con il testo della risposta
-                            return response.text().then(text => { 
-                                throw new Error('Server returned an error status. Response body (HTML/Text) received: ' + text.substring(0, 200) + '...');
-                            });
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        data.forEach(place => {
-                            if (!place.geom) {
-                                console.warn('Missing geom for place:', place);
-                                return; 
-                            }
-                            let geojson;
-                            try {
-                                geojson = JSON.parse(place.geom);
-                            } catch (e) {
-                                console.error('Error parsing GeoJSON geometry:', e, 'Data:', place.geom);
-                                return; // Skip this place if JSON is invalid
-                            }
+        //         // Modificata la rotta per recuperare i dati solo del primo indicatore
+        //         fetch('/get' + api + 'IndicatorsData/' + indicator1Name) 
+        //             .then(response => {
+        //                  if (!response.ok) {
+        //                     // Se la risposta non è OK, lancia un errore con il testo della risposta
+        //                     return response.text().then(text => { 
+        //                         throw new Error('Server returned an error status. Response body (HTML/Text) received: ' + text.substring(0, 200) + '...');
+        //                     });
+        //                 }
+        //                 return response.json();
+        //             })
+        //             .then(data => {
+        //                 data.forEach(place => {
+        //                     if (!place.geom) {
+        //                         console.warn('Missing geom for place:', place);
+        //                         return; 
+        //                     }
+        //                     let geojson;
+        //                     try {
+        //                         geojson = JSON.parse(place.geom);
+        //                     } catch (e) {
+        //                         console.error('Error parsing GeoJSON geometry:', e, 'Data:', place.geom);
+        //                         return; // Skip this place if JSON is invalid
+        //                     }
                             
-                            // Call mixColor with a single indicator
-                            let color = mixColor(min1, max1, place[indicator1Name], '#3FC692');
+        //                     // Call mixColor with a single indicator
+        //                     let color = mixColor(min1, max1, place[indicator1Name], '#3FC692');
 
-                            function style(feature) {
-                                return {
-                                    fillColor: color, // Fill color based on the value
-                                    weight: 1,
-                                    opacity: 1,
-                                    color: '#ffffff', // Border color set to white
-                                    dashArray: '1',
-                                    fillOpacity: 1,
-                                };
-                            }
-                            // Reference to the external div
-                            let infoBox = document.getElementById('info-box');
+        //                     function style(feature) {
+        //                         return {
+        //                             fillColor: color, // Fill color based on the value
+        //                             weight: 1,
+        //                             opacity: 1,
+        //                             color: '#ffffff', // Border color set to white
+        //                             dashArray: '1',
+        //                             fillOpacity: 1,
+        //                         };
+        //                     }
+        //                     // Reference to the external div
+        //                     let infoBox = document.getElementById('info-box');
 
-                            function onEachFeature(feature, layer) {
-                                // Define the behavior for when the mouse is over the layer
-                                layer.on('mouseover', (e) => { 
+        //                     function onEachFeature(feature, layer) {
+        //                         // Define the behavior for when the mouse is over the layer
+        //                         layer.on('mouseover', (e) => { 
                                 
-                                    // Show the external div and update its content
-                                    if (api == 'Sll') {
-                                        infoBox.innerHTML = 'Current Area: ' + place.DEN_SLL_2011_2018;
+        //                             // Show the external div and update its content
+        //                             if (api == 'Sll') {
+        //                                 infoBox.innerHTML = 'Current Area: ' + place.DEN_SLL_2011_2018;
                                        
-                                    } else {
-                                        infoBox.innerHTML = 'Current Area: ' + place.COMUNE;
-                                    }
-                                    // Optionally, change the style of the layer
-                                    e.target.setStyle({
-                                        fillOpacity: 0.2
-                                    });
-                                });
-                                // Define the behavior for when the mouse leaves the layer
-                                layer.on('mouseout', (e) => {
-                                    // Hide the external div
-                                    infoBox.innerHTML = 'Current Area: '
-                                    // Reset the style of the layer
-                                    e.target.setStyle({
-                                        fillOpacity: 1
-                                    });
-                                });
-                                // Define the behavior for when the layer is clicked
-                                layer.on('click', () => {
-                                    document.getElementById('layers').style.display =
-                                        'block'
-                                    if (api == 'Sll') {
-                                        axios.get('/get' + api + 'AreaData/' + place.sll_2011)
-                                            .then(response => {
-                                                updateTable(response.data);
-                                            })
-                                            .catch(error => {
-                                                console.error('Error fetching data:',
-                                                    error);
-                                            });
-                                    } else {
-                                        axios.get('/get' + api + 'Data/' + place.municipality_code)
-                                            .then(response => {
-                                                updateTable(response.data);
-                                            })
-                                            .catch(error => {
-                                                console.error('Error fetching data:',
-                                                    error);
-                                            });
-                                    }
+        //                             } else {
+        //                                 infoBox.innerHTML = 'Current Area: ' + place.COMUNE;
+        //                             }
+        //                             // Optionally, change the style of the layer
+        //                             e.target.setStyle({
+        //                                 fillOpacity: 0.2
+        //                             });
+        //                         });
+        //                         // Define the behavior for when the mouse leaves the layer
+        //                         layer.on('mouseout', (e) => {
+        //                             // Hide the external div
+        //                             infoBox.innerHTML = 'Current Area: '
+        //                             // Reset the style of the layer
+        //                             e.target.setStyle({
+        //                                 fillOpacity: 1
+        //                             });
+        //                         });
+        //                         // Define the behavior for when the layer is clicked
+        //                         layer.on('click', () => {
+        //                             document.getElementById('layers').style.display =
+        //                                 'block'
+        //                             if (api == 'Sll') {
+        //                                 axios.get('/get' + api + 'AreaData/' + place.sll_2011)
+        //                                     .then(response => {
+        //                                         updateTable(response.data);
+        //                                     })
+        //                                     .catch(error => {
+        //                                         console.error('Error fetching data:',
+        //                                             error);
+        //                                     });
+        //                             } else {
+        //                                 axios.get('/get' + api + 'Data/' + place.municipality_code)
+        //                                     .then(response => {
+        //                                         updateTable(response.data);
+        //                                     })
+        //                                     .catch(error => {
+        //                                         console.error('Error fetching data:',
+        //                                             error);
+        //                                     });
+        //                             }
 
-                                });
-                            }
-                            var geojsonLayer = L.geoJSON(geojson, {
-                                style: style,
-                                onEachFeature: onEachFeature
-                            });
-                            geojsonLayer.addTo(map);
-                            geojsonLayers.push({
-                                layer: geojsonLayer,
-                                bounds: geojsonLayer.getBounds()
-                            });
-                        });
+        //                         });
+        //                     }
+        //                     var geojsonLayer = L.geoJSON(geojson, {
+        //                         style: style,
+        //                         onEachFeature: onEachFeature
+        //                     });
+        //                     geojsonLayer.addTo(map);
+        //                     geojsonLayers.push({
+        //                         layer: geojsonLayer,
+        //                         bounds: geojsonLayer.getBounds()
+        //                     });
+        //                 });
 
-                        function updateVisibleLayers() {
-                            var currentZoom = map.getZoom();
-                            var visibleBounds = map.getBounds();
-                            geojsonLayers.forEach(obj => {
-                                var layer = obj.layer;
-                                var bounds = obj.bounds;
-                                if (visibleBounds.intersects(bounds)) {
-                                    if (!map.hasLayer(layer)) {
-                                        map.addLayer(layer);
-                                    }
-                                } else {
-                                    if (map.hasLayer(layer)) {
-                                        map.removeLayer(layer);
-                                    }
-                                }
-                            });
-                        }
-                        map.on('zoomend moveend', updateVisibleLayers);
-                        updateVisibleLayers();
-                        hideLoadingSpinner();
-                    })
-                    .catch(error => {
-                        console.error('Error fetching GeoJSON data:', error);
-                        hideLoadingSpinner();
-                    });
-            }).catch(error => {
-                console.error('Error fetching indicator ranges:', error);
-                hideLoadingSpinner();
-            });
-        }
+        //                 function updateVisibleLayers() {
+        //                     var currentZoom = map.getZoom();
+        //                     var visibleBounds = map.getBounds();
+        //                     geojsonLayers.forEach(obj => {
+        //                         var layer = obj.layer;
+        //                         var bounds = obj.bounds;
+        //                         if (visibleBounds.intersects(bounds)) {
+        //                             if (!map.hasLayer(layer)) {
+        //                                 map.addLayer(layer);
+        //                             }
+        //                         } else {
+        //                             if (map.hasLayer(layer)) {
+        //                                 map.removeLayer(layer);
+        //                             }
+        //                         }
+        //                     });
+        //                 }
+        //                 map.on('zoomend moveend', updateVisibleLayers);
+        //                 updateVisibleLayers();
+        //                 hideLoadingSpinner();
+        //             })
+        //             .catch(error => {
+        //                 console.error('Error fetching GeoJSON data:', error);
+        //                 hideLoadingSpinner();
+        //             });
+        //     }).catch(error => {
+        //         console.error('Error fetching indicator ranges:', error);
+        //         hideLoadingSpinner();
+        //     });
+        // }
 
         function pickIndicators() {
             const indicator1Name = document.getElementById('indicatorSelect1').value;
@@ -854,7 +937,7 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
         // Funzione per creare e aggiungere il controllo legenda
         function addLegendControl() {
             // Rimuovi la legenda esistente se presente
-            if (legend && map.hasControl(legend)) {
+            if (legend) {
                 map.removeControl(legend);
             }
 
@@ -901,33 +984,88 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
 
 
         // Funzione per aggiornare la parte dinamica (indicatore selezionato) della legenda
-function updateDynamicLegend(indicatorCode, minVal, maxVal, color) {
-    const dynamicDiv = document.getElementById('dynamic-indicator-legend');
-    if (!dynamicDiv) return;
+// function updateDynamicLegend(indicatorCode, minVal, maxVal, color) {
+//     const dynamicDiv = document.getElementById('dynamic-indicator-legend');
+//     if (!dynamicDiv) return;
 
-    // Recupera il nome leggibile dall'oggetto indicatorMap
+//     // Recupera il nome leggibile dall'oggetto indicatorMap
+//     const indicatorName = indicatorMap[indicatorCode] || indicatorCode;
+
+//     const minColor = 'rgb(240, 240, 240)';
+//     const maxColor = color; 
+//     let m = parseFloat(minVal).toFixed(2)
+//     let M = parseFloat(maxVal).toFixed(2)
+
+//     dynamicDiv.innerHTML = `
+//         <span style="margin-bottom: 5px; display: block;">${indicatorName}</span>
+//         <div style="
+//             height: 15px; 
+//             background: linear-gradient(to right, ${minColor}, ${maxColor});
+//             border: 1px solid #ccc;
+//             margin-bottom: 3px;
+//         "></div>
+//         <div style="display: flex; justify-content: space-between; font-size: 12px;">
+//             <span style="font-weight: bold;">${m}</span>
+//             <span style="font-weight: bold;">${M}</span>
+//         </div>
+//     `;
+// }
+    
+    
+    function updateChoroplethLegend(layer, indicatorCode) {
     const indicatorName = indicatorMap[indicatorCode] || indicatorCode;
 
-    const minColor = 'rgb(240, 240, 240)';
-    const maxColor = color; 
-    let m = parseFloat(minVal).toFixed(2)
-    let M = parseFloat(maxVal).toFixed(2)
+    // Rimuovi legenda precedente se presente
+    if (legend) {
+        map.removeControl(legend);
+    }
 
-    dynamicDiv.innerHTML = `
-        <span style="margin-bottom: 5px; display: block;">${indicatorName}</span>
-        <div style="
-            height: 15px; 
-            background: linear-gradient(to right, ${minColor}, ${maxColor});
-            border: 1px solid #ccc;
-            margin-bottom: 3px;
-        "></div>
-        <div style="display: flex; justify-content: space-between; font-size: 12px;">
-            <span style="font-weight: bold;">${m}</span>
-            <span style="font-weight: bold;">${M}</span>
-        </div>
-    `;
+    legend = L.control({ position: 'bottomleft' });
+
+    legend.onAdd = function (map) {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.style.backgroundColor = 'white';
+        div.style.padding = '10px';
+        div.style.borderRadius = '5px';
+        div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
+        div.style.fontSize = '12px';
+        div.style.width = '190px';
+
+        // Ottieni breaks e colori dal layer
+        const limits = layer.options.limits;
+        const colors = layer.options.colors;
+
+        let html = `<b>${indicatorName}</b><br>`;
+        for (let i = 0; i < limits.length; i++) {
+            const from = parseFloat(limits[i]).toFixed(2);
+            const to = limits[i + 1] ? parseFloat(limits[i + 1]).toFixed(2) : '+';
+            html += `
+                <i style="
+                    background:${colors[i]};
+                    width:20px;
+                    height:12px;
+                    display:inline-block;
+                    margin-right:6px;
+                    border:1px solid #999;
+                "></i> ${from} – ${to}<br>
+            `;
+        }
+
+        // Layer fissi (Autostrade + Interporti)
+        html += `
+            <br><i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interports<br>
+            <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Highways
+        `;
+
+        div.innerHTML = html;
+        return div;
+    };
+
+    legend.addTo(map);
 }
-    </script>
+
+
+</script>
 
 </body>
 
