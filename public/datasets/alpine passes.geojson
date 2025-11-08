@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "alpine passes",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "Nome Valico Alpino": "Brennero", "Latitudine": 47.0, "Longitudine": 11.5, "rotazione": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 11.5, 47.0 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "Nome Valico Alpino": "Frejus", "Latitudine": 45.17, "Longitudine": 6.84, "rotazione": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 6.84, 45.17 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "Nome Valico Alpino": "Monte Bianco", "Latitudine": 45.92, "Longitudine": 6.87, "rotazione": -20.0 }, "geometry": { "type": "Point", "coordinates": [ 6.87, 45.92 ] } },
+{ "type": "Feature", "properties": { "fid": 4, "Nome Valico Alpino": "San Gottardo", "Latitudine": 46.55, "Longitudine": 8.5667, "rotazione": 10.0 }, "geometry": { "type": "Point", "coordinates": [ 8.5667, 46.55 ] } },
+{ "type": "Feature", "properties": { "fid": 5, "Nome Valico Alpino": "Sempione", "Latitudine": 46.25, "Longitudine": 8.0167, "rotazione": -30.0 }, "geometry": { "type": "Point", "coordinates": [ 8.0167, 46.25 ] } },
+{ "type": "Feature", "properties": { "fid": 6, "Nome Valico Alpino": "Tarvisio", "Latitudine": 46.5, "Longitudine": 13.6, "rotazione": 25.0 }, "geometry": { "type": "Point", "coordinates": [ 13.6, 46.5 ] } }
+]
+}
