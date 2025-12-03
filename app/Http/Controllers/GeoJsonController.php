@@ -197,7 +197,7 @@ public function indexComuniWithIndicators($indicators)
     //     )
     //     ->paginate($limit);
 
-        dd(Railway::select('name')->get());
+        // dd(Railway::select('name')->get());
 
         return response()->json($railways);
     }

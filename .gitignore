@@ -19,3 +19,5 @@ yarn-error.log
 /.idea
 /.vscode
 /.DS_Store
+public/datasets/railway.csv
+public/datasets/railway.csv.old
