@@ -9,8 +9,13 @@ use App\Models\SllArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\SllAreaData;
+
 use App\Models\Interport;
 use App\Models\Highway;
+use App\Models\Railway;
+use App\Models\AlpinePass;
+use App\Models\CargoPort;
+use App\Models\CargoAirport;
 
 class GeoJsonController extends Controller
 {
@@ -134,10 +139,67 @@ public function indexComuniWithIndicators($indicators)
         return response()->json($interports); // Devi restituire la risposta JSON
     }
 
+    /**
+     * Recupera i dati di Alpine Passes, convertendo la geometria in GeoJSON.
+     */
+    public function getAlpinePasses()
+    {
+        // Seleziona nome, latitudine, longitudine, rotazione e converte la geometria (geom) in GeoJSON
+        // ST_Simplify è utile per ridurre la complessità se le geometrie fossero più grandi (LineStrings o Polygons),
+        // ma è mantenuto per coerenza con l'esempio originale (anche se su Point non ha effetto).
+        $alpinePasses = AlpinePass::select('name', 'latitude', 'longitude', 'rotation', 
+            DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom")
+        )->get();
+
+        return response()->json($alpinePasses);
+    }
+
+    /**
+     * Recupera i dati di Cargo Ports, convertendo la geometria in GeoJSON.
+     */
+    public function getCargoPorts()
+    {
+        // Seleziona idporto, locode, name, importance e converte la geometria in GeoJSON
+        $cargoPorts = CargoPort::select('idporto', 'locode', 'name', 'importance', 
+            DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom")
+        )->get();
+
+        return response()->json($cargoPorts);
+    }
+
+    /**
+     * Recupera i dati di Cargo Airports, convertendo la geometria in GeoJSON.
+     */
+    public function getCargoAirports()
+    {
+        // Seleziona i campi specifici e converte la geometria in GeoJSON
+        $cargoAirports = CargoAirport::select('airport_name', 'municipality', 'iata_code', 'icao_code', 'operator', 
+            DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom")
+        )->get();
+
+        return response()->json($cargoAirports);
+    }
+
+
     public function getHighways()
     {
         $highways = Highway::select('name', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))->get();
-        return response()->json($highways); // Devi restituire la risposta JSON
+        return response()->json($highways); 
+    }
+
+        public function getRailway()
+    {
+        $railway = Railway::select('name', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.05))::json AS geom"))->get();
+    
+    // $limit = $request->get('limit', 10000);
+    //     $railways = Railway::select('name', 
+    //         DB::raw("ST_AsGeoJSON(ST_Simplify(geom, {$tolerance}))::json AS geom")
+    //     )
+    //     ->paginate($limit);
+
+        dd(Railway::select('name')->get());
+
+        return response()->json($railways);
     }
 
 

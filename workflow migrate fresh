@@ -2,6 +2,12 @@ php artisan import:highway '/home/poni/trackingit/public/datasets/AUTOSTRADE.geo
 php artisan import:interport '/home/poni/trackingit/public/datasets/INTERPORTI.geojson'
 php artisan import:sllareas '/home/poni/trackingit/public/datasets/SLL_basemap.geojson'
 php artisan import:municipalities '/home/poni/trackingit/public/datasets/Comuni_basemap.geojson'
+php artisan import:railway '/home/poni/trackingit/public/datasets/railway.geojson'
+php artisan import:cargoairport '/home/poni/trackingit/public/datasets/CARGOAIRPORT.geojson'
+php artisan import:cargoport '/home/poni/trackingit/public/datasets/CARGOPORT.geojson'
+
+php artisan import:alpinepasses '/home/poni/trackingit/public/datasets/ALPINEPASS.geojson'
+
 
 import:sllareas /var/www/vhosts/gifted-borg.217-160-114-177.plesk.page/httpdocs/public/datasets/SLL_basemap.geojson
 

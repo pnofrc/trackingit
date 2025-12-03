@@ -29,6 +29,15 @@
 
 
     <style>
+
+        th{
+            width: 50%;
+        }
+
+        .info{
+            box-shadow: unset !important;
+        }
+
         .corpus {
             transform: translate3d(-100%, 0, 0)
         }
@@ -88,7 +97,7 @@
             background: none;
             border: none;
             background:  #00000066;
-            width: 13vw
+            width: 13vw;
 
 
             border-radius: 1rem;
@@ -286,8 +295,8 @@
 
             <label class="switch" id="apiToggle">
                 <div class="selection">
-                    <p id='sll' class="selected">SLL</p>
-                    <p id='comuni'>MUNICIPALITIES</p>
+                    <p id='sll' class="selected">Sistemi Locali del Lavoro</p>
+                    <p id='comuni'>COMUNI</p>
                 </div>
                 <input type="checkbox">
                 <span class="slider round"></span>
@@ -337,11 +346,11 @@
     </div>
 
     <div class="info-container">
-        <div id="info-box">Current Area </div>
+        <div id="info-box">Area Corrente</div>
 
         <div id="layers">
 
-            <table id="data-table" border="1">
+            <table id="data-table" border="1" style="display:none;">
                 <tbody>
 
                     <!-- <tr>
@@ -507,6 +516,38 @@
             'VImm13_21': 'Variazione Valori Immobiliari Capannoni 2013-2021'
         };
 
+        const indicatorDetails = {
+            'POP21': { description: 'Numero complessivo di residenti nel 2021.', source: 'ISTAT' },
+            'TPOP01_21': { description: 'Variazione percentuale della popolazione residente tra il 2001 e il 2021.', source: 'Elaborazione su base ISTAT' },
+            'TPOP11_21': { description: 'Variazione percentuale della popolazione residente tra il 2011 e il 2021.', source: 'Elaborazione su base ISTAT' },
+            'PST21': { description: 'Quota di popolazione residente con cittadinanza straniera nel 2021.', source: 'Elaborazione su base ISTAT' },
+            'VPST01_21': { description: 'Variazione della quota di popolazione residente con cittadinanza straniera tra il 2001 e il 2021.', source: 'Elaborazione su base ISTAT' },
+            'VPST11_21': { description: 'Variazione della quota di popolazione residente con cittadinanza straniera tra il 2011 e il 2021.', source: 'Elaborazione su base ISTAT' },
+            'PIS21': { description: 'Quota di popolazione che ha conseguito almeno il diploma di scuola secondaria superiore nel 2021.', source: 'Elaborazione su base ISTAT' },
+            'VPIS01_21': { description: 'Variazione della quota di popolazione con istruzione superiore tra il 2001 e il 2021.', source: 'Elaborazione su base ISTAT' },
+            'VPIS11_21': { description: 'Variazione della quota di popolazione con istruzione superiore tra il 2011 e il 2021.', source: 'Elaborazione su base ISTAT' },
+            'RedMed21': { description: 'Reddito medio dichiarato per contribuente nel 2021.', source: 'Ministero Economia e Finanze' },
+            'TRedMed01_21': { description: 'Variazione percentuale del reddito medio tra il 2001 e il 2021.', source: 'Elaborazione su base Ministero Economia e Finanze' },
+            'TRedMed11_21': { description: 'Variazione percentuale del reddito medio tra il 2011 e il 2021.', source: 'Elaborazione su base Ministero Economia e Finanze' },
+            'Dis21': { description: 'Percentuale della forza lavoro disoccupata nel 2021.', source: 'ISTAT' },
+            'VDis11_21': { description: 'Variazione della percentuale della forza lavoro disoccupata tra il 2011 e il 2021.', source: 'Elaborazione su base ISTAT' },
+            'AddLog21': { description: 'Numero di occupati nel settore della logistica nel 2021. (Codici ATECO 492 - 494 - 502 - 504 - 512 - 521 -522).', source: 'ISTAT - ASIA Imprese' },
+            'TAddLog01_21': { description: 'Variazione percentuale degli addetti alla logistica tra il 2001 e il 2021. (Codici ATECO 492 - 494 - 502 - 504 - 512 - 521 -522).', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'TAddLog11_21': { description: 'Variazione percentuale degli addetti alla logistica tra il 2011 e il 2021. (Codici ATECO 492 - 494 - 502 - 504 - 512 - 521 -522).', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'XAdd_21': { description: 'Quota di occupati nella logistica sul totale degli addetti nel 2021.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'VXAdd_01_21': { description: 'Variazione della quota di occupati nella logistica sul totale degli addetti tra il 2001 e il 2021.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'VXAdd_11_21': { description: 'Variazione della quota di occupati nella logistica sul totale degli addetti tra il 2011 e il 2021.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'QLAdd_IT01': { description: 'Specializzazione nel settore logistico nel 2001, confrontando la quota di addetti alla logistica sul totale locale con la corrispondente quota a livello nazionale.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'QLAdd_IT11': { description: 'Specializzazione nel settore logistico nel 2011, confrontando la quota di addetti alla logistica sul totale locale con la corrispondente quota a livello nazionale.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'QLAdd_IT21': { description: 'Specializzazione nel settore logistico nel 2021, confrontando la quota di addetti alla logistica sul totale locale con la corrispondente quota a livello nazionale.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'VQLAdd_IT01_21': { description: 'Variazione del quoziente di localizzazione per addetti del settore logistico tra il 2001 e il 2021.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'VQLAdd_IT11_21': { description: 'Variazione del quoziente di localizzazione per addetti del settore logistico tra il 2011 e il 2021.', source: 'Elaborazione su base ISTAT - ASIA Imprese' },
+            'StCAT21': { description: 'Quota di unità immobiliari (categorie catastali D01-D07) sul totale delle unità immobiliari urbane (UIU) nel 2021.', source: 'Agenzia delle Entrate - OMI' },
+            'UIU13_21': { description: 'Variazione della quota di unità immobiliari (categorie catastali D01-D07) sul totale delle unità immobiliari urbane (UIU) tra il 2013 e il 2021.', source: 'Elaborazione su base Agenzia delle Entrate - OMI' },
+            'Imm21': { description: 'Valore medio di compravendita dei capannoni (categorie catastali D01-D07) nel 2021.', source: 'Agenzia delle Entrate - OMI' },
+            'VImm13_21': { description: 'Variazione del valore medio di compravendita dei capannoni (categorie catastali D01-D07) tra il 2013 e il 2021.', source: 'Elaborazione su base Agenzia delle Entrate - OMI' }
+        };
+
 
 fetch('/comuni')
             .then(response => response.json())
@@ -562,6 +603,23 @@ fetch('/comuni')
 
         map.createPane('topPane');
         map.getPane('topPane').style.zIndex = 650;
+        
+
+        map.createPane('topPane2');
+        map.getPane('topPane2').style.zIndex = 640;
+
+        map.createPane('topPane3');
+        map.getPane('topPane3').style.zIndex = 640;
+
+        map.createPane('topPane4');
+        map.getPane('topPane4').style.zIndex = 640;
+
+        map.createPane('topPane5');
+        map.getPane('topPane5').style.zIndex = 640;
+
+        map.createPane('topPane6');
+        map.getPane('topPane6').style.zIndex = 640;
+
         fetch('/getInterports')
             .then(response => response.json())
             .then(data => {
@@ -592,9 +650,6 @@ fetch('/comuni')
             .catch(error => console.error('Error loading interports:', error));
 
 
-        map.createPane('topPane2');
-        map.getPane('topPane2').style.zIndex = 640;
-
         // Show highways on the map
         fetch('/getHighways')
             .then(response => response.json())
@@ -612,6 +667,108 @@ fetch('/comuni')
                     }).addTo(map);
                 })
             }).catch(error => console.error('Error loading static GeoJSON 1:', error));
+
+
+        // Show highways on the map
+        // fetch('/getRailways')
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         data.forEach(railway => {
+        //             const geoJSONGeom = JSON.parse(railway.geom); // Converte da stringa JSON a oggetto GeoJSON
+        //             L.geoJSON(geoJSONGeom, {
+        //                 style: {
+        //                     pane: 'topPane3',
+        //                     color: '#3a8f75ff',
+        //                     weight: 1,
+        //                     opacity: 1,
+        //                     fillOpacity: 1
+        //                 }
+        //             }).addTo(map);
+        //         })
+        //     }).catch(error => console.error('Error loading static GeoJSON 1:', error));
+
+        fetch('/getCargoPorts')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(point => {
+                    const geoJSONGeom = JSON.parse(point.geom);
+
+                    // Assumi che sia un Point (per usare L.circleMarker su punti)
+                    if (geoJSONGeom.type === 'Point') {
+                        const coordinates = geoJSONGeom.coordinates;
+
+                        // Crea il marker nel pane 'topPane' per mantenerlo in cima
+                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
+                            pane: 'topPane4',   // Specifica che questo marker va nel pane 'topPane'
+                            radius: 5,         // Dimensione del cerchio
+                            color: '#6fc50dff',  // Colore del bordo (viola)
+                            fillColor:  '#e655e6ff', // Colore di riempimento (viola)
+                        }).addTo(map);
+
+                        // Aggiungi un popup con il nome e la città dell'interport
+                        marker.bindPopup(`
+                    <strong>${point.name}</strong><br>
+                    <em>${point.locode}</em>
+                `);
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading interports:', error));
+
+
+              fetch('/getCargoAirports')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(point => {
+                    const geoJSONGeom = JSON.parse(point.geom);
+
+                    // Assumi che sia un Point (per usare L.circleMarker su punti)
+                    if (geoJSONGeom.type === 'Point') {
+                        const coordinates = geoJSONGeom.coordinates;
+
+                        // Crea il marker nel pane 'topPane' per mantenerlo in cima
+                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
+                            pane: 'topPane5',   // Specifica che questo marker va nel pane 'topPane'
+                            radius: 5,         // Dimensione del cerchio
+                            color: '#55e6aeff',  // Colore del bordo (viola)
+                            fillColor:  '#55e6aeff', // Colore di riempimento (viola)
+                        }).addTo(map);
+
+                        // Aggiungi un popup con il nome e la città dell'interport
+                        marker.bindPopup(`
+                    <strong>${point.airport_name}</strong> <em>${point.iata_code}</em>
+                `);
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading interports:', error));
+
+
+              fetch('/getAlpinePasses')
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(point => {
+                    const geoJSONGeom = JSON.parse(point.geom);
+
+                    if (geoJSONGeom.type === 'Point') {
+                        const coordinates = geoJSONGeom.coordinates;
+
+                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
+                            pane: 'topPane6',   
+                            radius: 10,       
+                            color: '#b6b9b9a1', 
+                            fillColor:  '#b6b9b9a1',
+                             fillOpacity: 1
+                        }).addTo(map);
+
+                        // Aggiungi un popup con il nome e la città dell'interport
+                        marker.bindPopup(`
+                    <strong>${point.name}</strong>
+                `);
+                    }
+                });
+            })
+            .catch(error => console.error('Error loading interports:', error));
 
 
 
@@ -644,7 +801,7 @@ fetch('/comuni')
         const dataResp  = await fetch(`/get${api}IndicatorsData/${indicatorName}`);
         const data = await dataResp.json();
 
-        const color = '#3FC692';
+        const color = '#2A8D6E'; // Darker green
 
         // Prepara GeoJSON valido
         const features = data
@@ -652,7 +809,7 @@ fetch('/comuni')
             .map(p => ({
                 type: 'Feature',
                 properties: { 
-                    value: p[indicatorName], 
+                    value: p[indicatorName],
                     name: api === 'Sll' ? p.DEN_SLL_2011_2018 : p.COMUNE,
                     code: api === 'Sll' ? p.sll_2011 : p.municipality_code
                 },
@@ -669,18 +826,18 @@ fetch('/comuni')
             mode: 'q', // quantile
             style: {
                 color: '#fff',
-                weight: 1,
+                weight: 0.5, // Thinner border
                 fillOpacity: 0.9
             },
             onEachFeature: function(feature, layer) {
                 const infoBox = document.getElementById('info-box');
                 layer.on({
                     mouseover: (e) => {
-                        infoBox.innerHTML = `Current Area: ${feature.properties.name}`;
+                        infoBox.innerHTML = `Area Corrente: ${feature.properties.name}`;
                         e.target.setStyle({ fillOpacity: 0.01 });
                     },
                     mouseout: (e) => {
-                        infoBox.innerHTML = 'Current Area: ';
+                        infoBox.innerHTML = 'Area Corrente: ';
                         e.target.setStyle({ fillOpacity: 0.9 });
                     },
                     click: () => {
@@ -886,7 +1043,7 @@ fetch('/comuni')
             api = geotoggle ? 'Comuni' : 'Sll' 
             
             // Aggiorna le classi 'selected' basandosi sul nuovo stato 'api'
-            document.getElementById('comuni').classList.toggle('selected', api === 'Comuni');
+            document.getElementById('comuni').classList.toggle('selected', geotoggle);
             document.getElementById('sll').classList.toggle('selected', api === 'Sll');
             
             // Fetch and update data with the new API endpoint
@@ -898,6 +1055,7 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
 
         // Funzione per aggiornare la tabella con i dati recuperati
         function updateTable(data) {
+            document.getElementById('data-table').style.display = 'table';
             const fields = [
                  'name-data', 'POP21', 'TPOP01_21', 'TPOP11_21', 'PST21',
                 'VPST01_21', 'VPST11_21', 'PIS21', 'VPIS01_21', 'VPIS11_21', 'RedMed21', 'TRedMed01_21',
@@ -975,8 +1133,8 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
 
             fixedDiv.innerHTML = `
             <br>
-                <i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interports<br>
-                <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Highways
+                <i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interporti<br>
+                <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Autostrade
             `;
         }
 
@@ -1030,6 +1188,64 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
         div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
         div.style.fontSize = '12px';
         div.style.width = '190px';
+        div.style.maxHeight = '350px';
+
+        // Ottieni breaks e colori dal layer
+        const limits = layer.options.limits;
+        const colors = layer.options.colors;
+
+        let html = ``;
+
+        const details = indicatorDetails[indicatorCode];
+        if (details) {
+            html += `<div style="margin-top: 0px; font-size: 11px;">
+                        <p style="margin: 0; line-height: 1.2;">${details.description}</p>
+                        <p style="margin: 5px 0 0 0; line-height: 1; font-size: 9px; font-style: italic;">Fonte: ${details.source}</p>
+                     </div><br>`;
+        }
+
+        for (let i = 0; i < limits.length; i++) {
+            const from = parseFloat(limits[i]).toFixed(2);
+            const to = limits[i + 1] ? parseFloat(limits[i + 1]).toFixed(2) : '+';
+            html += `
+                <i style="background:${colors[i]}; width:20px; height:12px; display:inline-block; margin-right:6px; border:1px solid #999;"></i> ${from} – ${to}<br>
+            `;
+        }
+
+   
+
+        // Layer fissi (Autostrade + Interporti)
+        html += `
+            <br><i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interporti<br>
+            <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Autostrade
+        `;
+
+        div.innerHTML = html;
+        return div;
+    };
+
+    legend.addTo(map);
+}
+
+/*
+    function updateChoroplethLegend(layer, indicatorCode) {
+    const indicatorName = indicatorMap[indicatorCode] || indicatorCode;
+
+    // Rimuovi legenda precedente se presente
+    if (legend) {
+        map.removeControl(legend);
+    }
+
+    legend = L.control({ position: 'bottomleft' });
+
+    legend.onAdd = function (map) {
+        const div = L.DomUtil.create('div', 'info legend');
+        div.style.backgroundColor = 'white';
+        div.style.padding = '10px';
+        div.style.borderRadius = '5px';
+        div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
+        div.style.fontSize = '12px';
+        div.style.width = '190px';
 
         // Ottieni breaks e colori dal layer
         const limits = layer.options.limits;
@@ -1054,7 +1270,7 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
         // Layer fissi (Autostrade + Interporti)
         html += `
             <br><i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interports<br>
-            <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Highways
+            <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Autostrade
         `;
 
         div.innerHTML = html;
@@ -1062,8 +1278,7 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
     };
 
     legend.addTo(map);
-}
-
+}*/
 
 </script>
 

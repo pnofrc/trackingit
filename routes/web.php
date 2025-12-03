@@ -31,8 +31,12 @@ Route::get('/getComuniIndicatorsData/{indicators}', [GeoJsonController::class, '
 
 
 Route::get('/getHighways', [GeoJsonController::class, 'getHighways']);
+Route::get('/getRailways', [GeoJsonController::class, 'getRailway']);
 
 Route::get('/getInterports', [GeoJsonController::class, 'getInterports']);
+Route::get('/getCargoPorts', [GeoJsonController::class, 'getCargoPorts']);
+Route::get('/getCargoAirports', [GeoJsonController::class, 'getCargoAirports']);
+Route::get('/getAlpinePasses', [GeoJsonController::class, 'getAlpinePasses']);
 
 Route::get('/getCharts/{id}', [ContentsController::class, 'getCharts']);
 
