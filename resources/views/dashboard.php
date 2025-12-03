@@ -194,6 +194,10 @@
 
         }
 
+        .selection p{
+              font-size: .75rem;
+        }
+
 
         .switch .selection p, .switch .selection a{
             text-align: center;
@@ -211,7 +215,8 @@
         .indicators_dropdown div select,
         button,
         .switch {
-            cursor: pointer
+            cursor: pointer;
+              font-size: .7rem;
         }
 
         .download{
@@ -1216,8 +1221,12 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
 
         // Layer fissi (Autostrade + Interporti)
         html += `
-            <br><i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interporti<br>
+            <br>
             <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Autostrade
+            <br><i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interporti<br>
+            <i style="background: #e655e6ff; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Porti Cargo<br>
+            <i style="background: #55e6aeff; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Aeroporti Cargo<br>
+            <i style="background: #b6b9b9a1; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Valichi Alpini
         `;
 
         div.innerHTML = html;
