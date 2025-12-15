@@ -43,21 +43,21 @@
     <div id="visualization-dashboard">
 
         <div class="visualization-navigator">
-            <div class="kind-visualization">
+            {{-- <div class="kind-visualization">
                 <span class="model">VISUAL MODEL</span>
                 <span id='scatterplot'
                     onclick="pickChart('visualization_scatterplot')"class="visualization_scatterplot model selected-viz">SCATTERPLOT</span>
                 <span id='treemap' onclick="pickChart('visualization_treemap')"
                     class="visualization_treemap model">TREEMAP</span>
-            </div>
+            </div> --}}
 
             <br>
             <div class="kind-visualization">
                 <div class="dataset-download">
 
                 <span class="model">DATASET</span>
-                    <a href="/datasets/DB_SSL_TRACKING-IT_Dahsboard.csv" download class="model">Download Dataset SSL</a>
-                    <a href="/datasets/dbComuni_LOGISTICA_dashboard.csv" download class="model">Download Dataset Comuni</a>
+                    <a href="/datasets/TRACKING-IT_DATABASE_SSL.xlsx" download class="model">Download Dataset SSL</a>
+                    <a href="/datasets/TRACKING-IT_DATABASE_COMUNI.xlsx" download class="model">Download Dataset Comuni</a>
                 </div>
 
                 @foreach ($visualizations as $viz)

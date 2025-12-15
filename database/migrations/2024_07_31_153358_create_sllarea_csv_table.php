@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSllareaCsvTable extends Migration
+class CreateSllareaCSVTable extends Migration
 {
     public function up()
     {

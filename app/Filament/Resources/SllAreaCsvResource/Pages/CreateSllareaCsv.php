@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Filament\Resources\SllareaCsvResource\Pages;
+namespace App\Filament\Resources\SllareaCSVResource\Pages;
 
-use App\Filament\Resources\SllareaCsvResource;
+use App\Filament\Resources\SllareaCSVResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 
-class CreateSllareaCsv extends CreateRecord
+class CreateSllareaCSV extends CreateRecord
 {
-    protected static string $resource = SllareaCsvResource::class;
+    protected static string $resource = SllareaCSVResource::class;
 }

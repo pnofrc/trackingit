@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\SllareaCsvImport;
+use App\Imports\SllareaCSVImport;
 
 class CSVImportController extends Controller
 {
@@ -15,7 +15,7 @@ class CSVImportController extends Controller
         ]);
 
         $file = $request->file('file');
-        Excel::import(new SllareaCsvImport, $file);
+        Excel::import(new SllareaCSVImport, $file);
 
         return redirect()->back()->with('success', 'CSV Imported Successfully!');
     }

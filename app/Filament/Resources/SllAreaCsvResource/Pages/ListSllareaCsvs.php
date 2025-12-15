@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\SllareaCsvResource\Pages;
+namespace App\Filament\Resources\SllareaCSVResource\Pages;
 
-use App\Filament\Resources\SllareaCsvResource;
+use App\Filament\Resources\SllareaCSVResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListSllareaCsvs extends ListRecords
+class ListSllareaCSVs extends ListRecords
 {
-    protected static string $resource = SllareaCsvResource::class;
+    protected static string $resource = SllareaCSVResource::class;
 
     protected function getHeaderActions(): array
     {

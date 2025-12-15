@@ -30,6 +30,41 @@
 
     <style>
 
+
+
+
+/* Stile per l'icona a Croce (Porti Merci) */
+.cross-icon {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    color: #8668B2; /* Nero uniforme */
+    text-align: center;
+    background: none;
+    border: none;
+}
+
+/* Stile per l'icona a Più (Aeroporti Cargo) */
+.plus-icon {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1;
+    color: #8668B2; /* Nero uniforme */
+    text-align: center;
+    background: none;
+    border: none;
+}
+
+/* Stile per l'icona a Triangolo (Valichi Alpini) */
+.triangle-alpine-icon {
+   width: 0 !important;
+  height: 0 !important;
+    border-left: 8px solid transparent; 
+    border-right: 8px solid transparent;
+    border-bottom: 12px solid #8668B2; /* Nero uniforme */
+    background: none;
+}
+
         th{
             width: 50%;
         }
@@ -97,7 +132,7 @@
             background: none;
             border: none;
             background:  #00000066;
-            width: 13vw;
+            width: fit-content;
 
 
             border-radius: 1rem;
@@ -209,6 +244,7 @@
 
         #indicatorSelect1,option{
             text-align: center;
+                border: unset !important;
         }
 
 
@@ -489,6 +525,16 @@
     <script src="app.js"></script>
     <script defer async>
 
+
+let highwayLayer = null;
+let interportLayer = null;
+let cargoPortLayer = null;
+let cargoAirportLayer = null;
+let alpinePassLayer = null;
+let railwayLayer = null;
+
+
+
         const indicatorMap = {
             'POP21': 'Popolazione Totale 2021',
             'TPOP01_21': 'Trend Popolazione Totale 2001-2021',
@@ -557,7 +603,6 @@
 fetch('/comuni')
             .then(response => response.json())
             .then(data => {
-                console.log(data)
             })
 
 
@@ -626,33 +671,95 @@ fetch('/comuni')
         map.getPane('topPane6').style.zIndex = 640;
 
         fetch('/getInterports')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(interport => {
-                    const geoJSONGeom = JSON.parse(interport.geom);
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(interport => {
+            const geoJSONGeom = JSON.parse(interport.geom);
+            if (geoJSONGeom.type === 'Point') {
+                const coordinates = geoJSONGeom.coordinates;
+                const marker = L.circleMarker([coordinates[1], coordinates[0]], {
+                    pane: 'topPane',
+                    radius: 6,              // Cerchio di dimensione media
+                    color: '#8668B2',       // Bordo Nero
+                    fillColor: '#8668B2',   // Riempimento Nero
+                    fillOpacity: 1
+                }).addTo(map);
 
-                    // Assumi che sia un Point (per usare L.circleMarker su punti)
-                    if (geoJSONGeom.type === 'Point') {
-                        const coordinates = geoJSONGeom.coordinates;
+                marker.bindPopup(`<strong>${interport.name}</strong><br><em>${interport.city}</em>`);
+            }
+        });
+    })
+    .catch(error => console.error('Error loading interports:', error));
 
-                        // Crea il marker nel pane 'topPane' per mantenerlo in cima
-                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
-                            pane: 'topPane',   // Specifica che questo marker va nel pane 'topPane'
-                            radius: 8,         // Dimensione del cerchio
-                            color: '#800080',  // Colore del bordo (viola)
-                            fillColor: '#800080', // Colore di riempimento (viola)
-                            fillOpacity: 0.7   // Trasparenza del riempimento
-                        }).addTo(map);
 
-                        // Aggiungi un popup con il nome e la città dell'interport
-                        marker.bindPopup(`
-                    <strong>${interport.name}</strong><br>
-                    <em>${interport.city}</em>
-                `);
-                    }
-                });
-            })
-            .catch(error => console.error('Error loading interports:', error));
+
+
+fetch('/getCargoPorts')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(point => {
+            const geoJSONGeom = JSON.parse(point.geom);
+            if (geoJSONGeom.type === 'Point') {
+                const coordinates = geoJSONGeom.coordinates;
+                L.marker([coordinates[1], coordinates[0]], {
+                    pane: 'topPane4',
+                    icon: crossIcon
+                }).addTo(map)
+                .bindPopup(`<strong>${point.name}</strong><br><em>${point.locode}</em>`);
+            }
+        });
+    })
+    .catch(error => console.error('Error loading cargo ports:', error));
+
+
+        const plusIcon = L.divIcon({
+    className: 'plus-icon',
+    html: '+',
+    iconSize: [15, 15],
+    iconAnchor: [7, 7]
+});
+
+fetch('/getCargoAirports')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(point => {
+            const geoJSONGeom = JSON.parse(point.geom);
+            if (geoJSONGeom.type === 'Point') {
+                const coordinates = geoJSONGeom.coordinates;
+                L.marker([coordinates[1], coordinates[0]], {
+                    pane: 'topPane5',
+                    icon: plusIcon
+                }).addTo(map)
+                .bindPopup(`<strong>${point.airport_name}</strong> <em>${point.iata_code}</em>`);
+            }
+        });
+    })
+    .catch(error => console.error('Error loading cargo airports:', error));
+
+
+         const triangleAlpineIcon = L.divIcon({
+    className: 'triangle-alpine-icon',
+    iconSize: [16, 16],
+    iconAnchor: [8, 12] // Ancoraggio in basso per un triangolo dritto
+});
+
+fetch('/getAlpinePasses')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(point => {
+            const geoJSONGeom = JSON.parse(point.geom);
+            if (geoJSONGeom.type === 'Point') {
+                const coordinates = geoJSONGeom.coordinates;
+                L.marker([coordinates[1], coordinates[0]], {
+                    pane: 'topPane6',
+                    icon: triangleAlpineIcon
+                }).addTo(map)
+                .bindPopup(`<strong>${point.name}</strong>`);
+            }
+        });
+    })
+    .catch(error => console.error('Error loading alpine passes:', error));
+
 
 
         // Show highways on the map
@@ -675,107 +782,184 @@ fetch('/comuni')
 
 
         // Show highways on the map
-        // fetch('/getRailways')
-        //     .then(response => response.json())
-        //     .then(data => {
-        //         data.forEach(railway => {
-        //             const geoJSONGeom = JSON.parse(railway.geom); // Converte da stringa JSON a oggetto GeoJSON
-        //             L.geoJSON(geoJSONGeom, {
-        //                 style: {
-        //                     pane: 'topPane3',
-        //                     color: '#3a8f75ff',
-        //                     weight: 1,
-        //                     opacity: 1,
-        //                     fillOpacity: 1
-        //                 }
-        //             }).addTo(map);
-        //         })
-        //     }).catch(error => console.error('Error loading static GeoJSON 1:', error));
+//         fetch('/getRailways')
+//             .then(response => response.json())
+//             .then(data => {
+//                 data.forEach(railway => {
+//                     const geoJSONGeom = JSON.parse(railway.geom); // Converte da stringa JSON a oggetto GeoJSON
+//                     L.geoJSON(geoJSONGeom, {
+//                         style: {
+//                             pane: 'topPane3',
+//                             color: '#3a8f75ff',
+//                             weight: 1,
+//                             opacity: 1,
+//                             fillOpacity: 1
+//                         }
+//                     }).addTo(map);
+//                 })
+//             }).catch(error => console.error('Error loading static GeoJSON 1:', error));
 
-        fetch('/getCargoPorts')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(point => {
-                    const geoJSONGeom = JSON.parse(point.geom);
+      const crossIcon = L.divIcon({
+    className: 'cross-icon',
+    html: 'X',
+    iconSize: [15, 15],
+    iconAnchor: [7, 7]
+});
 
-                    // Assumi che sia un Point (per usare L.circleMarker su punti)
-                    if (geoJSONGeom.type === 'Point') {
-                        const coordinates = geoJSONGeom.coordinates;
 
-                        // Crea il marker nel pane 'topPane' per mantenerlo in cima
-                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
-                            pane: 'topPane4',   // Specifica che questo marker va nel pane 'topPane'
-                            radius: 5,         // Dimensione del cerchio
-                            color: '#6fc50dff',  // Colore del bordo (viola)
-                            fillColor:  '#e655e6ff', // Colore di riempimento (viola)
-                        }).addTo(map);
+// Variabile globale per tenere traccia del layer delle ferrovie
 
-                        // Aggiungi un popup con il nome e la città dell'interport
-                        marker.bindPopup(`
-                    <strong>${point.name}</strong><br>
-                    <em>${point.locode}</em>
-                `);
+// Funzione per richiedere e aggiornare le ferrovie in base alla vista attuale
+function updateRailways() {
+    // Rimuovi il vecchio layer se esiste
+    if (railwayLayer) {
+        map.removeLayer(railwayLayer);
+    }
+
+    const zoom = map.getZoom();
+    const bounds = map.getBounds();
+    
+    // Formato BBOX richiesto dal server: latMin,lngMin,latMax,lngMax
+    const boundsString = `${bounds.getSouth()},${bounds.getWest()},${bounds.getNorth()},${bounds.getEast()}`;
+
+    // Chiama il nuovo endpoint dinamico
+    const url = `/getRailway?zoom=${zoom}&bounds=${boundsString}`; 
+
+    // showLoadingSpinner(); // Attiva lo spinner per le ferrovie
+
+    fetch(url)
+        .then(response => response.json())
+        .then(geojson => {
+            // hideLoadingSpinner(); // Disattiva lo spinner
+            
+            if (geojson.features.length === 0) return;
+            
+            // Crea il nuovo layer GeoJSON con lo stile tratteggiato e il colore uniforme
+            railwayLayer = L.geoJSON(geojson, {
+                style: {
+                    pane: 'topPane3',
+                    color: '#8668B2',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 1,
+                    dashArray: '5, 5' // Linea tratteggiata
+                },
+                onEachFeature: function(feature, layer) {
+                    if (feature.properties && feature.properties.name) {
+                        layer.bindPopup(`<strong>Ferrovia:</strong> ${feature.properties.name}`);
                     }
-                });
-            })
-            .catch(error => console.error('Error loading interports:', error));
+                }
+            }).addTo(map);
+        })
+        .catch(error => console.error('Error loading dynamic railways:', error));
+}
 
 
-              fetch('/getCargoAirports')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(point => {
-                    const geoJSONGeom = JSON.parse(point.geom);
 
-                    // Assumi che sia un Point (per usare L.circleMarker su punti)
-                    if (geoJSONGeom.type === 'Point') {
-                        const coordinates = geoJSONGeom.coordinates;
 
-                        // Crea il marker nel pane 'topPane' per mantenerlo in cima
-                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
-                            pane: 'topPane5',   // Specifica che questo marker va nel pane 'topPane'
-                            radius: 5,         // Dimensione del cerchio
-                            color: '#55e6aeff',  // Colore del bordo (viola)
-                            fillColor:  '#55e6aeff', // Colore di riempimento (viola)
-                        }).addTo(map);
 
-                        // Aggiungi un popup con il nome e la città dell'interport
-                        marker.bindPopup(`
-                    <strong>${point.airport_name}</strong> <em>${point.iata_code}</em>
-                `);
+// =================================================================
+// 3. FUNZIONE DI CARICAMENTO DINAMICO (Ferrovie)
+// =================================================================
+
+// Funzione che gestisce il caricamento delle ferrovie in base al BBOX e allo zoom
+// Funzione che gestisce il caricamento delle ferrovie in base al BBOX e allo zoom
+function updateRailwaysDynamic() {
+    
+    // 1. MOSTRA LO SPINNER PRIMA DI INIZIARE LA RICHIESTA AL SERVER
+    showLoadingSpinner();
+    
+    if (railwayLayer) {
+        map.removeLayer(railwayLayer);
+        railwayLayer = null; 
+    }
+
+    const zoom = map.getZoom();
+    const bounds = map.getBounds();
+    
+    // Formato BBOX richiesto dal server: latMin,lngMin,latMax,lngMax
+    const boundsString = `${bounds.getSouth()},${bounds.getWest()},${bounds.getNorth()},${bounds.getEast()}`;
+
+    // Chiama il nuovo endpoint dinamico
+    const url = `/getRailway?zoom=${zoom}&bounds=${boundsString}`; 
+
+    fetch(url)
+        .then(response => response.json())
+        .then(geojson => {
+            
+            // 2. NASCONDI LO SPINNER UNA VOLTA RICEVUTI I DATI
+            hideLoadingSpinner();
+
+            if (geojson.features && geojson.features.length === 0) return;
+            
+            // Crea il nuovo layer GeoJSON con lo stile tratteggiato
+            railwayLayer = L.geoJSON(geojson, {
+                style: {
+                    pane: 'topPane3',
+                    color: '#8668B2',
+                    weight: 2,
+                    opacity: 1,
+                    fillOpacity: 1,
+                    dashArray: '5, 5' // Linea tratteggiata
+                },
+                onEachFeature: function(feature, layer) {
+                    if (feature.properties && feature.properties.name) {
+                        layer.bindPopup(`<strong>Ferrovia:</strong> ${feature.properties.name}`);
                     }
-                });
-            })
-            .catch(error => console.error('Error loading interports:', error));
+                }
+            }).addTo(map);
+        })
+        .catch(error => {
+            // 3. NASCONDI LO SPINNER ANCHE IN CASO DI ERRORE
+            hideLoadingSpinner();
+            console.error('Error loading dynamic railways:', error);
+        });
+}
 
 
-              fetch('/getAlpinePasses')
-            .then(response => response.json())
-            .then(data => {
-                data.forEach(point => {
-                    const geoJSONGeom = JSON.parse(point.geom);
+// =================================================================
+// 4. FUNZIONE TOGGLE STRATI (Assegnata ai checkbox)
+// =================================================================
 
-                    if (geoJSONGeom.type === 'Point') {
-                        const coordinates = geoJSONGeom.coordinates;
+function toggleLayer(layerName, isChecked) {
+    const staticLayerMap = {
+        'Highways': highwayLayer,
+        'Interports': interportLayer,
+        'CargoPorts': cargoPortLayer,
+        'CargoAirports': cargoAirportLayer,
+        'AlpinePasses': alpinePassLayer
+    };
 
-                        const marker = L.circleMarker([coordinates[1], coordinates[0]], {
-                            pane: 'topPane6',   
-                            radius: 10,       
-                            color: '#b6b9b9a1', 
-                            fillColor:  '#b6b9b9a1',
-                             fillOpacity: 1
-                        }).addTo(map);
+    if (layerName === 'Railways') {
+        if (isChecked) {
+            // Attiva: Aggiunge l'ascoltatore 'moveend' e carica subito i dati
+            map.on('moveend', updateRailwaysDynamic);
+            updateRailwaysDynamic(); 
+        } else {
+            // Disattiva: Rimuove l'ascoltatore e rimuove il layer attuale
+            map.off('moveend', updateRailwaysDynamic);
+            if (railwayLayer) {
+                map.removeLayer(railwayLayer);
+                railwayLayer = null;
+            }
+        }
+    } else if (layerName === 'Highways') {
+        loadHighways(isChecked);
+    } else if (layerName === 'Interports') {
+        loadInterports(isChecked);
+    } else if (layerName === 'CargoPorts') {
+        loadCargoPorts(isChecked);
+    } else if (layerName === 'CargoAirports') {
+        loadCargoAirports(isChecked);
+    } else if (layerName === 'AlpinePasses') {
+        loadAlpinePasses(isChecked);
+    }
+}
 
-                        // Aggiungi un popup con il nome e la città dell'interport
-                        marker.bindPopup(`
-                    <strong>${point.name}</strong>
-                `);
-                    }
-                });
-            })
-            .catch(error => console.error('Error loading interports:', error));
 
-
+// =================================================================
+// 5. CHIAMATE DI INIZIALIZZAZIONE
+// =================================================================
 
         // Global variables
         let geotoggle = false;
@@ -831,7 +1015,7 @@ fetch('/comuni')
             mode: 'q', // quantile
             style: {
                 color: '#fff',
-                weight: 0.5, // Thinner border
+                weight: 0.1, // Thinner border
                 fillOpacity: 0.9
             },
             onEachFeature: function(feature, layer) {
@@ -870,162 +1054,7 @@ fetch('/comuni')
     }
 }
 
-        // function getIndicatorsData(indicator1Name) { // Funzione modificata per un solo indicatore
-        //     // Show the loading spinner
-        //     showLoadingSpinner();
-        //     // Clear existing GeoJSON layers from the map
-        //     geojsonLayers.forEach(obj => {
-        //         if (map.hasLayer(obj.layer)) {
-        //             map.removeLayer(obj.layer);
-        //         }
-        //     });
-        //     geojsonLayers = []; // Reset the layers array
-        //     // Fetch the range (min and max) for the indicator
-        //     // Chiamata modificata per includere il tipo di API (Sll/Comuni)
-        //     const range1Promise = axios.get(`/getIndicatorRange/${api}/${indicator1Name}`).then(response => response.data);
-            
-        //     // Wait for the promise to resolve
-        //     Promise.all([range1Promise]).then(([range1]) => {
-        //         const min1 = range1.min;
-        //         const max1 = range1.max;
-        //         const color= '#3FC692';
-
-        //         updateDynamicLegend(indicator1Name, min1, max1, color);
-
-        //         // Modificata la rotta per recuperare i dati solo del primo indicatore
-        //         fetch('/get' + api + 'IndicatorsData/' + indicator1Name) 
-        //             .then(response => {
-        //                  if (!response.ok) {
-        //                     // Se la risposta non è OK, lancia un errore con il testo della risposta
-        //                     return response.text().then(text => { 
-        //                         throw new Error('Server returned an error status. Response body (HTML/Text) received: ' + text.substring(0, 200) + '...');
-        //                     });
-        //                 }
-        //                 return response.json();
-        //             })
-        //             .then(data => {
-        //                 data.forEach(place => {
-        //                     if (!place.geom) {
-        //                         console.warn('Missing geom for place:', place);
-        //                         return; 
-        //                     }
-        //                     let geojson;
-        //                     try {
-        //                         geojson = JSON.parse(place.geom);
-        //                     } catch (e) {
-        //                         console.error('Error parsing GeoJSON geometry:', e, 'Data:', place.geom);
-        //                         return; // Skip this place if JSON is invalid
-        //                     }
-                            
-        //                     // Call mixColor with a single indicator
-        //                     let color = mixColor(min1, max1, place[indicator1Name], '#3FC692');
-
-        //                     function style(feature) {
-        //                         return {
-        //                             fillColor: color, // Fill color based on the value
-        //                             weight: 1,
-        //                             opacity: 1,
-        //                             color: '#ffffff', // Border color set to white
-        //                             dashArray: '1',
-        //                             fillOpacity: 1,
-        //                         };
-        //                     }
-        //                     // Reference to the external div
-        //                     let infoBox = document.getElementById('info-box');
-
-        //                     function onEachFeature(feature, layer) {
-        //                         // Define the behavior for when the mouse is over the layer
-        //                         layer.on('mouseover', (e) => { 
-                                
-        //                             // Show the external div and update its content
-        //                             if (api == 'Sll') {
-        //                                 infoBox.innerHTML = 'Current Area: ' + place.DEN_SLL_2011_2018;
-                                       
-        //                             } else {
-        //                                 infoBox.innerHTML = 'Current Area: ' + place.COMUNE;
-        //                             }
-        //                             // Optionally, change the style of the layer
-        //                             e.target.setStyle({
-        //                                 fillOpacity: 0.2
-        //                             });
-        //                         });
-        //                         // Define the behavior for when the mouse leaves the layer
-        //                         layer.on('mouseout', (e) => {
-        //                             // Hide the external div
-        //                             infoBox.innerHTML = 'Current Area: '
-        //                             // Reset the style of the layer
-        //                             e.target.setStyle({
-        //                                 fillOpacity: 1
-        //                             });
-        //                         });
-        //                         // Define the behavior for when the layer is clicked
-        //                         layer.on('click', () => {
-        //                             document.getElementById('layers').style.display =
-        //                                 'block'
-        //                             if (api == 'Sll') {
-        //                                 axios.get('/get' + api + 'AreaData/' + place.sll_2011)
-        //                                     .then(response => {
-        //                                         updateTable(response.data);
-        //                                     })
-        //                                     .catch(error => {
-        //                                         console.error('Error fetching data:',
-        //                                             error);
-        //                                     });
-        //                             } else {
-        //                                 axios.get('/get' + api + 'Data/' + place.municipality_code)
-        //                                     .then(response => {
-        //                                         updateTable(response.data);
-        //                                     })
-        //                                     .catch(error => {
-        //                                         console.error('Error fetching data:',
-        //                                             error);
-        //                                     });
-        //                             }
-
-        //                         });
-        //                     }
-        //                     var geojsonLayer = L.geoJSON(geojson, {
-        //                         style: style,
-        //                         onEachFeature: onEachFeature
-        //                     });
-        //                     geojsonLayer.addTo(map);
-        //                     geojsonLayers.push({
-        //                         layer: geojsonLayer,
-        //                         bounds: geojsonLayer.getBounds()
-        //                     });
-        //                 });
-
-        //                 function updateVisibleLayers() {
-        //                     var currentZoom = map.getZoom();
-        //                     var visibleBounds = map.getBounds();
-        //                     geojsonLayers.forEach(obj => {
-        //                         var layer = obj.layer;
-        //                         var bounds = obj.bounds;
-        //                         if (visibleBounds.intersects(bounds)) {
-        //                             if (!map.hasLayer(layer)) {
-        //                                 map.addLayer(layer);
-        //                             }
-        //                         } else {
-        //                             if (map.hasLayer(layer)) {
-        //                                 map.removeLayer(layer);
-        //                             }
-        //                         }
-        //                     });
-        //                 }
-        //                 map.on('zoomend moveend', updateVisibleLayers);
-        //                 updateVisibleLayers();
-        //                 hideLoadingSpinner();
-        //             })
-        //             .catch(error => {
-        //                 console.error('Error fetching GeoJSON data:', error);
-        //                 hideLoadingSpinner();
-        //             });
-        //     }).catch(error => {
-        //         console.error('Error fetching indicator ranges:', error);
-        //         hideLoadingSpinner();
-        //     });
-        // }
-
+     
         function pickIndicators() {
             const indicator1Name = document.getElementById('indicatorSelect1').value;
             // Chiamata a getIndicatorsData con un solo argomento
@@ -1137,43 +1166,38 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
                 // <span style="margin-bottom: 5px; display: block;">Overlay Layers:</span>
 
             fixedDiv.innerHTML = `
-            <br>
-                <i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interporti<br>
-                <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Autostrade
+               <br>
+
+        <label>
+        <i style="background: none; border-top: 3px dashed #8668B2; width: 15px; height: 0px; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Ferrovie (il caricamento potrebbe essere lento) 
+            <input type="checkbox" id="toggleRailways" onchange="toggleLayer('Railways', this.checked)">
+        </label><br>
+    
+    <label>
+        <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Autostrade
+    </label><br>
+    
+
+    
+    <label>
+        <i style="background: #8668B2; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Interporti
+    </label><br>
+    
+    <label>
+        <i style="font-size: 15px; font-weight: bold; line-height: 1; color: #8668B2; text-align: center; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;">X</i> Porti Merci
+    </label><br>
+    
+    <label>
+        <i style="font-size: 15px; font-weight: bold; line-height: 1; color: #8668B2; text-align: center; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;">+</i> Aeroporti Cargo
+    </label><br>
+    
+    <label>
+        <i style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 12px solid #8668B2; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Valichi Alpini
+    </label>
             `;
         }
 
 
-
-
-        // Funzione per aggiornare la parte dinamica (indicatore selezionato) della legenda
-// function updateDynamicLegend(indicatorCode, minVal, maxVal, color) {
-//     const dynamicDiv = document.getElementById('dynamic-indicator-legend');
-//     if (!dynamicDiv) return;
-
-//     // Recupera il nome leggibile dall'oggetto indicatorMap
-//     const indicatorName = indicatorMap[indicatorCode] || indicatorCode;
-
-//     const minColor = 'rgb(240, 240, 240)';
-//     const maxColor = color; 
-//     let m = parseFloat(minVal).toFixed(2)
-//     let M = parseFloat(maxVal).toFixed(2)
-
-//     dynamicDiv.innerHTML = `
-//         <span style="margin-bottom: 5px; display: block;">${indicatorName}</span>
-//         <div style="
-//             height: 15px; 
-//             background: linear-gradient(to right, ${minColor}, ${maxColor});
-//             border: 1px solid #ccc;
-//             margin-bottom: 3px;
-//         "></div>
-//         <div style="display: flex; justify-content: space-between; font-size: 12px;">
-//             <span style="font-weight: bold;">${m}</span>
-//             <span style="font-weight: bold;">${M}</span>
-//         </div>
-//     `;
-// }
-    
     
     function updateChoroplethLegend(layer, indicatorCode) {
     const indicatorName = indicatorMap[indicatorCode] || indicatorCode;
@@ -1217,77 +1241,54 @@ document.querySelector('#apiToggle input[type="checkbox"]').addEventListener('ch
             `;
         }
 
-   
+        
 
-        // Layer fissi (Autostrade + Interporti)
-        html += `
-            <br>
-            <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Autostrade
-            <br><i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interporti<br>
-            <i style="background: #e655e6ff; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Porti Cargo<br>
-            <i style="background: #55e6aeff; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Aeroporti Cargo<br>
-            <i style="background: #b6b9b9a1; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Valichi Alpini
-        `;
+                // All'interno della funzione o blocco in cui generi la legenda di Leaflet
+html += `
+    <br>
+
+        <label>
+        <i style="background: none; border-top: 3px dashed #8668B2; width: 15px; height: 0px; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Ferrovie (il caricamento potrebbe essere lento) 
+    
+    <input type="checkbox" id="toggleRailways" onchange="toggleLayer('Railways', this.checked)">
+        </label><br>
+    
+    <label>
+        <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Autostrade
+    </label><br>
+    
+
+    
+    <label>
+        <i style="background: #8668B2; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Interporti
+    </label><br>
+    
+    <label>
+        <i style="font-size: 15px; font-weight: bold; line-height: 1; color: #8668B2; text-align: center; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;">X</i> Porti Merci
+    </label><br>
+    
+    <label>
+        <i style="font-size: 15px; font-weight: bold; line-height: 1; color: #8668B2; text-align: center; display: inline-block; width: 15px; height: 15px; margin-right: 5px; vertical-align: middle;">+</i> Aeroporti Cargo
+    </label><br>
+    
+    <label>
+        <i style="width: 0; height: 0; border-left: 8px solid transparent; border-right: 8px solid transparent; border-bottom: 12px solid #8668B2; display: inline-block; margin-right: 5px; vertical-align: middle;"></i> Valichi Alpini
+    </label>
+`;
 
         div.innerHTML = html;
         return div;
     };
 
     legend.addTo(map);
-}
 
-/*
-    function updateChoroplethLegend(layer, indicatorCode) {
-    const indicatorName = indicatorMap[indicatorCode] || indicatorCode;
+    // Esegui solo la prima volta che la legenda viene creata
+    if (!window.staticLayersInitialized) {
+        // Chiama tutte le funzioni di caricamento statico, basandosi sullo stato dei checkbox appena creati
 
-    // Rimuovi legenda precedente se presente
-    if (legend) {
-        map.removeControl(legend);
+        window.staticLayersInitialized = true; // Imposta un flag per non ripetere l'inizializzazione
     }
-
-    legend = L.control({ position: 'bottomleft' });
-
-    legend.onAdd = function (map) {
-        const div = L.DomUtil.create('div', 'info legend');
-        div.style.backgroundColor = 'white';
-        div.style.padding = '10px';
-        div.style.borderRadius = '5px';
-        div.style.boxShadow = '0 0 15px rgba(0,0,0,0.2)';
-        div.style.fontSize = '12px';
-        div.style.width = '190px';
-
-        // Ottieni breaks e colori dal layer
-        const limits = layer.options.limits;
-        const colors = layer.options.colors;
-
-        let html = `<b>${indicatorName}</b><br>`;
-        for (let i = 0; i < limits.length; i++) {
-            const from = parseFloat(limits[i]).toFixed(2);
-            const to = limits[i + 1] ? parseFloat(limits[i + 1]).toFixed(2) : '+';
-            html += `
-                <i style="
-                    background:${colors[i]};
-                    width:20px;
-                    height:12px;
-                    display:inline-block;
-                    margin-right:6px;
-                    border:1px solid #999;
-                "></i> ${from} – ${to}<br>
-            `;
-        }
-
-        // Layer fissi (Autostrade + Interporti)
-        html += `
-            <br><i style="background: #800080; width: 10px; height: 10px; border-radius: 50%; display: inline-block; margin-right: 5px;"></i> Interports<br>
-            <i style="background: #8668B2; width: 15px; height: 3px; display: inline-block; margin-right: 5px;"></i> Autostrade
-        `;
-
-        div.innerHTML = html;
-        return div;
-    };
-
-    legend.addTo(map);
-}*/
+}
 
 </script>
 

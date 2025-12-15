@@ -183,24 +183,92 @@ public function indexComuniWithIndicators($indicators)
 
     public function getHighways()
     {
-        $highways = Highway::select('name', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.01))::json AS geom"))->get();
+        $highways = Highway::select('name', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.001))::json AS geom"))->get();
         return response()->json($highways); 
     }
 
-        public function getRailway()
-    {
-        $railway = Railway::select('name', DB::raw("ST_AsGeoJSON(ST_Simplify(geom, 0.05))::json AS geom"))->get();
     
-    // $limit = $request->get('limit', 10000);
-    //     $railways = Railway::select('name', 
-    //         DB::raw("ST_AsGeoJSON(ST_Simplify(geom, {$tolerance}))::json AS geom")
-    //     )
-    //     ->paginate($limit);
+    
 
-        // dd(Railway::select('name')->get());
 
-        return response()->json($railways);
+    public function getRailway(Request $request)
+{
+    // Imposta il livello di zoom e il BBOX richiesti
+    $zoom = $request->get('zoom', 6);
+    $bounds = $request->get('bounds'); 
+    
+    // 1. Determina la tolleranza di semplificazione basata sullo zoom
+    // Questo riduce il dettaglio per carichi veloci a livelli di zoom bassi.
+    $tolerance = match (true) {
+        $zoom <= 6 => 500000,
+        $zoom <= 8 => 300000,
+        $zoom <= 10 => 250000,
+        $zoom <= 12 => 200000,
+        default => 100000,
+    };
+    
+    $query = Railway::select('name', 
+        // Genera il GeoJSON come STRINGA SQL pura (AS geom_string). 
+        // Rimuovendo ::json si impedisce a Laravel di codificare due volte.
+        DB::raw("ST_AsGeoJSON(ST_Simplify(geom, {$tolerance})) AS geom_string")
+    );
+    
+    // **FILTRO ESSENZIALE 1:** Esclude i record che non hanno una geometria definita a livello di database.
+    $query->whereNotNull('geom'); 
+    
+    // 2. Filtro per Bounding Box (BBOX)
+    if ($bounds) {
+        try {
+            // Estrae le coordinate: latMin, lngMin, latMax, lngMax
+            [$latMin, $lngMin, $latMax, $lngMax] = explode(',', $bounds);
+            
+            // Crea l'oggetto BBOX PostGIS
+            $bbox = "ST_MakeEnvelope({$lngMin}, {$latMin}, {$lngMax}, {$latMax}, 4326)";
+            
+            // Filtra le geometrie che intersecano il riquadro visibile
+            $query->whereRaw("ST_Intersects(geom, {$bbox})");
+            
+        } catch (\Exception $e) {
+             // Gestione di un BBOX malformato
+            \Log::error('Errore nel parsing del BBOX per le ferrovie: ' . $e->getMessage());
+        }
     }
+    
+    // Limita il numero di risultati per prevenire crash (fino a 50.000)
+    $railway = $query->limit(50000)->get(); 
+    
+    // 3. Struttura la risposta come FeatureCollection
+    $features = $railway
+        ->map(function($r) {
+            // Decodifica la stringa GeoJSON in un oggetto PHP
+            $geometry = json_decode($r->geom_string);
+            
+            // **FILTRO ESSENZIALE 2:** Verifica che la geometria decodificata sia un oggetto valido
+            // e non sia una GeometryCollection (spesso problematica in Leaflet).
+            if (!is_object($geometry) || !isset($geometry->type) || $geometry->type === 'GeometryCollection') {
+                return null; // Salta questa feature non valida
+            }
+
+            return [
+                'type' => 'Feature',
+                'properties' => ['name' => $r->name],
+                // Passa l'oggetto geometria decodificato (JSON pulito)
+                'geometry' => $geometry, 
+            ];
+        })
+        // Rimuove tutti gli elementi nulli generati dal filtro essenziale 2
+        ->filter()
+        ->values() // Ri-indicizza l'array per un JSON pulito
+        ->all();
+
+    // Invia la risposta finale in formato GeoJSON FeatureCollection
+    return response()->json([
+        'type' => 'FeatureCollection',
+        'features' => $features
+    ]);
+}
+
+
 
 
     // get min and max of an idicator (for the color visualization)

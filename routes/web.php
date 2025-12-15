@@ -31,7 +31,7 @@ Route::get('/getComuniIndicatorsData/{indicators}', [GeoJsonController::class, '
 
 
 Route::get('/getHighways', [GeoJsonController::class, 'getHighways']);
-Route::get('/getRailways', [GeoJsonController::class, 'getRailway']);
+Route::get('/getRailway', [GeoJsonController::class, 'getRailway']);
 
 Route::get('/getInterports', [GeoJsonController::class, 'getInterports']);
 Route::get('/getCargoPorts', [GeoJsonController::class, 'getCargoPorts']);
